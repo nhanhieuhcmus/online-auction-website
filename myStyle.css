@@ -1,0 +1,104 @@
+#searchArea {
+    width: 400px;
+}
+
+#searchBtn {
+    background-color: rgba(239, 245, 245, 0.76);
+}
+
+#searchIcon {
+    width: 20px;
+}
+
+.nav-item {
+    color: white;
+}
+
+div .category {
+    border-right-style: groove;
+}
+
+.category {
+    list-style-type: none;
+}
+
+.category li img {
+    width: 20px;
+}
+
+.categoryArea li:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(55, 115, 226);
+}
+
+.sidebar a {
+    display: block;
+    text-decoration: none;
+    color: blue;
+}
+
+.sidebar a:hover{
+    background-color: gray;
+    color:white;
+}
+.dropdown-container{
+    text-decoration: none;
+    display:none;
+}
+.dropdown-container a{
+    margin-left:30px;
+}
+
+.sidebar{
+    overflow-x: hidden;
+    z-index: 1;
+}
+.active{
+    background-color: rgba(0, 102, 255, 0.589);
+    color: white;
+}
+
+.icon-bar{
+    display:flex;
+    flex-direction: row;
+}
+  
+  .icon-bar a {
+    display: block;
+    text-align: center;
+    height:50px;
+    width: 50px;
+    padding:10px;
+    color: white;
+    font-size: 20px;
+  }
+  
+  .icon-bar a:hover {
+    background-color: #000;
+  }
+  
+  .facebook {
+    background: #3B5998;
+    color: white;
+  }
+  
+  .twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  
+  .google {
+    background: #dd4b39;
+    color: white;
+  }
+  
+  .linkedin {
+    background: #007bb5;
+    color: white;
+  }
+  
+  .youtube {
+    background: #bb0000;
+    color: white;
+  }
+  
