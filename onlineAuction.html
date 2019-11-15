@@ -7,22 +7,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="myStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Auction Online Webpage</title>
 </head>
 
 <body>
 
-    <div id="headLine01">
-        <nav class="navbar navbar-expand-sm bg-primary">
-            <a class="nav-item mx-2" id="home" href="#"><i id="ic_home" class="fa fa-home"></i>HOME</a>
+    <div class="header sticky-top">
+        <nav class="navbar bg-primary sticky-top flex-md-nowrap p-0">
+            <a class="nav-item mx-2" id="home" href="#" style="font-weight: bold;">
+                <i id="ic_home" class="fa fa-home"></i>
+            HOME
+            </a>
             <form class="form-inline">
                 <div class="form-control">
                     <div id="searchArea">Tìm sản phẩm hay thương hiệu mong muốn ...</div>
                 </div>
                 <button class="btn ml-1" id="searchBtn">
-                    <img id="searchIcon" src="searchIcon.svg">
+                    <i class="fa fa-search"></i>
                     Tìm kiếm
                 </button>
             </form>
@@ -40,44 +45,48 @@
     </div>
     <!-- DANH MUC -->
     <div class="row flex-x1-nowrap">
-        <div class="categoryArea mx-4" style="width: 200px">
-            <div class="" id="headLine02">DANH MỤC SẢN PHẨM</div>
-            <div class="sidebar">
-                <a class="dropdown-btn" href="#">
-                    <i class="fa fa-laptop"></i>
-                    Điện Tử
-                    <i class="fa fa-caret-down"></i>
-                </a>
-
-                <div class="dropdown-container">
-                    <a href="#">Điện thoại di động</a>
-                    <a href="#">Máy tính xách tay</a>
-                    <a href="#">Khác</a>
-                </div>
-                <a href="#">
+        <div class="categoryArea mx-4" id="categoryArea" style="width: 200px">
+            <div class="container">
+                <div class="sidebar" style="position: fixed;">
+                    <a class="dropdown-btn" href="#">
+                        <i class="fa fa-podcast"></i>
+                        Điện Tử
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                    <div class="dropdown-container">
+                        <a href="#">
+                            <i class="fa fa-mobile" style="font-size: 20px;"></i>
+                            Điện thoại di động</a>
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            Máy tính xách tay</a>
+                        <a href="#">Khác</a>
+                    </div>
+                    <a href="#">
                         <i class="fa fa-headphones"></i>
-                    Phụ Kiện - Thiết Bị Số</a>
-                <a href="#">
-                        <i class="fa fa-camera-retro"></i> 
-                    Máy Ảnh - Quay Phim</a>
-                <a href="#">
+                        Phụ Kiện - Thiết Bị Số</a>
+                    <a href="#">
+                        <i class="fa fa-camera-retro"></i>
+                        Máy Ảnh - Quay Phim</a>
+                    <a href="#">
                         <i class="fa fa-home"></i>
-                    Nhà Cửa Đời Sống</a>
-                <a href="#">
+                        Nhà Cửa Đời Sống</a>
+                    <a href="#">
                         <i class="fa fa-product-hunt"></i>
-                    Hàng Tiêu Dùng</a>
-                <a href="#">
+                        Hàng Tiêu Dùng</a>
+                    <a href="#">
                         <i class="fa fa-heart"></i>
-                    Làm Đẹp - Sức Khoẻ</a>
-                <a href="#">
+                        Làm Đẹp - Sức Khoẻ</a>
+                    <a href="#">
                         <i class="fa fa-cart-plus"></i>
-                    Thời Trang - Phụ Kiện</a>
-                <a href="#">
+                        Thời Trang - Phụ Kiện</a>
+                    <a href="#">
                         <i class="fa fa-car"></i>
-                    Xe Máy - Ô Tô</a>
-                <a href="#">
-                    <i class="fa fa-bolt"></i>
-                Điện Gia Dụng</a>
+                        Xe Máy - Ô Tô</a>
+                    <a href="#">
+                        <i class="fa fa-plug"></i>
+                        Điện Gia Dụng</a>
+                </div>
             </div>
         </div>
         <!-- ---------------------------------------------------------------------------------- -->
@@ -94,11 +103,13 @@
                 <!-- The slideshow -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="https://www.asus.com/media/global/banners/tcpwrq7u6lcctx4r/tcpwrq7u6lcctx4r-0_0_desktop.jpg" 
-                        width=100% height="400">
-                        <div class="carousel-caption text-left" >
+                        <img src="https://www.asus.com/media/global/banners/tcpwrq7u6lcctx4r/tcpwrq7u6lcctx4r-0_0_desktop.jpg"
+                            width=100% height="400">
+                        <div class="carousel-caption text-left">
                             <h3>ASUS EXPERTBOOK Cho Doanh Nhân</h3>
-                            <p>ProArt StudioBook Pro là một trong những máy tính xách tay mỏng nhất thế giới có tính năng đồ họa NVIDIA® Quadro® RTX, làm cho nó trở thành một thế lực hùng mạnh mang ý tưởng đến với cuộc sống. </p>
+                            <p>ProArt StudioBook Pro là một trong những máy tính xách tay mỏng nhất thế giới có tính
+                                năng đồ họa NVIDIA® Quadro® RTX, làm cho nó trở thành một thế lực hùng mạnh mang ý tưởng
+                                đến với cuộc sống. </p>
                             <button class="btn btn-lg btn-primary mb-4">Đấu giá ngay</button>
                         </div>
                     </div>
@@ -107,16 +118,20 @@
                             width=100% height="400">
                         <div class="carousel-caption text-left">
                             <h3>Lựa Chọn Khác Cho Bạn</h3>
-                            <p>ProArt StudioBook Pro 17 là một trong những máy tính xách tay mỏng nhất thế giới có tính năng đồ họa NVIDIA® Quadro® RTX, làm cho nó trở thành một thế lực hùng mạnh mang ý tưởng đến với cuộc sống. </p>
+                            <p>ProArt StudioBook Pro 17 là một trong những máy tính xách tay mỏng nhất thế giới có tính
+                                năng đồ họa NVIDIA® Quadro® RTX, làm cho nó trở thành một thế lực hùng mạnh mang ý tưởng
+                                đến với cuộc sống. </p>
                             <button class="btn btn-lg btn-primary mb-4">Đấu giá ngay</button>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="https://www.thinkpro.vn/uploads/images/userfiles/san-pham/Asus/P5440/p5440_a13.jpg"
-                         width=100% height="400">
+                            width=100% height="400">
                         <div class="carousel-caption text-right">
                             <h3>Thêm Một Lựa Chọn Nữa</h3>
-                            <p>ProArt StudioBook Pro 17 là một trong những máy tính xách tay mỏng nhất thế giới có tính năng đồ họa NVIDIA® Quadro® RTX, làm cho nó trở thành một thế lực hùng mạnh mang ý tưởng đến với cuộc sống.
+                            <p>ProArt StudioBook Pro 17 là một trong những máy tính xách tay mỏng nhất thế giới có tính
+                                năng đồ họa NVIDIA® Quadro® RTX, làm cho nó trở thành một thế lực hùng mạnh mang ý tưởng
+                                đến với cuộc sống.
                             </p>
                             <button class="btn btn-lg btn-primary mb-4">Đấu giá ngay</button>
                         </div>
@@ -131,53 +146,65 @@
                     <span class="carousel-control-next-icon"></span>
                 </a>
             </div>
-            <div class="row featurette border-top" id="title"><h5 style="text-align: left;">Gần kết thúc</h5></div>
+            <div class="row featurette border-top" id="title">
+                <h5 style="text-align: left;">Gần kết thúc</h5>
+            </div>
             <div class="card-deck">
-            <div class="card mr-auto" style="width: 18rem;"><a href="#" > 
-                <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=640;maxWidth=550" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Đấu giá</a>
-                </div>
-            </a></div>
-            <div class="card mr-auto" style="width: 18rem;"><a href="#" > 
-                <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=640;maxWidth=550" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Đấu giá</a>
-                </div>
-            </a></div>
-            <div class="card mr-auto" style="width: 18rem;"><a href="#" > 
-                <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=640;maxWidth=550" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Đấu giá</a>
-                </div>
-            </a></div>
+                <div class="card mr-auto" style="width: 18rem;"><a href="#">
+                        <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=640;maxWidth=550"
+                            class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Đấu giá</a>
+                        </div>
+                    </a></div>
+                <div class="card mr-auto" style="width: 18rem;"><a href="#">
+                        <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=640;maxWidth=550"
+                            class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Đấu giá</a>
+                        </div>
+                    </a></div>
+                <div class="card mr-auto" style="width: 18rem;"><a href="#">
+                        <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=640;maxWidth=550"
+                            class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Đấu giá</a>
+                        </div>
+                    </a></div>
             </div>
             <div class="card-deck mt-2">
-                <div class="card mr-auto" style="width: 3rem;"><a href="#" > 
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=640;maxWidth=550" class="card-img-top">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Đấu giá</a>
-                    </div>
-                </a></div>
-                <div class="card mr-auto" style="width: 3rem;"><a href="#" > 
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=640;maxWidth=550" class="card-img-top">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Đấu giá</a>
-                    </div>
-                </a></div>
-            </div>
+                <div class="card mr-auto" style="width: 3rem;"><a href="#">
+                        <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=640;maxWidth=550"
+                            class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Đấu giá</a>
+                        </div>
+                    </a></div>
+                <div class="card mr-auto" style="width: 3rem;"><a href="#">
+                        <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=640;maxWidth=550"
+                            class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Đấu giá</a>
+                        </div>
+                    </a></div>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -200,8 +227,37 @@
             });
         }
         // -------------------------------------------------------------
+        $(document).ready(function () {
+            console.log("document ready!");
 
+            var $sticky = $('.sticky');
+            var $stickyrStopper = $('.sticky-stopper');
+            if (!!$sticky.offset()) { // make sure ".sticky" element exists
+
+                var generalSidebarHeight = $sticky.innerHeight();
+                var stickyTop = $sticky.offset().top;
+                var stickOffset = 0;
+                var stickyStopperPosition = $stickyrStopper.offset().top;
+                var stopPoint = stickyStopperPosition - generalSidebarHeight - stickOffset;
+                var diff = stopPoint + stickOffset;
+
+                $(window).scroll(function () { // scroll event
+                    var windowTop = $(window).scrollTop(); // returns number
+
+                    if (stopPoint < windowTop) {
+                        $sticky.css({ position: 'absolute', top: diff });
+                    } else if (stickyTop < windowTop + stickOffset) {
+                        $sticky.css({ position: 'fixed', top: stickOffset });
+                    } else {
+                        $sticky.css({ position: 'absolute', top: 'initial' });
+                    }
+                });
+
+            }
+        });
     </script>
+
+    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
