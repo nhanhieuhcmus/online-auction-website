@@ -14,8 +14,17 @@
     color: white;
 }
 
+#ic_home{
+    height: 20px;
+    width: 20px;
+}
+#home{
+  margin-right: 30px;
+}
+
 div .category {
     border-right-style: groove;
+    border-right-width: 5px;
 }
 
 .category {
@@ -24,6 +33,8 @@ div .category {
 
 .category li img {
     width: 20px;
+    height: 20px;
+    margin-block: 30px;
 }
 
 .categoryArea li:hover {
@@ -101,4 +112,16 @@ div .category {
     background: #bb0000;
     color: white;
   }
-  
+  .carousel-caption{
+    color: white;
+  }
+
+  #title{
+    color: gray;
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+
+  .carousel-inner{
+    margin-bottom: 10px;
+  }
