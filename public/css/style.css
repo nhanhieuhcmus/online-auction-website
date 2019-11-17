@@ -140,9 +140,39 @@
     font-size: 20px;
     color: red;
 }
-.checked {
-    color: orange;
-}
 .info {
     font-size: 15px;
+}
+#nearlyFinished{
+  color: grey;
+  border-bottom: 1px solid grey;
+  margin-left: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#container{
+  max-width: 90%;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+#price{
+  font-weight: bold;
+  text-align: end;
+  color: red;
+}
+.checked{
+  color: orange;
+}
+.unchecked{
+  color:grey;
+}
+#Countauctions{
+  text-align: end;
+  color: red;
+  font-weight: initial;
 }
