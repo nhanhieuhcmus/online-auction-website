@@ -1,0 +1,148 @@
+.navbar a:hover, .dropdown02:hover .dropbtn {
+    background-color: black;
+  }
+  .dropbtn{
+    outline: none;
+    border: none;
+    background-color: inherit;
+    color: white;
+  }
+  .dropdown02-content a:hover {
+    background-color: aqua;
+  }
+  .dropdown02:hover .dropdown02-content {
+    display: block;
+  }
+  .dropdown02-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  .dropdown02-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(255, 237, 214);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  .dropdown-container {
+    display: none;
+    background-color: #262626;
+    padding-left: 8px;
+  }
+  .icon-bar{
+    display:flex;
+    flex-direction: row;
+  }
+  
+  .icon-bar a {
+    display: block;
+    text-align: center;
+    height:50px;
+    width: 50px;
+    padding:10px;
+    color: white;
+    font-size: 20px;
+  }
+  
+  .icon-bar a:hover {
+    background-color: #000;
+  }
+  
+  .facebook {
+    background: #3B5998;
+    color: white;
+  }
+  
+  .twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  
+  .google {
+    background: #dd4b39;
+    color: white;
+  }
+  
+  .linkedin {
+    background: #007bb5;
+    color: white;
+  }
+  
+  .youtube {
+    background: #bb0000;
+    color: white;
+  }
+  .carousel-caption{
+    color: white;
+  }
+  /* Create multilevelmenu bootstrap 4 */
+  .dropdown-submenu {
+    position: relative;
+  }
+  
+  .dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+  }
+  
+  .dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+  }
+  .dropdown-menu a:hover{
+    background-color: rgba(238, 130, 238, 0.856);
+  }
+  .dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+  }
+  
+  .dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+  }
+  
+  .dropdown-submenu.pull-left {
+    float: none;
+  }
+  
+  .dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+  }
+  .items {
+    max-width: 70%;
+    max-height: auto;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+#countDown, #recent-price {
+    font-size: 20px;
+    color: red;
+}
+.checked {
+    color: orange;
+}
+.info {
+    font-size: 15px;
+}
