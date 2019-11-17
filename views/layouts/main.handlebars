@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="myStyle.css">
+    <title>Auction Online Webpage</title>
+</head>
+
+<body>
+        <div class="navbar bg-primary">
+            <div class="dropdown02">
+                <button class="dropbtn" style="font-weight: bold">
+                        <i class="fa fa-bars"></i>
+                    CATEGORY
+                </button>
+                <div class="dropdown02-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+            <a class="nav-item mx-2" id="home" href="#" style="font-weight: bold;">
+                <i class="fa fa-home"></i>
+                HOME
+            </a>
+            
+            <form class="form-inline">
+                <div class="form-control">
+                    <div id="searchArea">Tìm sản phẩm hay thương hiệu mong muốn ...</div>
+                </div>
+                <button class="btn ml-1" id="searchBtn">
+                    <i class="fa fa-search"></i>
+                    Tìm kiếm
+                </button>
+            </form>
+            <a class="nav-item mx-2" href="#">Theo dõi đơn hàng</a>
+            <a class="nav-item mr-auto" href="#">
+                <div class="icon-bar">
+                    <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="google"><i class="fa fa-google"></i></a>
+                    <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                    <a href="#" class="youtube"><i class="fa fa-youtube"></i></a>
+                </div>
+            </a>
+        </div>
+
+    <!-- DANH MUC -->
+        <div class="categoryArea mx-4" id="categoryArea" style="width: 200px">
+                <div class="sidebar" style="position: fixed;">
+                    <a class="dropdown-btn" href="#">
+                        <i class="fa fa-podcast"></i>
+                        Điện Tử
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                    <div class="dropdown-container">
+                        <a href="#">
+                            <i class="fa fa-mobile" style="font-size: 20px;"></i>
+                            Điện thoại di động</a>
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            Máy tính xách tay</a>
+                        <a href="#">Khác</a>
+                    </div>
+                    <a href="#">
+                        <i class="fa fa-headphones"></i>
+                        Phụ Kiện - Thiết Bị Số</a>
+                    <a href="#">
+                        <i class="fa fa-camera-retro"></i>
+                        Máy Ảnh - Quay Phim</a>
+                    <a href="#">
+                        <i class="fa fa-home"></i>
+                        Nhà Cửa Đời Sống</a>
+                    <a href="#">
+                        <i class="fa fa-product-hunt"></i>
+                        Hàng Tiêu Dùng</a>
+                    <a href="#">
+                        <i class="fa fa-heart"></i>
+                        Làm Đẹp - Sức Khoẻ</a>
+                    <a href="#">
+                        <i class="fa fa-cart-plus"></i>
+                        Thời Trang - Phụ Kiện</a>
+                    <a href="#">
+                        <i class="fa fa-car"></i>
+                        Xe Máy - Ô Tô</a>
+                    <a href="#">
+                        <i class="fa fa-plug"></i>
+                        Điện Gia Dụng</a>
+                </div>
+        </div>
+
+        {{{body}}}
+
+         <script>
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+        // -------------------------------------------------------------
+        
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
