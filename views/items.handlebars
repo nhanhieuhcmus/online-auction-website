@@ -22,8 +22,15 @@
                     </div>
                     <div class ="card-body">
                         <hr width="90%">
-                        <button type="button" class="btn btn-danger" style="width:40%;">
-                                <i class="fa fa-gavel"></i> Đấu giá</button>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input id="spinner" type="number" value="50" min="0" max="100" step="10" />
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-danger" style="width:150px;">
+                                    <i class="fa fa-gavel"></i> Đấu giá</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -123,7 +130,8 @@
                     </table>
             </div>
         </div>
-
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-input-spinner@1.12.7/src/bootstrap-input-spinner.min.js"></script>
     <script>
         //Bộ đếm ngày giờ
         var countDownDate = new Date();
@@ -154,4 +162,7 @@
             clearInterval(x);
             }
         }, 1000);
+
+        //quantity button
+        $("input[type='number']").inputSpinner();
     </script>

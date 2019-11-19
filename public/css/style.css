@@ -176,3 +176,20 @@ a{
   color: red;
   font-weight: initial;
 }
+
+.tab-content {
+  border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0px 0px 7px 1px #f3f3f3;
+    /* -moz-box-shadow: 0px 0px 7px 1px #f3f3f3; */
+    -webkit-box-shadow: 0px 0px 7px 1px #f3f3f3;
+    border: 1px solid #ececec;
+    border-top: none;
+    min-height: 500px;
+}
+#total-credit, #đ{
+  font-weight: bold;
+  font-size: 20px;
+  color: #007bb5;
+}
