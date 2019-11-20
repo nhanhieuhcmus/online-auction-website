@@ -29,7 +29,9 @@ app.get('/profile', function (req, res) {
     res.render('profile', {title: 'Thông tin cá nhân'});
 });
 
-
+app.get('/history-auction', function (req, res) {
+    res.render('history_auction', {title: 'Thông tin cá nhân'});
+});
 app.listen(3000,()=>{
     console.log('Web server running at port [3000]..');
 })
