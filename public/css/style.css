@@ -111,11 +111,23 @@
 
 
 
-  .items {
-    max-width: 70%;
+  .imgs {
+    max-width: 100%;
     max-height: auto;
     margin-top: 10%;
     margin-bottom: 10%;
+    cursor: pointer;
+}
+
+.sub-img {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.sub-img>img {
+  max-width: 100%;
+  max-height: auto;
 }
 #countDown, #recent-price {
     font-size: 20px;

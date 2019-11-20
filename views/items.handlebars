@@ -1,18 +1,26 @@
-<div class="container-fluid px-5">
+<div class="container-fluid px-5 mt-3">
         <div class="card">
             <div class="row no-gutters">
-                <div class="col-md-4 d-flex align-items-center border-right flex-column">
-                    <img class = "items" src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg">
-                    <div class="sub-img d-flex justify-content-around px-5" style="width:100%;">
-                        <img class = "items" src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=50;maxWidth=60">
-                        <img class = "items" src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=50;maxWidth=60">
-                        <img class = "items" src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg;maxHeight=50;maxWidth=60">
+                <div class="col-md-5 d-flex align-items-center border-right flex-column">
+                    <div class="card-img p-4 d-flex align-items-center" style="height: 400px;">
+                        <img id = "main-img" class = "imgs" src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg">
+                        </div>
+                    <div id = "sub-img-group" class="d-flex justify-content-between">
+                        <div class="sub-img col-md-4 d-flex align-items-center">
+                        <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg">
+                        </div>
+                        <div class="sub-img col-md-4 d-flex align-items-center">
+                        <img class = "align-center" src="https://i.ebayimg.com/images/g/wokAAOSw6B1dgpZ0/s-l1600.jpg">
+                        </div>
+                        <div class="sub-img col-md-4 d-flex align-items-center">
+                        <img class = "align-center" src="https://i.ebayimg.com/images/g/LEsAAOSw-zVdgpZ3/s-l1600.jpg">
+                        </div>          
                     </div>
                 </div>
 
                 <div class="col-md-4 border-right d-flex flex-column">
                     <div class="card-body">
-                        <h5 class="card-title m-0">Tên sản phẩm</h5>
+                        <h5 class="card-title m-0">Laptop HP 14-ck0135TU (6KD74PA) (14" HD/Pentium 4417U/4GB/500GB HDD/HD 610/Win10/1.6 kg)</h5>
                         <p class="card-text"><small class="text-muted">Thời điểm đăng 
                             <span class = "postTime font-italic">05/03/2019</span></small></p>
 
@@ -24,7 +32,7 @@
                         <hr width="90%">
                         <div class="row">
                             <div class="col-md-6">
-                                <input id="spinner" type="number" value="50" min="0" max="100" step="10" />
+                                <input id="spinner" data-suffix="k" type="number" value="50" min="0" max="100" step="10" />
                             </div>
                             <div class="col-md-6">
                                 <button type="button" class="btn btn-danger" style="width:150px;">
@@ -34,30 +42,42 @@
                     </div>
                 </div>
 
-                <div class="info col-md-4 d-flex align-content-stretch flex-wrap">
+                <div class="info col-md-3 d-flex align-content-stretch flex-wrap">
                         <div class="card-body border-bottom">
                             <h6 class="card-title">Thông tin người bán</h6>
                             <span class="card-text">Nguyễn Thị Nở</span><br>
-                            <span class="card-text">Rating</span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
+                            <span class="card-text">Rating: </span>
+                            <b>8/10</b>
                         </div>
                         <div class="card-body">
                             <h6 class="card-title">Người đặt giá cao nhất hiện tại</h6>
                             <span class="card-text">Lê Văn Chí</span><br>
-                            <span class="card-text">Rating</span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
+                            <span class="card-text">Rating: </span>
+                            <b>8/10</b>
                         </div>
                 </div>
             </div>
         </div>
+    <table class="table table-striped mt-5">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Thời điểm</th>
+                <th scope="col">Người mua</th>
+                <th scope="col">Giá</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each this.categories}}
+            <tr>
+                <th scope="row">{{BidId}}</th>
+                <td>{{Time}}</td>
+                <td>{{Bidder}}</td>
+                <td>{{Price}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
         <h4 class="mt-5">SẢN PHẨM CÙNG LOẠI</h4>
         <br><br>
         
@@ -165,4 +185,18 @@
 
         //quantity button
         $("input[type='number']").inputSpinner();
+
+        //select image
+        var mainImg = document.getElementById('main-img');
+        var subImgs = document.getElementById('sub-img-group').getElementsByClassName('sub-img');
+        var i;
+        subImgs[0].addEventListener('click', function() {
+                mainImg.src = subImgs[0].getElementsByTagName('img')[0].src;
+            });
+        subImgs[1].addEventListener('click', function() {
+                mainImg.src = subImgs[1].getElementsByTagName('img')[0].src;
+            });
+        subImgs[2].addEventListener('click', function() {
+                mainImg.src = subImgs[2].getElementsByTagName('img')[0].src;
+            });
     </script>
