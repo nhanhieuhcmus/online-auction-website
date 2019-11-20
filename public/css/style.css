@@ -92,11 +92,28 @@
     border-radius: 6px 0 6px 6px;
   }
   /* POPUP LOGIN FORM */
-  .items {
+  
+
+
+
+  .imgs {
+    max-width: 100%;
     max-width: 70%;
     max-height: auto;
     margin-top: 10%;
     margin-bottom: 10%;
+    cursor: pointer;
+}
+
+.sub-img {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.sub-img>img {
+  max-width: 100%;
+  max-height: auto;
 }
 #countDown, #recent-price {
     font-size: 20px;
