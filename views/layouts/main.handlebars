@@ -68,24 +68,30 @@
             TRANG CHỦ</a>
         <form class="form-inline">
             <div class="form-control">
-                <div id="searchArea">Tìm sản phẩm hay thương hiệu mong muốn ...</div>
+                <div id="searchArea">
+                    <input type="text" placeholder="Tìm sản phẩm hay thương hiệu mong muốn ..."
+                        style="width: 350px; border:none;outline:none">
+                    <button type="submit" style="border: none;background-color: white;"><i class="fa fa-search"></i></button>
+                </div>
+        
             </div>
             <button class="btn text-light mx-3">
                 <i class="fa fa-search"></i>
                 Tìm kiếm
             </button>
         </form>
-        <a class="nav-item text-white mx-2 mr-auto text-decoration-none" href="#" style="font-weight: bold;">
+        <a class="nav-item text-white mx-2 mr-auto" href="cart" style="font-weight: bold;">
             <i class="fa fa-shopping-cart"></i>
             GIỎ HÀNG
         </a>
 
-        <a class="nav-item text-decoration-none" href="#" style="font-weight: bold; margin-right: 0px;">
+        <a class="nav-item" href="#" style="font-weight: bold; margin-right: 0px;">
             <button class="btn text-white" data-target="#mymodel" data-toggle="modal">
                 <i class="fa fa-user"></i>
-                ĐĂNG NHẬP</button>
+                ĐĂNG NHẬP
+            </button>
             <div class="modal fade" id="mymodel">
-                <div class="modal-dialog">
+                <div class="modal-dialog">  
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: purple;">
                             <div class="text-primary text-light">THÔNG TIN ĐĂNG NHẬP</div>
@@ -115,15 +121,12 @@
                             </form>
                         </div>
                         <div class="modal-body">
-                            <button class="rounded-pill" style="background-color: royalblue;color:white">
+                            <button class="btn" style="background-color: rgba(65, 105, 225, 0.925);color:white">
                                 <i class="fa fa-facebook"></i>
                                 Đăng nhập bằng Facebook</button>
-                            <button class="rounded-pill" style="background-color:#dd4b39;color:white">
+                            <button class="btn" style="background-color:#dd4c39de;color:white">
                                 <i class="fa fa-google"></i>
                                 Đăng nhập bằng Google</button>
-
-
-
                         </div>
                         <div class="modal-footer">
                             <div class="text-dark">Chưa có tài khoản? Bấm vào </div>

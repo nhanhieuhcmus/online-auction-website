@@ -9,6 +9,10 @@ app.get('/home', function (req, res) {
     res.render('home', {title: 'Trang chủ'});
 });
 
+app.get('/cart', function (req, res) {
+    res.render('cart', {title: 'Cart'});
+});
+
 app.get('/items', function (req, res) {
     res.render('items', {title: 'Chi tiết sản phẩm'});
 });
@@ -21,6 +25,7 @@ app.get('/profile', function (req, res) {
     res.render('profile', {title: 'Thông tin cá nhân'});
 });
 
+
 app.listen(3000,()=>{
-    console.log('Web server running at local');
+    console.log('Web server running at port [3000]..');
 })
