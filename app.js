@@ -4,13 +4,17 @@ var app = express();
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 app.use(express.static('public'))
- 
+
+app.get('/', function (req, res) {
+    res.render('home', {title: 'Trang chủ'});
+});
+
 app.get('/home', function (req, res) {
     res.render('home', {title: 'Trang chủ'});
 });
 
 app.get('/cart', function (req, res) {
-    res.render('cart', {title: 'Cart'});
+    res.render('cart', {title: 'Giỏ hàng'});
 });
 
 app.get('/items', function (req, res) {
