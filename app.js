@@ -5,12 +5,8 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 app.use(express.static('public'))
  
-app.get('/', function (req, res) {
-    res.render('home', {title: 'Home Page'});
-});
-
 app.get('/home', function (req, res) {
-    res.render('home', {title: 'Home Page'});
+    res.render('home', {title: 'Trang chủ'});
 });
 
 app.get('/cart', function (req, res) {
@@ -18,11 +14,15 @@ app.get('/cart', function (req, res) {
 });
 
 app.get('/items', function (req, res) {
-    res.render('items', {title: 'Product Page'});
+    res.render('items', {title: 'Chi tiết sản phẩm'});
+});
+
+app.get('/list-product', function (req, res) {
+    res.render('listProduct', {title: 'Danh sách sản phẩm'});
 });
 
 app.get('/profile', function (req, res) {
-    res.render('profile', {title: 'Profile'});
+    res.render('profile', {title: 'Thông tin cá nhân'});
 });
 
 

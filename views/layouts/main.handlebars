@@ -19,8 +19,8 @@
             aria-expanded="false" style="font-weight: bold;">DANH MỤC</button>
         <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
             <li class="dropdown-submenu">
-                <a class="dropdown-item" tabindex="-1" href="#">
-                    <i class="fa fa-podcast"></i>
+                <a class="dropdown-item" tabindex="-1" href="list-product">
+                    <i class="fa fa-podcast mr-2"></i>
                     Điện Tử</a>
                 <ul class="dropdown-menu">
                     <li class="dropdown-item"><a tabindex="-1" href="#">Điện Thoại Di Động</a></li>
@@ -30,7 +30,7 @@
             </li>
             <li class="dropdown-submenu">
                 <a class="dropdown-item" tabindex="-1" href="#">
-                    <i class="fa fa-headphones"></i>
+                    <i class="fa fa-headphones mr-2"></i>
                     Phụ Kiện - Thiết Bị Số</a>
                 <ul class="dropdown-menu">
                     <li class="dropdown-item"><a tabindex="-1" href="#">Tai Nghe</a></li>
@@ -40,31 +40,31 @@
             </li>
 
             <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-camera-retro"></i>
+                <i class="fa fa-camera-retro mr-2"></i>
                 Máy Ảnh - Quay Phim</a>
             <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-home"></i>
+                <i class="fa fa-home mr-2"></i>
                 Nhà Cửa Đời Sống</a>
             <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-product-hunt"></i>
+                <i class="fa fa-product-hunt mr-2"></i>
                 Hàng Tiêu Dùng</a>
             <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-heart"></i>
+                <i class="fa fa-heart mr-2"></i>
                 Làm Đẹp - Sức Khoẻ</a>
             <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-cart-plus"></i>
+                <i class="fa fa-cart-plus mr-2"></i>
                 Thời Trang - Phụ Kiện</a>
             <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-car"></i>
+                <i class="fa fa-car mr-2"></i>
                 Xe Máy - Ô Tô</a>
             <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-plug"></i>
+                <i class="fa fa-plug mr-2"></i>
                 Điện Gia Dụng</a>
         </ul>
 
         </div>
-        <a class="nav-item text-white mx-1" href="home" style="font-weight: bold;">
-            <i class="fa fa-home"></i>
+        <a class="nav-item text-white mx-1 text-decoration-none mr-3" href="home" style="font-weight: bold;">
+            <i class="fa fa-home mx-3"></i>
             TRANG CHỦ</a>
         <form class="form-inline">
             <div class="form-control">
@@ -75,6 +75,10 @@
                 </div>
         
             </div>
+            <button class="btn text-light mx-3">
+                <i class="fa fa-search"></i>
+                Tìm kiếm
+            </button>
         </form>
         <a class="nav-item text-white mx-2 mr-auto" href="cart" style="font-weight: bold;">
             <i class="fa fa-shopping-cart"></i>
@@ -97,20 +101,20 @@
                             <form action="">
                                 <div class="form-group">
                                     <i class="fa fa-user"></i>
-                                    <label for="">Username:</label>
+                                    <label for="">Tên đăng nhập:</label>
                                     <input class="form-control" type="text" name="" placeholder="Nhập tên người dùng..">
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-lock"></i>
-                                    <label for="">Password:</label>
+                                    <label for="">Mật khẩu:</label>
                                     <input class="form-control" type="text" name="" placeholder="Nhập mật khẩu..">
                                 </div>
                                 <div class="form-check"
                                     style="display: flex; flex-direction: row; justify-content: space-between;">
                                     <div>
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Ghi nhớ đăng nhập</label>
+                                        <label class="form-check-label" for="exampleCheck1">Nhớ mật khẩu</label>
                                     </div>
                                     <div>Quên mật khẩu?</div>
                                 </div>
@@ -125,7 +129,7 @@
                                 Đăng nhập bằng Google</button>
                         </div>
                         <div class="modal-footer">
-                            <a class="" style="text-decoration: none;">Chưa có tài khoản? Click </a>
+                            <div class="text-dark">Chưa có tài khoản? Bấm vào </div>
                             <a class="" href="#" style="font-weight: bold;">
                                 <a class="text-primary ml-0" data-target="#mymodel02" data-toggle="modal" id="register">
                                     đăng ký ngay</a>
@@ -146,26 +150,26 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label class="text-dark">Password:</label>
+                                                        <label class="text-dark">Mật khẩu:</label>
                                                         <input class="form-control" type="text" name=""
                                                             placeholder="Nhập mật khẩu..">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="text-dark">Repeat Password:</label>
+                                                        <label class="text-dark">Nhập lại mật khẩu:</label>
                                                         <input class="form-control" type="text" name=""
                                                             placeholder="Nhập lại mật khẩu lần nữa..">
                                                     </div>
                                                     <div class="form-check" style="display: flex; flex-direction: row;">
-                                                        <div class="text-dark">By creating an account you agree to our
+                                                        <div class="text-dark">Bằng việc nhấn vào tạo tài khoản, bằng đồng ý về
                                                         </div>
-                                                        <a class="ml-1" href="#">Terms & Privacy.</a>
+                                                        <a class="ml-1" href="#">Điều khoản & Quyền riêng tư của chúng tôi.</a>
                                                         <input type="checkbox" class="form-check-input"
                                                             id="exampleCheck1">
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn btn-success">ĐĂNG KÝ NGAY</button>
+                                                <button class="btn text-white" style="background-color: purple; ">ĐĂNG KÝ NGAY</button>
                                             </div>
                                         </div>
 
@@ -173,7 +177,7 @@
                                 </div>
 
                             </a>
-                            <button class="btn btn-success">ĐĂNG NHẬP</button>
+                            <button class="btn text-white" style="background-color: purple;">ĐĂNG NHẬP</button>
 
                         </div>
                     </div>
@@ -185,7 +189,7 @@
 
 
     </nav>
-    <div class="container-fluid">
+    <div id="container"">
         {{{body}}}
         <footer class="border-top row mt-5">
             <div class="col-18 col-md mt-5">
