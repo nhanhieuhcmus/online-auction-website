@@ -17,6 +17,7 @@
                         </div>          
                     </div>
                 </div>
+            </div>
 
                 <div class="col-md-4 border-right d-flex flex-column">
                     <div class="card-body">
@@ -24,9 +25,12 @@
                         <p class="card-text"><small class="text-muted">Thời điểm đăng 
                             <span class = "postTime font-italic">05/03/2019</span></small></p>
 
-                        <p class="mb-1">Giá hiện tại: <span id="recent-price"> 69.000đ </span></p>
-                        <p class="mb-1">Giá mua ngay: <span id="buy-now"> 10 tỷ </span></p>
-                        <span class="card-text bold">Đấu giá kết thúc sau </span><span id="countDown"></span>
+                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> 69.000đ </span></p>
+                    <p class="mb-1">Giá mua ngay: <span id="buy-now"> 10 tỷ </span></p>
+                    <span class="card-text bold">Đấu giá kết thúc sau </span><span id="countDown"></span><br><br>
+                </div>
+                <div id="favorite">
+                        <i class="heart fa fa-heart-o"></i>
                     </div>
                     <div class ="card-body">
                         <hr width="90%">
@@ -41,6 +45,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
                 <div class="info col-md-3 d-flex align-content-stretch flex-wrap">
                         <div class="card-body border-bottom">
@@ -150,22 +155,28 @@
                     </table>
             </div>
         </div>
-        
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-input-spinner@1.12.7/src/bootstrap-input-spinner.min.js"></script>
+    </div>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap-input-spinner@1.12.7/src/bootstrap-input-spinner.min.js"></script>
     <script>
+         $(".heart.fa").click(function () {
+            $(this).toggleClass("fa-heart fa-heart-o");
+        });
+
         //Bộ đếm ngày giờ
         var countDownDate = new Date();
-        countDownDate.setHours(countDownDate.getHours()+1);
-        countDownDate.setDate(countDownDate.getDate()+1);
+        countDownDate.setHours(countDownDate.getHours() + 1);
+        countDownDate.setDate(countDownDate.getDate() + 1);
         // cập nhập thời gian sau mỗi 1 giây
-        var x = setInterval(function() {
-        
+        var x = setInterval(function () {
+
             // Lấy thời gian hiện tại
             var now = new Date().getTime();
-        
+
             // Lấy số thời gian chênh lệch
             var distance = countDownDate.getTime() - now;
-        
+
             // Tính toán số ngày, giờ, phút, giây từ thời gian chênh lệch
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -174,12 +185,12 @@
             var display = "";
             if (days > 0)
                 display = display + days + " Ngày ";
-            display =display + hours + " : " + minutes + " : " + seconds;
+            display = display + hours + " : " + minutes + " : " + seconds;
             // HIển thị chuỗi thời gian trong thẻ p
             document.getElementById("countDown").innerHTML = display;
             // Nếu thời gian kết thúc, hiển thị chuỗi thông báo
             if (distance < 0) {
-            clearInterval(x);
+                clearInterval(x);
             }
         }, 1000);
 

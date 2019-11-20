@@ -36,22 +36,7 @@
     display: none;
     background-color: #262626;
     padding-left: 8px;
-  }
-  .icon-bar{
-    display:flex;
-    flex-direction: row;
-  }
-  
-  .icon-bar a {
-    display: block;
-    text-align: center;
-    height:50px;
-    width: 50px;
-    padding:10px;
-    color: white;
-    font-size: 20px;
-  }
-  
+  } 
  
   .carousel-caption{
     color: white;
@@ -113,6 +98,7 @@
 
   .imgs {
     max-width: 100%;
+    max-width: 70%;
     max-height: auto;
     margin-top: 10%;
     margin-bottom: 10%;
@@ -136,7 +122,7 @@
 .info {
     font-size: 15px;
 }
-#nearlyFinished{
+#top5{
   color: grey;
   border-bottom: 1px solid grey;
   margin-left: 20px;
@@ -145,13 +131,8 @@
 }
 
 #container{
-  max-width: 90%;
+  margin: 0% 5% 0% 5%;
 }
-
-/* a{
-  color: black;
-  text-decoration: none;
-} */
 
 #price{
   font-weight: bold;
@@ -161,13 +142,16 @@
 .checked{
   color: orange;
 }
-.unchecked{
-  color:grey;
-}
-#Countauctions{
-  text-align: end;
+
+.heart{
   color: red;
-  font-weight: initial;
+  font-size: 25px;
+  text-align: end;
+}
+
+#favorite{
+  margin: auto;
+  
 }
 
 .tab-content {
@@ -185,4 +169,21 @@
   font-weight: bold;
   font-size: 20px;
   color: #007bb5;
+}
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#columnProduct{
+  margin-top: 10px;
 }
