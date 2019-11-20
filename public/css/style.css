@@ -97,8 +97,7 @@
 
 
   .imgs {
-    max-width: 100%;
-    max-width: 70%;
+    max-width: 90%;
     max-height: auto;
     margin-top: 10%;
     margin-bottom: 10%;
@@ -138,9 +137,6 @@
   font-weight: bold;
   text-align: end;
   color: red;
-}
-.checked{
-  color: orange;
 }
 
 .heart{
@@ -186,4 +182,8 @@
 
 #columnProduct{
   margin-top: 10px;
+}
+
+.rating-table-head {
+  color: cornflowerblue;
 }
