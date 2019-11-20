@@ -9,6 +9,14 @@ app.get('/', function (req, res) {
     res.render('home', {title: 'Home Page'});
 });
 
+app.get('/home', function (req, res) {
+    res.render('home', {title: 'Home Page'});
+});
+
+app.get('/cart', function (req, res) {
+    res.render('cart', {title: 'Cart'});
+});
+
 app.get('/items', function (req, res) {
     res.render('items', {title: 'Product Page'});
 });
@@ -17,6 +25,7 @@ app.get('/profile', function (req, res) {
     res.render('profile', {title: 'Profile'});
 });
 
+
 app.listen(3000,()=>{
-    console.log('Web server running at sfhkfj');
+    console.log('Web server running at port [3000]..');
 })

@@ -36,22 +36,7 @@
     display: none;
     background-color: #262626;
     padding-left: 8px;
-  }
-  .icon-bar{
-    display:flex;
-    flex-direction: row;
-  }
-  
-  .icon-bar a {
-    display: block;
-    text-align: center;
-    height:50px;
-    width: 50px;
-    padding:10px;
-    color: white;
-    font-size: 20px;
-  }
-  
+  } 
  
   .carousel-caption{
     color: white;
@@ -107,10 +92,6 @@
     border-radius: 6px 0 6px 6px;
   }
   /* POPUP LOGIN FORM */
-  
-
-
-
   .items {
     max-width: 70%;
     max-height: auto;
@@ -135,11 +116,6 @@
 #container{
   max-width: 90%;
 }
-
-/* a{
-  color: black;
-  text-decoration: none;
-} */
 
 #price{
   font-weight: bold;
