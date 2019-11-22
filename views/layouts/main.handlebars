@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    {{!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -64,21 +65,18 @@
 
         </div>
         <a class="nav-item text-white mx-1 text-decoration-none mr-3" href="home" style="font-weight: bold;">
-            <i class="fa fa-home mx-3"></i>
+            <i class="fa fa-home mx"></i>
             TRANG CHỦ</a>
         <form class="form-inline">
             <div class="form-control">
                 <div id="searchArea">
                     <input type="text" placeholder="Tìm sản phẩm hay thương hiệu mong muốn ..."
                         style="width: 350px; border:none;outline:none">
-                    <button type="submit" style="border: none;background-color: white;"><i class="fa fa-search"></i></button>
+                    <button type="submit" style="border: none;background-color: white;"><i
+                            class="fa fa-search"></i></button>
                 </div>
-        
+
             </div>
-            <button class="btn text-light mx-3">
-                <i class="fa fa-search"></i>
-                Tìm kiếm
-            </button>
         </form>
         <a class="nav-item text-white mx-2 mr-auto" href="cart" style="font-weight: bold;">
             <i class="fa fa-shopping-cart"></i>
@@ -86,13 +84,13 @@
         </a>
 
         <a class="nav-item" href="#" style="font-weight: bold; margin-right: 0px;">
-            <button class="btn text-white" data-target="#mymodel" data-toggle="modal">
+            <button class="btn text-white" data-target="#mymodel" data-toggle="modal" id="loginArea">
                 <i class="fa fa-user"></i>
                 ĐĂNG NHẬP
             </button>
             <div class="modal fade" id="mymodel">
-                <div class="modal-dialog">  
-                    <div class="modal-content">
+                <div class="modal-dialog" id="modalID">
+                    <div class="modal-content" id="login-content">
                         <div class="modal-header" style="background-color: purple;">
                             <div class="text-primary text-light">THÔNG TIN ĐĂNG NHẬP</div>
                             <button type="button" class="close text-light" data-dismiss="modal"> &times; </button>
@@ -102,7 +100,7 @@
                                 <div class="form-group">
                                     <i class="fa fa-user"></i>
                                     <label for="">Tên đăng nhập:</label>
-                                    <input class="form-control" type="text" name="" placeholder="Nhập tên người dùng..">
+                                    <input class="form-control" type="text" placeholder="Nhập tên người dùng.." id="username">
                                 </div>
 
                                 <div class="form-group">
@@ -131,7 +129,7 @@
                         <div class="modal-footer">
                             <div class="text-dark">Chưa có tài khoản? Bấm vào </div>
                             <a class="" href="#" style="font-weight: bold;">
-                                <a class="text-primary ml-0" data-target="#mymodel02" data-toggle="modal" id="register">
+                                <a class="text-primary ml-0" data-target="#mymodel02" data-toggle="modal" id="signup">
                                     đăng ký ngay</a>
                                 <div class="modal fade" id="mymodel02">
                                     <div class="modal-dialog">
@@ -151,25 +149,32 @@
 
                                                     <div class="form-group">
                                                         <label class="text-dark">Mật khẩu:</label>
+
+                                                        <input class="form-control" type="password"
+
                                                         <input class="form-control" type="password" name=""
+
                                                             placeholder="Nhập mật khẩu..">
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="text-dark">Nhập lại mật khẩu:</label>
-                                                        <input class="form-control" type="text" name=""
+                                                        <input class="form-control" type="password"
                                                             placeholder="Nhập lại mật khẩu lần nữa..">
                                                     </div>
                                                     <div class="form-check" style="display: flex; flex-direction: row;">
-                                                        <div class="text-dark">Bằng việc nhấn vào tạo tài khoản, bằng đồng ý về
+                                                        <div class="text-dark">Bằng việc nhấn vào đây, bạn
+                                                            đồng ý về
+                                                            <a class="ml-1" href="#">Điều khoản & Quyền riêng tư của chúng
+                                                            tôi.</a>
                                                         </div>
-                                                        <a class="ml-1" href="#">Điều khoản & Quyền riêng tư của chúng tôi.</a>
+                                                        
                                                         <input type="checkbox" class="form-check-input"
                                                             id="exampleCheck1">
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn text-white" style="background-color: purple; ">ĐĂNG KÝ NGAY</button>
+                                                <button class="btn text-white" style="background-color: purple; ">TẠO TÀI KHOẢN</button>
                                             </div>
                                         </div>
 
@@ -177,7 +182,7 @@
                                 </div>
 
                             </a>
-                            <button class="btn text-white" style="background-color: purple;">ĐĂNG NHẬP</button>
+                            <button class="btn text-white" id="login" style="background-color: purple;">ĐĂNG NHẬP</button>
 
                         </div>
                     </div>
@@ -191,44 +196,44 @@
     </nav>
     <div id="container">
         {{{body}}}
-        <footer class="border-top row mt-5">
-            <div class="col-18 col-md mt-5">
-                <small class="d-block mb-3 text-muted">Sàn đấu giá trực tuyến</small>
-                <small class="d-block mb-3 text-muted">&copy; 2019-2020</small>
-            </div>
-            <div class="col-6 col-md mt-5">
-                <h5>Features</h5>
-                <ul class="list-unstyled">
-                    <li><a class="text-muted" href="#">Cool stuff</a></li>
-                    <li><a class="text-muted" href="#">Random feature</a></li>
-                    <li><a class="text-muted" href="#">Team feature</a></li>
-                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                    <li><a class="text-muted" href="#">Another one</a></li>
-                    <li><a class="text-muted" href="#">Last time</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md mt-5">
-                <h5>Resources</h5>
-                <ul class="list-unstyled">
-                    <li><a class="text-muted" href="#">Resource</a></li>
-                    <li><a class="text-muted" href="#">Resource name</a></li>
-                    <li><a class="text-muted" href="#">Another resource</a></li>
-                    <li><a class="text-muted" href="#">Final resource</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md mt-5">
-                <h5>About</h5>
-                <ul class="list-unstyled">
-                    <li><a class="text-muted" href="#">Team</a></li>
-                    <li><a class="text-muted" href="#">Locations</a></li>
-                    <li><a class="text-muted" href="#">Privacy</a></li>
-                    <li><a class="text-muted" href="#">Terms</a></li>
-                </ul>
-            </div>
+        <footer class=" border-top row mt-5">
+        <div class="col-18 col-md mt-5">
+            <small class="d-block mb-3 text-muted">Sàn đấu giá trực tuyến</small>
+            <small class="d-block mb-3 text-muted">&copy; 2019-2020</small>
+        </div>
+        <div class="col-6 col-md mt-5">
+            <h5>Features</h5>
+            <ul class="list-unstyled">
+                <li><a class="text-muted" href="#">Cool stuff</a></li>
+                <li><a class="text-muted" href="#">Random feature</a></li>
+                <li><a class="text-muted" href="#">Team feature</a></li>
+                <li><a class="text-muted" href="#">Stuff for developers</a></li>
+                <li><a class="text-muted" href="#">Another one</a></li>
+                <li><a class="text-muted" href="#">Last time</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md mt-5">
+            <h5>Resources</h5>
+            <ul class="list-unstyled">
+                <li><a class="text-muted" href="#">Resource</a></li>
+                <li><a class="text-muted" href="#">Resource name</a></li>
+                <li><a class="text-muted" href="#">Another resource</a></li>
+                <li><a class="text-muted" href="#">Final resource</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md mt-5">
+            <h5>About</h5>
+            <ul class="list-unstyled">
+                <li><a class="text-muted" href="#">Team</a></li>
+                <li><a class="text-muted" href="#">Locations</a></li>
+                <li><a class="text-muted" href="#">Privacy</a></li>
+                <li><a class="text-muted" href="#">Terms</a></li>
+            </ul>
+        </div>
     </div>
     </footer>
     </div>
-  
+
     <script>
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;
@@ -240,15 +245,36 @@
                 if (dropdownContent.style.display === "block") {
                     dropdownContent.style.display = "none";
                 } else {
-                   dropdownContent.style.display = "block";
+                    dropdownContent.style.display = "block";
                 }
             });
         }
                 // -------------------------------------------------------------
     </script>
-    
-    
+
+    <script>
+        var loginContent=document.getElementById("login-content");
+        var signup=document.getElementById("signup");
+        signup.onclick=function(){
+        }
+    </script>
+    <script>
+        var username=document.getElementById("username");
+        var password=document.getElementById("password");
+        var login=document.getElementById("login");
+        var loginArea=document.getElementById("loginArea");
+        var loginContent=document.getElementById("login-content");
+        var body=document.getElementsByTagName("body");
+        login.onclick=function(){
+            if (username.value=="admin" || username.value=="bidder" || username.value=="user" && password.value=="nhanhieu"){
+                loginArea.innerHTML="ADMINISTRATOR";
+                $(".modal").modal('hide');
+            }
+        }
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
+
 </html>
