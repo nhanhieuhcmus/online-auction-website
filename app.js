@@ -39,6 +39,10 @@ app.get('/profile', function (req, res) {
     res.render('profile', {title: 'Thông tin cá nhân'});
 });
 
+app.get('/new-product', function (req, res) {
+    res.render('newProduct', {title: 'Thông tin cá nhân'});
+});
+
 app.listen(3000,()=>{
     console.log('Web server running at port [3000]..');
 })

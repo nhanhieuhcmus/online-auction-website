@@ -139,6 +139,10 @@
   color: red;
 }
 
+.checked{
+  color: orange;
+}
+
 .heart{
   color: red;
   font-size: 25px;
