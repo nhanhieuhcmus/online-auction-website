@@ -2340,9 +2340,9 @@
         </table>
     </div>
     <div style="text-align: center;">
-        <a href="#" id="prev"> Previous</a>
+        <a href="#" id="prev"></a>
          <span id="PageIndex"></span>
-        <a href="#" id="next"> Next </a>
+        <a href="#" id="next"> > </a>
         </div>
     </div>
 <script>
@@ -2375,7 +2375,7 @@
             for (var i = 0; i < totalPages; i++)         //Create Anchors for paging by replacing the number in the anc string with value of i
             {                                     //in for loop
                 htmlpage += anc.replace('NUMBER', i).replace('NUMBER', i + 1);
-                htmlpage += ' ';
+                htmlpage += " ";
             }
             $('#PageIndex').html(htmlpage);       //Now Add the htmlpage variable to the innerHtml of the div with id #PageIndex
             run();                                //Call the function run()

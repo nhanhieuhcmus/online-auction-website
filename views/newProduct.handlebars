@@ -1,4 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <div class="container mt-2" style="max-width: 60%;">
     <form class="needs-validation" novalidate>
         <div id="newproduct">
@@ -13,9 +12,9 @@
                         Vui lòng nhập tên sản phẩm.
                     </div>
                 </div>
-                <div class="field">
-                    <label for="exampleFormControlFile1">Chọn hình ảnh (ít nhất 3 hình)</label>
-                    <input type="file" id="files" name="files[]" accept="image/*" multiple />
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile" accept="image/*">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Giá khởi điểm</label>
@@ -54,36 +53,8 @@
 </div>
 
 <script>
-    //Multiple image preview and remove
-    $(document).ready(function () {
-        if (window.File && window.FileList && window.FileReader) {
-            $("#files").on("change", function (e) {
-                var files = e.target.files,
-                    filesLength = files.length;
-                for (var i = 0; i < filesLength; i++) {
-                    var f = files[i]
-                    var fileReader = new FileReader();
-                    fileReader.onload = (function (e) {
-                        var file = e.target;
-                        $("<span class=\"pip\">" +
-                            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-                            "<br/><span class=\"remove\"> &times; </span>" +
-                            "</span>").insertAfter("#files");
-                        $(".remove").click(function () {
-                            $(this).parent(".pip").remove();
-                        });
-
-                    });
-                    fileReader.readAsDataURL(f);
-                }
-            });
-        } else {
-            alert("Your browser doesn't support to File API")
-        }
-    });
-
     // Example starter JavaScript for disabling form submissions if there are invalid fields
-    $(function () {
+    (function () {
         'use strict';
         window.addEventListener('load', function () {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
