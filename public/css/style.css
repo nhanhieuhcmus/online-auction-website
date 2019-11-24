@@ -1,4 +1,4 @@
-.body{
+﻿.body{
   font-family: Arial, Helvetica, sans-serif;
 }
 .dropdown02:hover .dropbtn {
@@ -216,6 +216,31 @@
 
 .dropdown-content a:hover {
   background-color: #ddd;
+}
+
+input[type="file"] {
+  display: block;
+}
+.imageThumb {
+  max-height: 75px;
+  border: 1px solid gray;
+  padding: 1px;
+  cursor: pointer;
+}
+.pip {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+}
+.remove {
+  display: block;
+  background: white;
+  border: 1px solid gray;
+  text-align: center;
+  cursor: pointer;
+}
+.remove:hover {
+  background:gray;
+  color: black;
 }
 
 .state-hidden{

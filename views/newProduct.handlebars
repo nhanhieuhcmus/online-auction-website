@@ -12,27 +12,27 @@
                         Vui lòng nhập tên sản phẩm.
                     </div>
                 </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" accept="image/*">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
+               <div class="fields mb-3">
+                    <label for="exampleFormControlFile1">Chọn hình ảnh (ít nhất 3 hình)</label>
+                    <input type="file" id="files" name="files[]" accept="image/*, video/*" multiple>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Giá khởi điểm</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" required>
+                    <input type="number" min="0" class="form-control" id="exampleFormControlInput1" required>
                     <div class="invalid-feedback">
                         Vui lòng nhập giá khởi điểm.
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Bước giá</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" required>
+                    <input type="number" min="0" class="form-control" id="exampleFormControlInput1" required>
                     <div class="invalid-feedback">
                         Vui lòng nhập bước giá.
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Giá mua ngay (nếu có)</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1">
+                    <input type="number" min="0" class="form-control" id="exampleFormControlInput1">
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Mô tả</label>
@@ -51,6 +51,36 @@
         </div>
     </form>
 </div>
+
+<script>
+    //Multiple image preview and remove
+    $(document).ready(function () {
+        if (window.File && window.FileList && window.FileReader) {
+            $("#files").on("change", function (e) {
+                var files = e.target.files,
+                    filesLength = files.length;
+                for (var i = 0; i < filesLength; i++) {
+                    var f = files[i]
+                    var fileReader = new FileReader();
+                    fileReader.onload = (function (e) {
+                        var file = e.target;
+                        $("<span class=\"pip\">" +
+                            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                            "<br/><span class=\"remove\"> &times; </span>" +
+                            "</span>").insertAfter("#files");
+                        $(".remove").click(function () {
+                            $(this).parent(".pip").remove();
+                        });
+
+                    });
+                    fileReader.readAsDataURL(f);
+                }
+            });
+        } else {
+            alert("Your browser doesn't support to File API")
+        }
+    });
+</script>
 
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields

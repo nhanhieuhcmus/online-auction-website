@@ -180,8 +180,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button class="btn text-white" style="background-color: purple; ">TẠO
-                                                    TÀI
-                                                    KHOẢN</button>
+                                                    TÀI KHOẢN</button>
                                             </div>
                                         </div>
 
@@ -297,6 +296,9 @@
         }
     </script>
     <script>
+        $("#signup").click(function(){
+             $("#modalID").modal('hide');
+        })
         $('document').ready(function () {
             $('[data-login-submit], [data-logout-button]').click(function () {
                 $('[data-login-button]').toggleClass('state-hidden');
