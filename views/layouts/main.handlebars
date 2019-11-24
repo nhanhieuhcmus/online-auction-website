@@ -64,7 +64,7 @@
         </ul>
 
         </div>
-        <a class="nav-item text-white mx-1 text-decoration-none mr-3" href="home" style="font-weight: bold;">
+        <a class="nav-item text-white mx-1 text-decoration-none mx-4" href="home" style="font-weight: bold;">
             <i class="fa fa-home mx"></i>
             TRANG CHỦ</a>
         <form class="form-inline">
@@ -78,16 +78,20 @@
 
             </div>
         </form>
-        <a class="nav-item text-white mx-2 mr-auto" href="cart" style="font-weight: bold;">
+        <a class="nav-item text-white mx-4 mr-auto" href="cart" style="font-weight: bold;">
             <i class="fa fa-shopping-cart"></i>
             GIỎ HÀNG
         </a>
 
         <a class="nav-item" href="#" style="font-weight: bold; margin-right: 0px;">
-            <button class="btn text-white" data-target="#mymodel" data-toggle="modal" id="loginArea">
+            <button data-login-button class="btn text-white mr-5" data-target="#mymodel" data-toggle="modal"
+                id="loginArea">
                 <i class="fa fa-user"></i>
                 ĐĂNG NHẬP
             </button>
+
+            {{!-- Hiện ra bảng thông tin đăng nhập --}}
+
             <div class="modal fade" id="mymodel">
                 <div class="modal-dialog" id="modalID">
                     <div class="modal-content" id="login-content">
@@ -100,13 +104,15 @@
                                 <div class="form-group">
                                     <i class="fa fa-user"></i>
                                     <label for="">Tên đăng nhập:</label>
-                                    <input class="form-control" type="text" placeholder="Nhập tên người dùng.." id="username">
+                                    <input class="form-control" type="text" placeholder="Nhập tên người dùng.."
+                                        id="username">
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-lock"></i>
                                     <label for="">Mật khẩu:</label>
-                                    <input class="form-control" type="password" name="" placeholder="Nhập mật khẩu..">
+                                    <input class="form-control" type="password" id="password"
+                                        placeholder="Nhập mật khẩu..">
                                 </div>
                                 <div class="form-check"
                                     style="display: flex; flex-direction: row; justify-content: space-between;">
@@ -150,10 +156,8 @@
                                                     <div class="form-group">
                                                         <label class="text-dark">Mật khẩu:</label>
 
-                                                        <input class="form-control" type="password"
-
-                                                        <input class="form-control" type="password" name=""
-
+                                                        <input class="form-control" type="password" <input
+                                                            class="form-control" type="password" name=""
                                                             placeholder="Nhập mật khẩu..">
                                                     </div>
                                                     <div class="form-group">
@@ -164,17 +168,20 @@
                                                     <div class="form-check" style="display: flex; flex-direction: row;">
                                                         <div class="text-dark">Bằng việc nhấn vào đây, bạn
                                                             đồng ý về
-                                                            <a class="ml-1" href="#">Điều khoản & Quyền riêng tư của chúng
-                                                            tôi.</a>
+                                                            <a class="ml-1" href="#">Điều khoản & Quyền riêng tư của
+                                                                chúng
+                                                                tôi.</a>
                                                         </div>
-                                                        
+
                                                         <input type="checkbox" class="form-check-input"
                                                             id="exampleCheck1">
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn text-white" style="background-color: purple; ">TẠO TÀI KHOẢN</button>
+                                                <button class="btn text-white" style="background-color: purple; ">TẠO
+                                                    TÀI
+                                                    KHOẢN</button>
                                             </div>
                                         </div>
 
@@ -182,7 +189,9 @@
                                 </div>
 
                             </a>
-                            <button class="btn text-white" id="login" style="background-color: purple;">ĐĂNG NHẬP</button>
+                            <button data-login-submit class="btn text-white" id="login"
+                                style="background-color: purple;">ĐĂNG
+                                NHẬP</button>
 
                         </div>
                     </div>
@@ -190,50 +199,64 @@
                 </div>
             </div>
 
+            {{!-- Hiện bảng profile ra --}}
+            <div class="btn-group">
+                <button data-user-button type="button" class="btn text-white dropdown-toggle state-hidden"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="userbtn"
+                    style="background-color: purple;">
+                    <i class="fa fa-user"></i>
+                    User
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button id="userOptional" class="dropdown-item" type="button"><a href="profile">Thông tin cá nhân
+                        </a></button>
+                    <button id="userOptional" class="dropdown-item" type="button"><a href="new-product">Đăng sản
+                            phẩm</a></button>
+                    <button data-logout-button id="userOptional" class="dropdown-item" type="button"><a href="#">Đăng
+                            xuất</a></button>
+                </div>
+            </div>
         </a>
-
-
     </nav>
     <div id="container">
         {{{body}}}
         <footer class=" border-top row mt-5">
-        <div class="col-18 col-md mt-5">
-            <small class="d-block mb-3 text-muted">Sàn đấu giá trực tuyến</small>
-            <small class="d-block mb-3 text-muted">&copy; 2019-2020</small>
-        </div>
-        <div class="col-6 col-md mt-5">
-            <h5>Features</h5>
-            <ul class="list-unstyled">
-                <li><a class="text-muted" href="#">Cool stuff</a></li>
-                <li><a class="text-muted" href="#">Random feature</a></li>
-                <li><a class="text-muted" href="#">Team feature</a></li>
-                <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                <li><a class="text-muted" href="#">Another one</a></li>
-                <li><a class="text-muted" href="#">Last time</a></li>
-            </ul>
-        </div>
-        <div class="col-6 col-md mt-5">
-            <h5>Resources</h5>
-            <ul class="list-unstyled">
-                <li><a class="text-muted" href="#">Resource</a></li>
-                <li><a class="text-muted" href="#">Resource name</a></li>
-                <li><a class="text-muted" href="#">Another resource</a></li>
-                <li><a class="text-muted" href="#">Final resource</a></li>
-            </ul>
-        </div>
-        <div class="col-6 col-md mt-5">
-            <h5>About</h5>
-            <ul class="list-unstyled">
-                <li><a class="text-muted" href="#">Team</a></li>
-                <li><a class="text-muted" href="#">Locations</a></li>
-                <li><a class="text-muted" href="#">Privacy</a></li>
-                <li><a class="text-muted" href="#">Terms</a></li>
-            </ul>
-        </div>
+            <div class="col-18 col-md mt-5">
+                <small class="d-block mb-3 text-muted">Sàn đấu giá trực tuyến</small>
+                <small class="d-block mb-3 text-muted">&copy; 2019-2020</small>
+            </div>
+            <div class="col-6 col-md mt-5">
+                <h5>Features</h5>
+                <ul class="list-unstyled">
+                    <li><a class="text-muted" href="#">Cool stuff</a></li>
+                    <li><a class="text-muted" href="#">Random feature</a></li>
+                    <li><a class="text-muted" href="#">Team feature</a></li>
+                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
+                    <li><a class="text-muted" href="#">Another one</a></li>
+                    <li><a class="text-muted" href="#">Last time</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md mt-5">
+                <h5>Resources</h5>
+                <ul class="list-unstyled">
+                    <li><a class="text-muted" href="#">Resource</a></li>
+                    <li><a class="text-muted" href="#">Resource name</a></li>
+                    <li><a class="text-muted" href="#">Another resource</a></li>
+                    <li><a class="text-muted" href="#">Final resource</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md mt-5">
+                <h5>About</h5>
+                <ul class="list-unstyled">
+                    <li><a class="text-muted" href="#">Team</a></li>
+                    <li><a class="text-muted" href="#">Locations</a></li>
+                    <li><a class="text-muted" href="#">Privacy</a></li>
+                    <li><a class="text-muted" href="#">Terms</a></li>
+                </ul>
+            </div>
     </div>
     </footer>
     </div>
-
     <script>
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;
@@ -249,30 +272,38 @@
                 }
             });
         }
-                // -------------------------------------------------------------
     </script>
 
+
     <script>
-        var loginContent=document.getElementById("login-content");
-        var signup=document.getElementById("signup");
-        signup.onclick=function(){
-        }
-    </script>
-    <script>
-        var username=document.getElementById("username");
-        var password=document.getElementById("password");
-        var login=document.getElementById("login");
-        var loginArea=document.getElementById("loginArea");
-        var loginContent=document.getElementById("login-content");
-        var body=document.getElementsByTagName("body");
-        login.onclick=function(){
-            if (username.value=="admin" || username.value=="bidder" || username.value=="user" && password.value=="nhanhieu"){
-                loginArea.innerHTML="ADMINISTRATOR";
-                $(".modal").modal('hide');
+        var username = document.getElementById("username");
+        var password = document.getElementById("password");
+        var login = document.getElementById("login");
+        var loginArea = document.getElementById("loginArea");
+        var loginContent = document.getElementById("login-content");
+        var user_button=document.getElementById("userbtn");
+        login.onclick = function () {
+            if ((username.value == "admin") && (password.value == "nhanhieu")) {
+                user_button.innerHTML = "Quản trị viên";
+
             }
+            else if ((username.value == "bidder") && (password.value == "nhanhieu")) {
+                user_button.innerHTML = "Người đấu giá";
+            }
+            else if ((username.value == "seller") && (password.value == "nhanhieu")) {
+                user_button.innerHTML = "Người bán hàng";
+            }
+            $(".modal").modal('hide');
         }
     </script>
-
+    <script>
+        $('document').ready(function () {
+            $('[data-login-submit], [data-logout-button]').click(function () {
+                $('[data-login-button]').toggleClass('state-hidden');
+                $('[data-user-button]').toggleClass('state-logged-in');
+            })
+        })
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
