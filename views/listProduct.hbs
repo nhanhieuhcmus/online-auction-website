@@ -2067,8 +2067,8 @@
                             </div>
                         </a>
                         <div id="favorite">
-                        <i class="heart fa fa-heart-o"></i>
-                    </div>
+                            <i class="heart fa fa-heart-o"></i>
+                        </div>
                     </div>
                 </td>
                 <td>
@@ -2341,106 +2341,103 @@
     </div>
     <div style="text-align: center;">
         <a href="#" id="prev"></a>
-         <span id="PageIndex"></span>
+        <span id="PageIndex"></span>
         <a href="#" id="next"> > </a>
-        </div>
     </div>
+</div>
 <script>
-    <script>
-        $(".heart.fa").click(function () {
-            $(this).toggleClass("fa-heart fa-heart-o");
-        });
-        </script>
+    $(".heart.fa").click(function () {
+        $(this).toggleClass("fa-heart fa-heart-o");
+    });
+</script>
 <script>
-        var elements = document.getElementsByClassName("column");
-        var i;
-        function gridView() {
-            for (i = 0; i < elements.length; i++) {
-                elements[i].style.width = "25%";
-            }
+    var elements = document.getElementsByClassName("column");
+    var i;
+    function gridView() {
+        for (i = 0; i < elements.length; i++) {
+            elements[i].style.width = "25%";
         }
-        </script>
+    }
+</script>
 <script>
-        //paging
-        var ps = 3;            // is the Page Size
-        var cp = 0;            // is Current Page Index
-        var table;           // is Objectk in which [HTML OBJECT] of the table
-        var tr;              // is Object in which [HTML OBJECT] of the tr
-        var totalPages = 0;    // is Total No of Pages
-        var anc = '<a href="javascript:SetPageIndex(NUMBER);">NUMBER</a>' //is Anchor for page Indexing which calls a
-        //Javascript function SetPageIndex which requires a index no to 
-        //be ed.
-        var htmlpage = '';    // is Object used to store list of HTML anchors
-        $(document).ready(function () {
-            table = $('#myTable').get(0);         //On Page Load 1st get the Table to be paged.
-            tr = $('#myTable tr').get();          //Get an Array of <tr> i.e table rows in the table.
-            totalPages = Math.ceil(tr.length / ps); //Get count of pages that are required to display complete data by dividing the total                                           //no of rows with the page size.
-            for (var i = 0; i < totalPages; i++)         //Create Anchors for paging by replacing the number in the anc string with value of i
-            {                                     //in for loop
-                htmlpage += anc.replace('NUMBER', i).replace('NUMBER', i + 1);
-                htmlpage += " ";
-            }
-            $('#PageIndex').html(htmlpage);       //Now Add the htmlpage variable to the innerHtml of the div with id #PageIndex
-            run();                                //Call the function run()
-            Showbtn();                            //Call the function Showbtn()
+    //paging
+    var ps = 3;            // is the Page Size
+    var cp = 0;            // is Current Page Index
+    var table;           // is Objectk in which [HTML OBJECT] of the table
+    var tr;              // is Object in which [HTML OBJECT] of the tr
+    var totalPages = 0;    // is Total No of Pages
+    var anc = '<a href="javascript:SetPageIndex(NUMBER);">NUMBER</a>' //is Anchor for page Indexing which calls a
+    //Javascript function SetPageIndex which requires a index no to
+    //be ed.
+    var htmlpage = '';    // is Object used to store list of HTML anchors
+    $(document).ready(function () {
+        table = $('#myTable').get(0);         //On Page Load 1st get the Table to be paged.
+        tr = $('#myTable tr').get();          //Get an Array of <tr> i.e table rows in the table.
+        totalPages = Math.ceil(tr.length / ps); //Get count of pages that are required to display complete data by dividing the total                                           //no of rows with the page size.
+        for (var i = 0; i < totalPages; i++)         //Create Anchors for paging by replacing the number in the anc string with value of i
+        {                                     //in for loop
+            htmlpage += anc.replace('NUMBER', i).replace('NUMBER', i + 1);
+            htmlpage += " ";
+        }
+        $('#PageIndex').html(htmlpage);       //Now Add the htmlpage variable to the innerHtml of the div with id #PageIndex
+        run();                                //Call the function run()
+        Showbtn();                            //Call the function Showbtn()
 
-            $("#prev").click(function (e) {         //Click Event of button #prev
-                cp--;                               //On Click of this btn the value of the variable cp is decremented by 1
-                run();                              //The run function then on the new value of variable cp determines the rows that has to
-                //be displayed
-                Showbtn();                          //The Showbtn function shows the enable and disables the navigation btn #next and #prev
-                //on the bases of the value in variable cp.
-                e.preventDefault();                 //Prevents the default event of the function.
-            });
-            $("#next").click(function (e) {          //Click Event of button #next
-                cp++;                               //On Click of this btn the value of the variable cp is incremented by 1
-                run();
-                Showbtn();
-                e.preventDefault();
-            });
+        $("#prev").click(function (e) {         //Click Event of button #prev
+            cp--;                               //On Click of this btn the value of the variable cp is decremented by 1
+            run();                              //The run function then on the new value of variable cp determines the rows that has to
+            //be displayed
+            Showbtn();                          //The Showbtn function shows the enable and disables the navigation btn #next and #prev
+            //on the bases of the value in variable cp.
+            e.preventDefault();                 //Prevents the default event of the function.
         });
-        var counter;
-        function SetPageIndex(counter)            //This function is called on the list of anchors. It set the value of the variable cp                                           //with the value of the page index to be displayed
-        {
-            cp = counter;
+        $("#next").click(function (e) {          //Click Event of button #next
+            cp++;                               //On Click of this btn the value of the variable cp is incremented by 1
             run();
             Showbtn();
-        }
+            e.preventDefault();
+        });
+    });
+    var counter;
+    function SetPageIndex(counter)            //This function is called on the list of anchors. It set the value of the variable cp                                           //with the value of the page index to be displayed
+    {
+        cp = counter;
+        run();
+        Showbtn();
+    }
 
-        function run() {                           // The function run() is the function that does the heavy lifting.
-            for (var i = 0; i < tr.length; i++)           // Initially it hides all the tr in the table
-            {
-                $(tr[i]).css("display", "none");     //hiding
-            }
-            var startIndex = ps * cp;                  //once all the tr is hidden the start index is calculated by multiplying variables
-            //ps and cp i.e page size and current page index.
-            var endIndex = startIndex + ps;            //endIndex is calculated by adding the page size to the start index.
-            if (startIndex == 0)                      //now display only the records between the var startIndex and endIndex.
-            {
-                for (var i = startIndex; i < endIndex; i++) {
-                    $(tr[i]).css("display", "block");
-                }
-            }
-            else {
-                for (var i = startIndex; i < endIndex; i++) {
-                    $(tr[i]).css("display", "block");
-                }
-            }
-        }
-
-        function Showbtn()                      //this funtion shows and hides the navigation button 
+    function run() {                           // The function run() is the function that does the heavy lifting.
+        for (var i = 0; i < tr.length; i++)           // Initially it hides all the tr in the table
         {
-            $("#prev").show();
-            $("#next").show();
-            if (cp == 0)
-            {
-                $("#prev").hide();
-                $("#next").show();
-            }
-            if (cp == (totalPages - 1))
-            {
-                $("#prev").show();
-                $("#next").hide();
+            $(tr[i]).css("display", "none");     //hiding
+        }
+        var startIndex = ps * cp;                  //once all the tr is hidden the start index is calculated by multiplying variables
+        //ps and cp i.e page size and current page index.
+        var endIndex = startIndex + ps;            //endIndex is calculated by adding the page size to the start index.
+        if (startIndex == 0)                      //now display only the records between the var startIndex and endIndex.
+        {
+            for (var i = startIndex; i < endIndex; i++) {
+                $(tr[i]).css("display", "block");
             }
         }
+        else {
+            for (var i = startIndex; i < endIndex; i++) {
+                $(tr[i]).css("display", "block");
+            }
+        }
+    }
+
+    function Showbtn()                      //this funtion shows and hides the navigation button
+    {
+        $("#prev").show();
+        $("#next").show();
+        if (cp == 0) {
+            $("#prev").hide();
+            $("#next").show();
+        }
+        if (cp == (totalPages - 1)) {
+            $("#prev").show();
+            $("#next").hide();
+        }
+    }
 </script>
