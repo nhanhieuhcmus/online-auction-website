@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    {{!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -18,14 +19,7 @@
         <button class="btn dropdown-toggle text-light" type="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false" style="font-weight: bold;">DANH MỤC</button>
         <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-            {{#if this.empty}}
             <li class="dropdown-submenu">
-                Không có dữ liệu
-            </li>
-            {{else}}
-            {{#print_category this.category}} {{name_category}} {{/print_category}}
-            {{/if}}
-            {{!-- <li class="dropdown-submenu">
                 <a class="dropdown-item" tabindex="-1" href="list-product">
                     <i class="fa fa-podcast mr-2"></i>
                     Điện Tử</a>
@@ -66,7 +60,7 @@
                 Xe Máy - Ô Tô</a>
             <a class="dropdown-item" tabindex="-1" href="#">
                 <i class="fa fa-plug mr-2"></i>
-                Điện Gia Dụng</a> --}}
+                Điện Gia Dụng</a>
         </ul>
 
         </div>
@@ -286,7 +280,7 @@
         var login = document.getElementById("login");
         var loginArea = document.getElementById("loginArea");
         var loginContent = document.getElementById("login-content");
-        var user_button = document.getElementById("userbtn");
+        var user_button=document.getElementById("userbtn");
         login.onclick = function () {
             if ((username.value == "admin") && (password.value == "nhanhieu")) {
                 user_button.innerHTML = "Quản trị viên";
@@ -302,8 +296,8 @@
         }
     </script>
     <script>
-        $("#signup").click(function () {
-            $("#modalID").modal('hide');
+        $("#signup").click(function(){
+             $("#modalID").modal('hide');
         })
         $('document').ready(function () {
             $('[data-login-submit], [data-logout-button]').click(function () {
