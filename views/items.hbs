@@ -33,10 +33,12 @@
                     <hr width="90%">
                     <div class="row">
                         <div class="col-md-6">
-                            <input id="spinner" type="number" value="50" min="0" step="10" />
+                            <form action="/auction" method="POST" id="price">
+                                <input id="spinner" name="price" type="number" value="50" min="0" step="10" />
+                            </form>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-danger" style="width: 120px;">
+                            <button type="submit" class="btn btn-danger" form="price" style="width: 120px;">
                                 <i class="fa fa-gavel"></i> Đấu giá</button>
                         </div>
                     </div>

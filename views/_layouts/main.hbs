@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     {{!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <title>{{title}}</title>
 </head>
@@ -19,48 +18,52 @@
         <button class="btn dropdown-toggle text-light" type="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false" style="font-weight: bold;">DANH MỤC</button>
         <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+            {{#each category}}
             <li class="dropdown-submenu">
-                <a class="dropdown-item" tabindex="-1" href="list-product">
-                    <i class="fa fa-podcast mr-2"></i>
-                    Điện Tử</a>
-                <ul class="dropdown-menu">
-                    <li class="dropdown-item"><a tabindex="-1" href="#">Điện Thoại Di Động</a></li>
-                    <li class="dropdown-item"><a href="#">Máy Tính Xách Tay</a></li>
-                    <li class="dropdown-item"><a href="#">Máy Tính Bảng</a></li>
-                </ul>
+                <a class="dropdown-item" tabindex="-1" href="/list-product/{{name_category}}">
+                    {{name_category}}</a>
             </li>
+            {{/each}}
+            {{!-- 
             <li class="dropdown-submenu">
                 <a class="dropdown-item" tabindex="-1" href="#">
                     <i class="fa fa-headphones mr-2"></i>
-                    Phụ Kiện - Thiết Bị Số</a>
+                    Phụ Kiện Điện tử</a>
                 <ul class="dropdown-menu">
                     <li class="dropdown-item"><a tabindex="-1" href="#">Tai Nghe</a></li>
-                    <li class="dropdown-item"><a href="#">Bàn Phím</a></li>
-                    <li class="dropdown-item"><a href="#">Chuột</a></li>
+                    <li class="dropdown-item"><a href="#">Chuột - Bàn Phím</a></li>
                 </ul>
             </li>
 
-            <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-camera-retro mr-2"></i>
-                Máy Ảnh - Quay Phim</a>
-            <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-home mr-2"></i>
-                Nhà Cửa Đời Sống</a>
-            <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-product-hunt mr-2"></i>
-                Hàng Tiêu Dùng</a>
-            <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-heart mr-2"></i>
-                Làm Đẹp - Sức Khoẻ</a>
-            <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-cart-plus mr-2"></i>
-                Thời Trang - Phụ Kiện</a>
-            <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-car mr-2"></i>
-                Xe Máy - Ô Tô</a>
-            <a class="dropdown-item" tabindex="-1" href="#">
-                <i class="fa fa-plug mr-2"></i>
-                Điện Gia Dụng</a>
+            <li class="dropdown-submenu">
+                <a class="dropdown-item" tabindex="-1" href="#">
+                    <i class="fa fa-headphones mr-2"></i>
+                    Thời Trang</a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item"><a tabindex="-1" href="#">Quần áo nam</a></li>
+                    <li class="dropdown-item"><a href="#">Quần áo nữ</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown-submenu">
+                <a class="dropdown-item" tabindex="-1" href="#">
+                    <i class="fa fa-headphones mr-2"></i>
+                    Trang Sức</a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item"><a tabindex="-1" href="#">Dây chuyền</a></li>
+                    <li class="dropdown-item"><a href="#">Vòng tay</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown-submenu">
+                <a class="dropdown-item" tabindex="-1" href="#">
+                    <i class="fa fa-headphones mr-2"></i>
+                    Sách</a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item"><a tabindex="-1" href="#">Thiếu Nhi</a></li>
+                    <li class="dropdown-item"><a href="#">Văn học</a></li>
+                </ul>
+            </li> --}}
         </ul>
 
         </div>
