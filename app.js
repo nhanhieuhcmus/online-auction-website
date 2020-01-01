@@ -7,7 +7,7 @@ const productModel = require('./models/product.model');
 const categoryModel = require('./models/category.model');
 const offerModel = require('./models/offer.model');
 const moment= require('moment');
-const bodyparser=require('body-parser')
+const bodyparser=require('body-parser');
 var app = express();
 
 const productRoute=require('./routes/product.route');
@@ -17,7 +17,7 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(bodyparser.urlencoded({extended:true}))
-
+var urlencodedParser = bodyparser.urlencoded({ extended: false })
 app.use(morgan('dev'));
 
 app.engine('hbs', handlebars.engine);
@@ -45,7 +45,11 @@ app.get('/profile', function (req, res) {
 app.get('/new-product', function (req, res) {
     res.render('newProduct', { title: 'Thông tin cá nhân' });
 });
-
+app.post('/register',urlencodedParser,(req,res)=>{
+    const email=req.body.email;
+    const password=req.body.password;
+    res.send('email: '+email+'<br>'+'password:'+password+'<br>');
+})
 require('./middlewares/locals.mdw')(app);
 require('./middlewares/routes.mdw')(app);
 
@@ -60,5 +64,5 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(3000, () => {
-    console.log('Web server running at port [3000]..');
+    console.log('Web server running at http://localhost:3000');
 })
