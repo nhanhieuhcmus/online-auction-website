@@ -20,21 +20,25 @@
             </div>
             <div class="col-md-4 border-right d-flex flex-column">
                 <div class="card-body">
-                    <h5 class="card-title m-0">Laptop HP 14-ck0135TU (6KD74PA) (14" HD/Pentium 4417U/4GB/500GB HDD/HD
-                        610/Win10/1.6 kg)</h5>
+                    <h5 class="card-title m-0">{{item.name}}</h5>
                     <p class="card-text"><small class="text-muted">Thời điểm đăng
-                            <span class="postTime font-italic">05/03/2019</span></small></p>
+                            <span class="postTime font-italic">{{item.start_date}}</span></small></p>
 
-                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> 69.000đ </span></p>
-                    <p class="mb-1">Giá mua ngay: <span id="buy-now"> 10 tỷ </span></p>
-                    <span class="card-text bold">Đấu giá kết thúc sau </span><span id="countDown"></span><br><br>
+                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> {{item.now_price}} </span></p>
+                    {{#if item.now_price}}
+                        <p class="mb-1">Giá mua ngay: <span id="buy-now"> {{item.now_price}} </span></p>
+                    {{/if}}
+                    <span class="card-text bold">Thời điểm kết thúc </span><span id = "endDate">{{item.end_date}}</span><br><br>
+                    {{!-- <span class="card-text bold">Đấu giá kết thúc sau </span><span id="countDown"></span><br><br> --}}
                 </div>
                 <div class="card-body">
                     <hr width="90%">
                     <div class="row">
                         <div class="col-md-6">
-                            <form action="/auction" method="POST" id="price">
+                            <form method="POST" id="price">
                                 <input id="spinner" name="price" type="number" value="50" min="0" step="10" />
+                                <input type="hidden" id="productId" name="productId" value="{{item.id}}">
+                                <input type="hidden" id="userId" name="userId" value="1">
                             </form>
                         </div>
                         <div class="col-md-6">

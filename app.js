@@ -3,10 +3,12 @@ var exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const handlebars = require('./helpers/handlebars')(exphbs);
 const productModel = require('./models/product.model');
+const offerModel = require('./models/offer.model');
 const moment= require('moment');
 const bodyparser=require('body-parser')
 var app = express();
 
+const productRoute=require('./routes/product.route');
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -20,6 +22,7 @@ app.engine('hbs', handlebars.engine);
 app.set('view engine', 'hbs');
 
 app.use(express.static('./public'));
+app.use('/list-product',productRoute);
 
 app.get('/', function (req, res) {
     res.render('home', { title: 'Trang chủ' });
@@ -47,27 +50,6 @@ app.get('/items', function (req, res) {
     });
 });
 
-app.get('/list-product/:name', async function (req, res) { 
-    console.log(req.params.name);
-    const rows = await productModel.allByCat(req.params.name);
-    rows.forEach(element => {
-        if(element.now_price==null)
-            element.now_price=false;
-            element.start_date=moment(element.start_date).format('DD/MM/YYYY');
-            element.end_date=moment(element.end_date).format('DD/MM/YYYY');
-    });
-
-    res.render('listProducts', {
-        catName:req.params.name,
-        products: rows,
-        empty: rows.length === 0,
-        title: 'Sản phẩm'
-    });
-});
-
-app.post('/auction',async (req,res)=>{
-    console.log(req.body);
-})
 app.get('/profile', function (req, res) {
     res.render('profile', { title: 'Thông tin cá nhân' });
 });
