@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,52 +19,16 @@
         <button class="btn dropdown-toggle text-light" type="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false" style="font-weight: bold;">DANH MỤC</button>
         <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-            {{#each category}}
-            <li class="dropdown-submenu">
-                <a class="dropdown-item" tabindex="-1" href="/list-product/{{name_category}}">
-                    {{name_category}}</a>
+            {{#each lcCategory}}
+            <li style="width: 250px;">
+                <a class="dropdown-item" tabindex="-1" href="/category/{{name_category}}">
+                    {{name_category}}
+                    {{#if num_of_products}}
+                    <span class="badge badge-danger float-right">{{num_of_products}}</span>
+                    {{/if}}
+                </a>
             </li>
             {{/each}}
-            {{!-- 
-            <li class="dropdown-submenu">
-                <a class="dropdown-item" tabindex="-1" href="#">
-                    <i class="fa fa-headphones mr-2"></i>
-                    Phụ Kiện Điện tử</a>
-                <ul class="dropdown-menu">
-                    <li class="dropdown-item"><a tabindex="-1" href="#">Tai Nghe</a></li>
-                    <li class="dropdown-item"><a href="#">Chuột - Bàn Phím</a></li>
-                </ul>
-            </li>
-
-            <li class="dropdown-submenu">
-                <a class="dropdown-item" tabindex="-1" href="#">
-                    <i class="fa fa-headphones mr-2"></i>
-                    Thời Trang</a>
-                <ul class="dropdown-menu">
-                    <li class="dropdown-item"><a tabindex="-1" href="#">Quần áo nam</a></li>
-                    <li class="dropdown-item"><a href="#">Quần áo nữ</a></li>
-                </ul>
-            </li>
-
-            <li class="dropdown-submenu">
-                <a class="dropdown-item" tabindex="-1" href="#">
-                    <i class="fa fa-headphones mr-2"></i>
-                    Trang Sức</a>
-                <ul class="dropdown-menu">
-                    <li class="dropdown-item"><a tabindex="-1" href="#">Dây chuyền</a></li>
-                    <li class="dropdown-item"><a href="#">Vòng tay</a></li>
-                </ul>
-            </li>
-
-            <li class="dropdown-submenu">
-                <a class="dropdown-item" tabindex="-1" href="#">
-                    <i class="fa fa-headphones mr-2"></i>
-                    Sách</a>
-                <ul class="dropdown-menu">
-                    <li class="dropdown-item"><a tabindex="-1" href="#">Thiếu Nhi</a></li>
-                    <li class="dropdown-item"><a href="#">Văn học</a></li>
-                </ul>
-            </li> --}}
         </ul>
 
         </div>
@@ -283,7 +248,7 @@
         var login = document.getElementById("login");
         var loginArea = document.getElementById("loginArea");
         var loginContent = document.getElementById("login-content");
-        var user_button=document.getElementById("userbtn");
+        var user_button = document.getElementById("userbtn");
         login.onclick = function () {
             if ((username.value == "admin") && (password.value == "nhanhieu")) {
                 user_button.innerHTML = "Quản trị viên";
@@ -299,8 +264,8 @@
         }
     </script>
     <script>
-        $("#signup").click(function(){
-             $("#modalID").modal('hide');
+        $("#signup").click(function () {
+            $("#modalID").modal('hide');
         })
         $('document').ready(function () {
             $('[data-login-submit], [data-logout-button]').click(function () {

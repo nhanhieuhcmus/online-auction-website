@@ -13,12 +13,11 @@
     <div class="CSSTableGenerator">
         <table ID="myTable">
             <div class="card-body">
-                <div class="card-deck">
-                    {{#each products}}
-                    <div class="col-sm-4 card border-0 mr-auto shadow-sm">
+                <div class="row">
+                    {{#each this.products}}
+                    <div class="col-sm-4 card border-0 mb-3 shadow-sm h-100s">
                         <a style="color:black; text-decoration: none;" href="{{catName}}/{{id}}">
-                            <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                                class="card-img-top">
+                            <img src="/imgs/sp/{{id}}/main.jpg" width="400px" height="300px" alt="{{name}}" title="{{name}}" class="card-img-top">
                             <div class="card-body">
                                 <h6 id="nearlyFi" class="card-title">{{name}}</h6>
                                 <p id="price">{{price}}</p>

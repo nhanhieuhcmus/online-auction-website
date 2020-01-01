@@ -1,6 +1,7 @@
 const express = require('express');
 const productModel = require('../models/product.model');
-const moment=require('moment')
+const categoryModel = require('../models/category.model');
+const moment= require('moment');
 const router = express.Router();
 
 router.use(express.static('public/css'));
@@ -50,5 +51,8 @@ router.post('/:name/:id',async (req,res)=>{
   // // console.log(result);
    res.redirect(`${req.params.id}`);
 });
+router.get('/',async (req,res)=>{
+    res.render('home', {title: 'Trang chủ'})
+})
 
 module.exports = router;

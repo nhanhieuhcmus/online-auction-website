@@ -1,6 +1,7 @@
 var express = require('express');
 var exphbs = require('express-handlebars');
 const morgan = require('morgan');
+const numeral = require('numeral');
 const handlebars = require('./helpers/handlebars')(exphbs);
 const productModel = require('./models/product.model');
 const offerModel = require('./models/offer.model');
@@ -58,7 +59,8 @@ app.get('/new-product', function (req, res) {
     res.render('newProduct', { title: 'Thông tin cá nhân' });
 });
 
-app.use('/admin/category', require('./routes/admin/category.route'));
+require('./middlewares/locals.mdw')(app);
+require('./middlewares/routes.mdw')(app);
 
 app.use((req, res, next) => {
     res.render('vwError/404.hbs', { title: 'Not Found' });
