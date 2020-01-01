@@ -49,11 +49,13 @@ router.get('/:name/:id', async function (req, res) {
   rows.forEach(element => {
     if (element.now_price == null)
       element.now_price = false;
+    element.catName = req.params.name;
     element.start_date = moment(element.start_date).format('DD/MM/YYYY');
     element.end_date = moment(element.end_date).format('DD/MM/YYYY');
   });
 
   res.render('items', {
+    catName: req.params.name,
     history,
     rows,
     item: single[0],
@@ -75,4 +77,19 @@ router.post('/:name/:id', async (req, res) => {
   // console.log(result);
   res.redirect(`${req.params.id}`);
 });
+
+router.get('/:name/:id/editor', async (req, res) => {
+  product = await productModel.single(req.params.id);
+  res.render('vwEditor', {
+    detail: product[0].detail,
+    title: 'Cập nhật mô tả'
+  });
+})
+
+router.post('/:name/:id/editor', async (req, res) => {
+  product = await productModel.single(req.params.id);
+  product[0].detail = req.body.FullDes;
+  await productModel.patch(product[0]);
+  res.redirect(`.`);
+})
 module.exports = router;
