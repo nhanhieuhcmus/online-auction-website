@@ -14,10 +14,12 @@ router.get('/:name', async function (req, res) {
     console.log(req.params.name);
     const rows = await productModel.allByCat(req.params.name);
     rows.forEach(element => {
-        if(element.now_price==null)
-            element.now_price=false;
-            element.start_date=moment(element.start_date).format('DD/MM/YYYY');
-            element.end_date=moment(element.end_date).format('DD/MM/YYYY');
+        if (element.instant_price == null)
+            element.instant_price = false;
+        if (element.priceholder = null)
+            element.priceholder = false;
+        element.start_date = moment(element.start_date).format('DD/MM/YYYY');
+        element.end_date = moment(element.end_date).format('DD/MM/YYYY');
     });
 
     res.render('listProducts', {

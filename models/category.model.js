@@ -3,19 +3,15 @@ const db = require('../utils/db');
 module.exports = {
     all: () => db.load('select * from category'),
 
-     // single: id => db.load(`select * from product where ProID = ${id}`),
-    // add: entity => db.add('product', entity),
-    // del: id => db.del('product', { ProID: id }),
-    // patch: entity => {
-    //   const condition = { ProID: entity.ProID };
-    //   delete entity.ProID;
-    //   return db.patch('product', entity, condition);
-    // }
+    single: id => db.load(`select * from category where id = ${id}`),
+    add: entity => db.add('category', entity),
+    del: Catid => db.del('category', { id: Catid }),
+    patch: entity => {
+      const condition = { id: entity.id };
+      delete entity.id;
+      return db.patch('category', entity, condition);
+    },
+    maxId: async () => {
+      const res = await db.load('select max(id) as MaxID from category'); return res[0].MaxID;},
 
-    allWithDetails: _ => {
-        const sql = `select c.id, c.name_category, count(p.id) as num_of_products
-          from category c, product p where c.id = p.categoryid
-          group by c.id`;
-        return db.load(sql);
-      },
 };

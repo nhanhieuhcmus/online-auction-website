@@ -20,14 +20,12 @@
             aria-expanded="false" style="font-weight: bold;">DANH MỤC</button>
         <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
             {{#each lcCategory}}
-            <li style="width: 250px;">
-                <a class="dropdown-item" tabindex="-1" href="/category/{{name_category}}">
-                    {{name_category}}
-                    {{#if num_of_products}}
-                    <span class="badge badge-danger float-right">{{num_of_products}}</span>
-                    {{/if}}
-                </a>
-            </li>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a class="dropdown-item" tabindex="-1" href="/category/{{name_category}}">
+                        {{name_category}} <i class="fa fa-angle-double-right ml-3 float-right" aria-hidden="true"></i>
+                    </a></li>
+            </ul>
             {{/each}}
         </ul>
 
@@ -179,6 +177,8 @@
                         </a></button>
                     <button id="userOptional" class="dropdown-item" type="button"><a href="new-product">Đăng sản
                             phẩm</a></button>
+                    <button id="userOptional" class="dropdown-item" type="button"><a href="/admin/category/edit-category">Chỉnh sửa danh
+                            mục sản phẩm</a></button>
                     <button data-logout-button id="userOptional" class="dropdown-item" type="button"><a href="#">Đăng
                             xuất</a></button>
                 </div>

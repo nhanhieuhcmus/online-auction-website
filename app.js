@@ -1,9 +1,10 @@
 var express = require('express');
 var exphbs = require('express-handlebars');
 const morgan = require('morgan');
-const numeral = require('numeral');
 const handlebars = require('./helpers/handlebars')(exphbs);
 const bodyparser=require('body-parser');
+
+require('express-async-errors');
 
 var app = express();
 
@@ -67,7 +68,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     res.render('vwError/index.hbs', { title: 'Error' })
     console.error(err.stack);
-    res.status(500).send('View error on console.');
+    // res.status(500).send('View error on console.');
 })
 
 app.listen(3000, () => {
