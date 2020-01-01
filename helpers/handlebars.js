@@ -1,12 +1,12 @@
+const moment=require('moment')
+
 function hbsHelpers(hbs) {
     return hbs.create({
         defaultLayout: 'main.hbs',
         layoutsDir: 'views/_layouts',
         helpers: {
-            format: function(product, option){
-                if (product.now_price != null)
-                    return '<p id="nearlyFi" class="card-text now_price">Giá mua ngay:' + product.now_price + 'đ</p>'
-            }
+            TimeFormat: time=> moment(time).format('DD/MM/YYYY hh:mm'),
+            hideName: name=> '****'+name.substr(name.length-4,4) ,
         }
          // More helpers...
     })

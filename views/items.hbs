@@ -1,32 +1,32 @@
 <div class="container-fluid px-5 mt-3">
     <div class="card">
         <div class="row no-gutters">
-            <div class="col-md-5 d-flex align-items-center border-right flex-column">
+            <div class="col-md-4 d-flex align-items-center border-right flex-column">
                 <div class="card-img p-4 d-flex align-items-center justify-content-center" style="height: 400px;">
                     <img id="main-img" class="imgs"
-                        src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg">
+                        src="/imgs/sp/{{item.id}}/main.jpg">
                 </div>
                 <div id="sub-img-group" class="d-flex justify-content-between">
                     <div class="sub-img col-md-4 d-flex align-items-center">
-                        <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg">
+                        <img src="/imgs/sp/{{item.id}}/main.jpg">
                     </div>
                     <div class="sub-img col-md-4 d-flex align-items-center">
-                        <img class="align-center" src="https://i.ebayimg.com/images/g/wokAAOSw6B1dgpZ0/s-l1600.jpg">
+                        <img class="align-center" src="/imgs/sp/{{item.id}}/1.jpg">
                     </div>
                     <div class="sub-img col-md-4 d-flex align-items-center">
-                        <img class="align-center" src="https://i.ebayimg.com/images/g/LEsAAOSw-zVdgpZ3/s-l1600.jpg">
+                        <img class="align-center" src="/imgs/sp/{{item.id}}/2.jpg">
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 border-right d-flex flex-column">
+            <div class="col-md-5 border-right d-flex flex-column">
                 <div class="card-body">
                     <h5 class="card-title m-0">{{item.name}}</h5>
                     <p class="card-text"><small class="text-muted">Thời điểm đăng
                             <span class="postTime font-italic">{{item.start_date}}</span></small></p>
 
-                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> {{item.now_price}} </span></p>
+                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> {{item.instant_price}} </span></p>
                     {{#if item.now_price}}
-                        <p class="mb-1">Giá mua ngay: <span id="buy-now"> {{item.now_price}} </span></p>
+                        <p class="mb-1">Giá mua ngay: <span id="buy-now"> {{item.instant_price}} </span></p>
                     {{/if}}
                     <span class="card-text bold">Thời điểm kết thúc </span><span id = "endDate">{{item.end_date}}</span><br><br>
                     {{!-- <span class="card-text bold">Đấu giá kết thúc sau </span><span id="countDown"></span><br><br> --}}
@@ -36,7 +36,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <form method="POST" id="price">
-                                <input id="spinner" name="price" type="number" value="50" min="0" step="10" />
+                                <input id="spinner" name="price" type="number" value="{{item.min_price}}" min="{{item.min_price}}" step="{{item.step_price}}" />
                                 <input type="hidden" id="productId" name="productId" value="{{item.id}}">
                                 <input type="hidden" id="userId" name="userId" value="1">
                             </form>
@@ -88,34 +88,37 @@
             </tr>
         </thead>
         <tbody>
-            {{#each this.categories}}
+            {{#each history}}
             <tr>
                 <th scope="row">{{BidId}}</th>
-                <td>{{Time}}</td>
-                <td>{{Bidder}}</td>
-                <td>{{Price}}</td>
+                <td>{{TimeFormat time}}</td>
+                <td>{{hideName full_name}}</td>
+                <td>{{price}}</td>
             </tr>
             {{/each}}
         </tbody>
     </table>
     <h4 class="mt-5">SẢN PHẨM CÙNG LOẠI</h4>
     <br><br>
+        <div class="container">
     <div class="CSSTableGenerator">
         <table ID="myTable">
-            <tr>
-                <td>
-                    <div class="card border-0 mr-auto shadow-sm">
-                        <a style="color:black; text-decoration: none;" href="items">
-                            <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                                class="card-img-top">
+            <div class="card-body">
+                <div class="row">
+                    {{#each rows}}
+                    <div class="col-sm-3 card border-0 mb-3 shadow-sm h-100s">
+                        <a style="color:black; text-decoration: none;" href="/{{catName}}/{{id}}">
+                            <img src="/imgs/sp/{{id}}/main.jpg"  alt="{{name}}" title="{{name}}" class="card-img-top">
                             <div class="card-body">
-                                <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                                <p id="price">11.900.000đ</p>
+                                <h6 id="nearlyFi" class="card-title">{{name}}</h6>
+                                <p id="price">{{price}}</p>
                                 <small class="text-muted">
                                     <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                                    <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                                    <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                                    <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
+                                    {{#if now_price}}
+                                    <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{now_price}}đ</p>
+                                    {{/if}}
+                                    <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
+                                    <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
                                     <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
                                 </small>
                                 <span class="my-2">
@@ -127,101 +130,16 @@
                                 </span>
                             </div>
                         </a>
-                        <div id="favorite">
+                        <div id="favorite" class="mb-0">
                             <i class="heart fa fa-heart-o"></i>
                         </div>
                     </div>
-                </td>
-                <td>
-                    <div class="card border-0 mr-auto shadow-sm">
-                        <a style="color:black; text-decoration: none;" href="items">
-                            <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                                class="card-img-top">
-                            <div class="card-body">
-                                <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                                <p id="price">11.900.000đ</p>
-                                <small class="text-muted">
-                                    <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                                    <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                                    <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                                    <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                                    <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                                </small>
-                                <span class="my-2">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star-o checked"></span>
-                                </span>
-                            </div>
-                        </a>
-                        <div id="favorite">
-                            <i class="heart fa fa-heart-o"></i>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="card border-0 mr-auto shadow-sm">
-                        <a style="color:black; text-decoration: none;" href="items">
-                            <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                                class="card-img-top">
-                            <div class="card-body">
-                                <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                                <p id="price">11.900.000đ</p>
-                                <small class="text-muted">
-                                    <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                                    <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                                    <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                                    <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                                    <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                                </small>
-                                <span class="my-2">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star-o checked"></span>
-                                </span>
-                            </div>
-                        </a>
-                        <div id="favorite">
-                            <i class="heart fa fa-heart-o"></i>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="card border-0 mr-auto shadow-sm">
-                        <a style="color:black; text-decoration: none;" href="items">
-                            <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                                class="card-img-top">
-                            <div class="card-body">
-                                <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                                <p id="price">11.900.000đ</p>
-                                <small class="text-muted">
-                                    <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                                    <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                                    <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                                    <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                                    <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                                </small>
-                                <span class="my-2">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star-o checked"></span>
-                                </span>
-                            </div>
-                        </a>
-                        <div id="favorite">
-                            <i class="heart fa fa-heart-o"></i>
-                        </div>
-                    </div>
-                </td>
-            </tr>
+                    {{/each}}
+                </div>
+            </div>
         </table>
     </div>
+</div>
     <h4 class="mt-5">MÔ TẢ SẢN PHẨM</h4>
     <div class="row" style="font-size: 13px;">
         <div class="col-md-8">
