@@ -1,0 +1,34 @@
+<script src="https://cdn.tiny.cloud/1/tj20fv9eshwetrpwilnu8nc5cxr6gobk23xl6gqe674aqom9/tinymce/5/tinymce.min.js"></script>
+<script>
+  tinymce.init({
+    selector: '#txtFullDes',
+    height: 600,
+    plugins: 'paste image link autolink lists table media',
+    menubar: false,
+    toolbar: [
+      'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright',
+      'forecolor backcolor',
+      'table link image media',
+    ],
+  });
+</script>
+
+<form method="POST" novalidate>
+  <div class="card shadow">
+    <h4 class="card-header">
+      Editor
+    </h4>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="txtFullDes">FullDes</label>
+        <textarea class="form-control" id="txtFullDes" name="FullDes" >{{detail}}</textarea>
+      </div>
+    </div>
+    <div class="card-footer text-right">
+      <button type="submit" class="btn btn-lg btn-success btn-block">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
