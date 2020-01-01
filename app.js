@@ -1,12 +1,11 @@
 var express = require('express');
 var exphbs = require('express-handlebars');
 const morgan = require('morgan');
+const numeral = require('numeral');
 const handlebars = require('./helpers/handlebars')(exphbs);
-const productModel = require('./models/product.model');
-const moment= require('moment');
-const bodyparser=require('body-parser')
-var app = express();
+const bodyparser=require('body-parser');
 
+var app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -47,24 +46,6 @@ app.get('/items', function (req, res) {
     });
 });
 
-app.get('/list-product/:name', async function (req, res) { 
-    console.log(req.params.name);
-    const rows = await productModel.allByCat(req.params.name);
-    rows.forEach(element => {
-        if(element.now_price==null)
-            element.now_price=false;
-            element.start_date=moment(element.start_date).format('DD/MM/YYYY');
-            element.end_date=moment(element.end_date).format('DD/MM/YYYY');
-    });
-
-    res.render('listProducts', {
-        catName:req.params.name,
-        products: rows,
-        empty: rows.length === 0,
-        title: 'Sản phẩm'
-    });
-});
-
 app.post('/auction',async (req,res)=>{
     console.log(req.body);
 })
@@ -76,7 +57,8 @@ app.get('/new-product', function (req, res) {
     res.render('newProduct', { title: 'Thông tin cá nhân' });
 });
 
-app.use('/admin/category', require('./routes/admin/category.route'));
+require('./middlewares/locals.mdw')(app);
+require('./middlewares/routes.mdw')(app);
 
 app.use((req, res, next) => {
     res.render('vwError/404.hbs', { title: 'Not Found' });

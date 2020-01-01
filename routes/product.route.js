@@ -1,25 +1,31 @@
 const express = require('express');
 const productModel = require('../models/product.model');
+const categoryModel = require('../models/category.model');
+const moment= require('moment');
 const router = express.Router();
 
 router.use(express.static('public/css'));
 
-router.get('/:id/list-product', async (req, res) => {
+router.get('/',async (req,res)=>{
+    res.render('home', {title: 'Trang chủ'})
+})
 
-    // for (const c of res.locals.lcCategories) {
-    //   if (c.CatID === +req.params.id) {
-    //     c.isActive = true;
-    //   }
-    // }
-  
-    // const rows = await productModel.allByCat(req.params.id);
-    // // const name_category = await productModel.catName(req.param.id);
-    // res.render('vwProducts/listProduct', {
-    // //   catName: name_category,
-    //   products: rows,
-    //   empty: rows.length === 0
-    //});
-  })
-  
+router.get('/:name', async function (req, res) { 
+    console.log(req.params.name);
+    const rows = await productModel.allByCat(req.params.name);
+    rows.forEach(element => {
+        if(element.now_price==null)
+            element.now_price=false;
+            element.start_date=moment(element.start_date).format('DD/MM/YYYY');
+            element.end_date=moment(element.end_date).format('DD/MM/YYYY');
+    });
+
+    res.render('listProducts', {
+        catName: req.params.name,
+        products: rows,
+        empty: rows.length === 0,
+        title: 'Sản phẩm'
+    });
+})
 
 module.exports = router;

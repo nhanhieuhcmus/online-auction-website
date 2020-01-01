@@ -12,6 +12,10 @@ router.get('/',async (req,res)=>{
        category,
        empty: category.length===0
     })
-})
+});
+
+router.get('/err', (req, res) => {
+    throw new Error('error occured');
+});
 
 module.exports=router;
