@@ -13,8 +13,8 @@ const mysql_query = util.promisify(pool.query).bind(pool);
 module.exports = {
   load: sql => mysql_query(sql),
   add: (tableName, entity) => mysql_query(`insert into ${tableName} set ?`, entity),
-  addoffer: (tableName, entity) => mysql_query(`insert into ${tableName}(product_id, user_id, price, time) 
-  value(${entity.product_id}, ${entity.user_id}, ${entity.price}, NOW())`)
+  del: (tableName, condition) => mysql_query(`delete from ${tableName} where ?`, condition),
+  patch: (tableName, entity, condition) => mysql_query(`update ${tableName} set ? where ?`, [entity, condition]),
 }; 
 
 
