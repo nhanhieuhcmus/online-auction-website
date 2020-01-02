@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <title>{{title}}</title>
 </head>
 
@@ -20,14 +23,12 @@
             aria-expanded="false" style="font-weight: bold;">DANH MỤC</button>
         <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
             {{#each lcCategory}}
-            <li style="width: 250px;">
-                <a class="dropdown-item" tabindex="-1" href="/category/{{name_category}}">
-                    {{name_category}}
-                    {{#if num_of_products}}
-                    <span class="badge badge-danger float-right">{{num_of_products}}</span>
-                    {{/if}}
-                </a>
-            </li>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a class="dropdown-item" tabindex="-1" href="/category/{{name_category}}">
+                        {{name_category}} <i class="fa fa-angle-double-right ml-3 float-right" aria-hidden="true"></i>
+                    </a></li>
+            </ul>
             {{/each}}
         </ul>
 
@@ -116,11 +117,37 @@
                                             <div class="modal-body">
                                                 <form action="/register" method="POST">
                                                     <div class="form-group">
+                                                        <label class="text-dark">Họ tên:</label>
+                                                        <input class="form-control" type="text" name="fullname"
+                                                            placeholder="Nhập họ tên.." autofocus>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="text-dark">Địa chỉ:</label>
+                                                        <input class="form-control" type="text" name="address"
+                                                            placeholder="Nhập địa chỉ..">
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label class="text-dark">Email:</label>
                                                         <input class="form-control" type="text" name="email"
                                                             placeholder="Nhập email..">
                                                     </div>
-
+                                                    <div class="form-group">
+                                                        <label for="txtDOB">Date of Birth</label>
+                                                        <input type="text" class="form-control" id="txtDOB" name="dob" placeholder="Nhập ngày sinh..">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="text-dark">Loại người dùng:</label>
+                                                        <select class="form-control" name="type-of-user"
+                                                            placeholder="Chọn loại người dùng..">
+                                                            <option>Người bán</option>
+                                                            <option>Người mua</option>
+                                                            </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="text-dark">Tên người dùng:</label>
+                                                        <input class="form-control" type="text" name="username"
+                                                            placeholder="Nhập tên người dùng..">
+                                                    </div>
                                                     <div class="form-group">
                                                         <label class="text-dark">Mật khẩu:</label>
 
@@ -180,6 +207,8 @@
                         </a></button>
                     <button id="userOptional" class="dropdown-item" type="button"><a href="new-product">Đăng sản
                             phẩm</a></button>
+                    <button id="userOptional" class="dropdown-item" type="button"><a href="/admin/category/edit-category">Chỉnh sửa danh
+                            mục sản phẩm</a></button>
                     <button data-logout-button id="userOptional" class="dropdown-item" type="button"><a href="#">Đăng
                             xuất</a></button>
                 </div>
@@ -274,6 +303,19 @@
                 $('[data-user-button]').toggleClass('state-logged-in');
             })
         })
+    </script>
+    
+    <script>
+        $('#txtDOB').datetimepicker({
+            // format: 'd/m/Y H:i'
+            format: 'd/m/Y',
+            timepicker: false,
+            mask: true,
+        });
+
+        function validate() {
+            return true;
+        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

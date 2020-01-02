@@ -7,24 +7,23 @@ const router = express.Router();
 
 router.use(express.static('public/css'));
 
-router.get('/:name', async function (req, res) {
+router.get('/:name', async function (req, res) { 
   console.log(req.params.name);
   const rows = await productModel.allByCat(req.params.name);
   rows.forEach(element => {
-    if (element.now_price == null)
-      element.now_price = false;
-    element.start_date = moment(element.start_date).format('DD/MM/YYYY');
-    element.end_date = moment(element.end_date).format('DD/MM/YYYY');
+      if (element.instant_price == null)
+          element.instant_price = false;
+      if (element.priceholder = null)
+          element.priceholder = false;
+      element.start_date = moment(element.start_date).format('DD/MM/YYYY');
+      element.end_date = moment(element.end_date).format('DD/MM/YYYY');
   });
 
-  rows.forEach(element => {
-    element.catName = req.params.name
-  });
   res.render('listProducts', {
-    catName: req.params.name,
-    products: rows,
-    empty: rows.length === 0,
-    title: 'Sản phẩm'
+      catName: req.params.name,
+      products: rows,
+      empty: rows.length === 0,
+      title: 'Sản phẩm'
   });
 });
 
@@ -114,5 +113,5 @@ router.post('/:name/:id/editor', async (req, res) => {
   product[0].detail += '<p><b>' + moment().format('DD/MM/YYYY hh:mm A') + '</b></p>' + req.body.FullDes;
   await productModel.patch(product[0]);
   res.redirect(`.`);
-})
+});
 module.exports = router;

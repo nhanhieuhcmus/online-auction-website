@@ -1,13 +1,19 @@
 var express = require('express');
 var exphbs = require('express-handlebars');
 const morgan = require('morgan');
-const numeral = require('numeral');
 const handlebars = require('./helpers/handlebars')(exphbs);
 const productModel = require('./models/product.model');
 const categoryModel = require('./models/category.model');
 const offerModel = require('./models/offer.model');
 const moment= require('moment');
 const bodyparser=require('body-parser');
+<<<<<<< HEAD
+const bcrypt = require('bcryptjs');
+=======
+
+require('express-async-errors');
+>>>>>>> c167a23acd0d26c2011d2fc0eecf59582d10da6d
+
 var app = express();
 
 const productRoute=require('./routes/product.route');
@@ -45,11 +51,13 @@ app.get('/profile', function (req, res) {
 app.get('/new-product', function (req, res) {
     res.render('newProduct', { title: 'Thông tin cá nhân' });
 });
-app.post('/register',urlencodedParser,(req,res)=>{
-    const email=req.body.email;
-    const password=req.body.password;
-    res.send('email: '+email+'<br>'+'password:'+password+'<br>');
-})
+// app.post('/register',urlencodedParser,async(req,res)=>{
+//     const N = 10;
+//     const hash = bcrypt.hashSync(req.body.password, N);
+//     const entity=req.body;
+//     entity.password=hash;
+//     res.send('email: '+req.body.email+'<br>'+'password:'+entity.password+'<br>');
+// })
 require('./middlewares/locals.mdw')(app);
 require('./middlewares/routes.mdw')(app);
 
@@ -60,7 +68,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     res.render('vwError/index.hbs', { title: 'Error' })
     console.error(err.stack);
-    res.status(500).send('View error on console.');
+    // res.status(500).send('View error on console.');
 })
 
 app.listen(3000, () => {
