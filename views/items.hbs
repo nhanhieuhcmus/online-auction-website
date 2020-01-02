@@ -24,8 +24,8 @@
                     <p class="card-text"><small class="text-muted">Thời điểm đăng
                             <span class="postTime font-italic">{{item.start_date}}</span></small></p>
 
-                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> {{item.instant_price}} </span></p>
-                    {{#if item.now_price}}
+                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> {{item.current_price}} </span></p>
+                    {{#if item.instant_price}}
                         <p class="mb-1">Giá mua ngay: <span id="buy-now"> {{item.instant_price}} </span></p>
                     {{/if}}
                     <span class="card-text bold">Thời điểm kết thúc </span><span id = "endDate">{{item.end_date}}</span><br><br>
@@ -99,7 +99,6 @@
         </tbody>
     </table>
     <h4 class="mt-5">SẢN PHẨM CÙNG LOẠI</h4>
-    <br><br>
         <div class="container">
     <div class="CSSTableGenerator">
         <table ID="myTable">
@@ -107,15 +106,15 @@
                 <div class="row">
                     {{#each rows}}
                     <div class="col-sm-3 card border-0 mb-3 shadow-sm h-100s">
-                        <a style="color:black; text-decoration: none;" href="/{{catName}}/{{id}}">
+                        <a style="color:black; text-decoration: none;" href="/category/{{catName}}/{{id}}">
                             <img src="/imgs/sp/{{id}}/main.jpg"  alt="{{name}}" title="{{name}}" class="card-img-top">
                             <div class="card-body">
                                 <h6 id="nearlyFi" class="card-title">{{name}}</h6>
                                 <p id="price">{{price}}</p>
                                 <small class="text-muted">
                                     <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                                    {{#if now_price}}
-                                    <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{now_price}}đ</p>
+                                    {{#if instant_price}}
+                                    <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{instant_price}}đ</p>
                                     {{/if}}
                                     <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
                                     <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
@@ -140,78 +139,13 @@
         </table>
     </div>
 </div>
-    <h4 class="mt-5">MÔ TẢ SẢN PHẨM</h4>
-    <div class="row" style="font-size: 13px;">
-        <div class="col-md-8">
-            <table id="chi-tiet" cellspacing="0" class="table table-bordered table-detail table-striped">
-                <colgroup>
-                    <col style="width: 25%;">
-                    <col>
-                </colgroup>
-                <tbody>
-                    <tr>
-                        <td rel="brand">Thương hiệu</td>
-                        <td class="last">
-                            <a href="">Downy</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td rel="expiry_time">Hạn sử dụng</td>
-                        <td class="last">
-                            Xem trên bao bì sản phẩm
-                        </td>
-                    </tr>
-                    <tr>
-                        <td rel="sku">SKU</td>
-                        <td class="last">
-                            9205453356846
-                        </td>
-                    </tr>
-                    <tr>
-                        <td rel="capacity">Dung tích</td>
-                        <td class="last">
-                            1.8L
-                        </td>
-                    </tr>
-                    <tr>
-                        <td rel="thanh_phan">Thành phần</td>
-                        <td class="last">
-                            Nước, Diethylester Dimethyl Ammonium Chloride, Côplymer, Cationic polymer, Formic acid,
-                            Hydrlchloric acid,
-                            Sodium1-hydroxyethane-1, 1-diphosphnate, Benzyl isothiazolione, Silicone, Hương liệu
-                        </td>
-                    </tr>
-                    <tr>
-                        <td rel="huong_dan_su_dung">Hướng dẫn sử dụng</td>
-                        <td class="last">
-                            <ul>
-                                <li>Rót Downy Cuốn hút vào nước xả cuối cùng hoặc vào ngăn đựng nước làm mềm vải của máy
-                                    giặt</li>
-                                <li>Sau khi xả, vắt khô như thường lệ</li>
-                                <li>Đối với giặt tay:&nbsp;Dùng 1/2 nắp Downy cho 15-20 chiếc quần áo, ngâm trong vài
-                                    phút, vắt và phơi khô
-                                </li>
-                                <li>Đối với giặt máy:&nbsp;Dùng 1/2 nắp Downy cho nửa thùng giặt (khoảng 35 lít) hoặc 1
-                                    nắp rưỡi cho đầy
-                                    thùng giặt (khoảng 52 lít)</li>
-                                <li>Để có được tốt nhất cho jeans, chăn, khan,... hãy dùng thêm 1 nắp đầy Downy</li>
-                                <li>KHÔNG ĐỔ TRỰC TIẾP LÊN QUẦN ÁO</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td rel="huong_dan_bao_quan">Hướng dẫn bảo quản</td>
-                        <td class="last">
-                            <ul>
-                                <li>Sau mỗi lần sử dụng, bạn hãy đóng chặt nắp lại</li>
-                                <li>Bảo quản sản phẩm ở nơi mát, tránh ánh nắng trực tiếp</li>
-                                <li>Nếu rơi vào mắt, hãy rửa thật sạch bằng nước</li>
-                                <li>ĐỂ XA TẦM TAY TRẺ EM</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <h4 class="mt-5 mb-4">MÔ TẢ SẢN PHẨM</h4>
+    <div class="card" style="font-size: 16px;">
+        <div class="card-body">
+        {{{item.detail}}}
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-success" href = "/category/{{catName}}/{{item.id}}/editor">Edit</a>
         </div>
     </div>
 </div>
