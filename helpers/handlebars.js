@@ -7,11 +7,14 @@ function hbsHelpers(hbs) {
         layoutsDir: 'views/_layouts',
         helpers: {
             format: val => numeral(val).format('0,0'),
-            TimeFormat: time=> moment(time).format('DD/MM/YYYY hh:mm'),
-            hideName: name=> '****'+name.substr(name.length-4,4) ,
+            TimeFormat: time => moment(time).format('DD/MM/YYYY hh:mm:ss'),
+            hideName: name => {
+                if (name != null) return '****' + name.substr(name.length - 4, 4)
+                return ""
+            },
         }
-         // More helpers...
+        // More helpers...
     })
-   
+
 }
 module.exports = hbsHelpers;
