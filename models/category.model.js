@@ -13,7 +13,5 @@ module.exports = {
     },
     maxId: async () => {
       const res = await db.load('select max(id) as MaxID from category'); 
-      return res[0].MaxID;
-    },
-
+      return res[0].MaxID;},
 };

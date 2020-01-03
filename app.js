@@ -9,6 +9,7 @@ const categoryModel = require('./models/category.model');
 const offerModel = require('./models/offer.model');
 const moment= require('moment');
 const bodyparser=require('body-parser');
+const bcrypt = require('bcryptjs');
 
 require('express-async-errors');
 
@@ -60,11 +61,13 @@ app.get('/profile', function (req, res) {
 app.get('/new-product', function (req, res) {
     res.render('newProduct', { title: 'Thông tin cá nhân' });
 });
-app.post('/register',urlencodedParser,(req,res)=>{
-    const email=req.body.email;
-    const password=req.body.password;
-    res.send('email: '+email+'<br>'+'password:'+password+'<br>');
-})
+// app.post('/register',urlencodedParser,async(req,res)=>{
+//     const N = 10;
+//     const hash = bcrypt.hashSync(req.body.password, N);
+//     const entity=req.body;
+//     entity.password=hash;
+//     res.send('email: '+req.body.email+'<br>'+'password:'+entity.password+'<br>');
+// })
 require('./middlewares/locals.mdw')(app);
 require('./middlewares/routes.mdw')(app);
 
