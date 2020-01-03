@@ -1,8 +1,8 @@
 const db = require('../utils/db');
 
 module.exports = {
-  all: () => db.load('select * from users'),
-  single: id => db.load(`select * from users where f_ID = ${id}`),
+  all: () => db.load('select * from user'),
+  single: id => db.load(`select * from user where id = ${id}`),
   add: entity => db.add('login', entity),
-  del: id => db.del('users', { f_ID: id }),
+  del: id => db.del('user', { f_ID: id }),
 };

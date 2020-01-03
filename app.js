@@ -7,12 +7,9 @@ const categoryModel = require('./models/category.model');
 const offerModel = require('./models/offer.model');
 const moment= require('moment');
 const bodyparser=require('body-parser');
-<<<<<<< HEAD
 const bcrypt = require('bcryptjs');
-=======
 
 require('express-async-errors');
->>>>>>> c167a23acd0d26c2011d2fc0eecf59582d10da6d
 
 var app = express();
 

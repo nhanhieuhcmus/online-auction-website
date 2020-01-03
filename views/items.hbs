@@ -38,7 +38,7 @@
                             <form method="POST" id="pform">
                                 <input id="spinner" name="price" type="number" value={{item.min_price}} min={{item.min_price}} step={{item.step_price}}>
                                 <input type="hidden" id="productId" name="productId" value="{{item.id}}">
-                                <input type="hidden" id="userId" name="userId" value="1">
+                                <input type="hidden" id="userId" name="userId" value="3">
                             </form>
                         </div>
                         <div class="col-md-6">
@@ -65,9 +65,9 @@
             <div class="info col-md-3 d-flex align-content-stretch flex-wrap">
                 <div class="card-body border-bottom">
                     <h6 class="card-title">Thông tin người bán</h6>
-                    <span class="card-text">Nguyễn Thị Nở</span><br>
+                    <span class="card-text">{{seller.full_name}}</span><br>
                     <span class="card-text">Rating: </span>
-                    <b>8/10</b>
+                    <b>{{seller.add_point}}/{{seller.minus_point}}</b>
                 </div>
                 <div class="card-body">
                     <h6 class="card-title">Người đặt giá cao nhất hiện tại</h6>
