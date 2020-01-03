@@ -1,5 +1,7 @@
 var express = require('express');
 var exphbs = require('express-handlebars');
+const hbs_sections = require('express-handlebars-sections');
+const session = require('express-session');
 const morgan = require('morgan');
 const handlebars = require('./helpers/handlebars')(exphbs);
 const productModel = require('./models/product.model');
@@ -18,6 +20,17 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    // cookie: {
+    //     secure: true
+    // }
+  }))
+  
+
 app.use(bodyparser.urlencoded({extended:true}))
 var urlencodedParser = bodyparser.urlencoded({ extended: false })
 app.use(morgan('dev'));

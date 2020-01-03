@@ -1,0 +1,95 @@
+<script
+    src="https://cdn.tiny.cloud/1/tj20fv9eshwetrpwilnu8nc5cxr6gobk23xl6gqe674aqom9/tinymce/5/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#detail',
+        height: 600,
+        plugins: 'paste image link autolink lists table media',
+        menubar: false,
+        toolbar: [
+            'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright',
+            'forecolor backcolor',
+            'table link image media',
+        ],
+    });
+</script>
+<div class="container mt-2" style="max-width: 60%;">
+    <form id="product_info" class="needs-validation" novalidate method="POST">
+        <div id="newproduct">
+            <div>
+                <br>
+                <h4 style="text-align: center;">Thông tin sản phẩm</h4><br>
+                <div class="form-group">
+                    <label for="name">Tên sản phẩm</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên sản phẩm"
+                        required>
+                    <div class="invalid-feedback">
+                        Vui lòng nhập tên sản phẩm.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="category">Thể loại</label>
+                    <select class="form-control" id="category" name="categoryid" placeholder="Nhập tên sản phẩm">
+                        {{#each lcCategory}}
+                        <option value="{{id}}"> {{name_category}} </option>
+                        {{/each}} </select>
+                </div>
+                <div class="form-group">
+                    <label for="start_price">Giá khởi điểm</label>
+                    <input type="number" min="0" step="1000" class="form-control" id="start_price" name="start_price"
+                        required>
+                    <div class="invalid-feedback">
+                        Vui lòng nhập giá khởi điểm.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="step_price">Bước giá</label>
+                    <input type="number" min="0" step="1000" class="form-control" id="step_price" name="step_price"
+                        required>
+                    <div class="invalid-feedback">
+                        Vui lòng nhập bước giá.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="instant_price">Giá mua ngay (nếu có)</label>
+                    <input type="number" min="0" step="1000" class="form-control" id="instant_price"
+                        name="instant_price">
+                </div>
+                <div class="form-group">
+                    <label for="detail">Mô tả</label>
+                    <textarea class="form-control" id="detail" name="detail" required></textarea>
+                    <div class="invalid-feedback">
+                        Vui lòng nhập mô tả.
+                    </div>
+                </div>
+                {{!-- <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="">
+                    <label class="form-check-label" for="">Tự động gia hạn?</label>
+                </div> --}}
+                <button form="product_info" type="submit" class="btn my-2" style="background-color: purple; color:white">
+                    <i class="fa fa-check mr-1" aria-hidden="true"></i> Đăng sản phẩm</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+</script>

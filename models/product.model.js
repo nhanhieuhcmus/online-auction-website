@@ -12,5 +12,9 @@ module.exports = {
       const condition = { id: entity.id };
       delete entity.product_id;
       return db.patch('product', entity, condition);
-    }
+    },
+    maxId: async () => {
+      const res = await db.load('select max(id) as MaxID from product'); 
+      return res[0].MaxID;
+    },
 };

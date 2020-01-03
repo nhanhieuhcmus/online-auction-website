@@ -24,9 +24,9 @@
                     <p class="card-text"><small class="text-muted">Thời điểm đăng
                             <span class="postTime font-italic">{{item.start_date}}</span></small></p>
 
-                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> {{item.current_price}} </span></p>
+                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> {{format item.current_price}}đ </span></p>
                     {{#if item.instant_price}}
-                        <p class="mb-1">Giá mua ngay: <span id="buy-now"> {{item.instant_price}} </span></p>
+                        <p class="mb-1">Giá mua ngay: <span id="buy-now"> {{format item.instant_price}}đ </span></p>
                     {{/if}}
                     <span class="card-text bold">Thời điểm kết thúc </span><span id = "endDate">{{item.end_date}}</span><br><br>
                     {{!-- <span class="card-text bold">Đấu giá kết thúc sau </span><span id="countDown"></span><br><br> --}}
@@ -110,11 +110,11 @@
                             <img src="/imgs/sp/{{id}}/main.jpg"  alt="{{name}}" title="{{name}}" class="card-img-top">
                             <div class="card-body">
                                 <h6 id="nearlyFi" class="card-title">{{name}}</h6>
-                                <p id="price">{{price}}</p>
+                                 <p id="price">{{format current_price}}đ</p>
                                 <small class="text-muted">
                                     <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
                                     {{#if instant_price}}
-                                    <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{instant_price}}đ</p>
+                                    <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{format instant_price}}đ</p>
                                     {{/if}}
                                     <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
                                     <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>

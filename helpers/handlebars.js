@@ -1,5 +1,7 @@
 const numeral = require('numeral');
-const moment=require('moment')
+const moment = require('moment');
+const hbs_sections = require('express-handlebars-sections');
+const session = require('express-session');
 
 function hbsHelpers(hbs) {
     return hbs.create({
@@ -7,11 +9,12 @@ function hbsHelpers(hbs) {
         layoutsDir: 'views/_layouts',
         helpers: {
             format: val => numeral(val).format('0,0'),
-            TimeFormat: time=> moment(time).format('DD/MM/YYYY hh:mm'),
-            hideName: name=> '****'+name.substr(name.length-4,4) ,
+            TimeFormat: time => moment(time).format('DD/MM/YYYY hh:mm'),
+            hideName: name => '****' + name.substr(name.length - 4, 4),
+            section: hbs_sections(),
+            // More helpers...
         }
-         // More helpers...
     })
-   
+
 }
 module.exports = hbsHelpers;
