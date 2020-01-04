@@ -1,0 +1,77 @@
+{{#section 'css'}}
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+{{/section}}
+
+{{#section 'js'}}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+  $('#txtDOB').datetimepicker({
+    // format: 'd/m/Y H:i'
+    format: 'd/m/Y',
+    timepicker: false,
+    mask: true,
+  });
+
+  function validate() {
+    return true;
+  }
+</script>
+{{/section}}
+<div class="text-dark text-center mt-4">Vui lòng điền đầy đủ thông tin</div>
+<div class="modal-body d-flex justify-content-center">
+  <form onsubmit="return validate();" method="POST" novalidate>
+    <div class="form-group">
+      <label class="text-dark">Họ tên:</label>
+      <input class="form-control" type="text" name="fullname" placeholder="Nhập họ tên.." autofocus>
+    </div>
+    <div class="form-group">
+      <label class="text-dark">Địa chỉ:</label>
+      <input class="form-control" type="text" name="address" placeholder="Nhập địa chỉ..">
+    </div>
+    <div class="form-group">
+      <label class="text-dark">Email:</label>
+      <input class="form-control" type="text" name="email" placeholder="Nhập email..">
+    </div>
+    <div class="form-group">
+      <label for="txtDOB">Ngày sinh:</label>
+      <input type="datetime" class="form-control" id="txtDOB" name="dob" placeholder="Nhập ngày sinh..">
+    </div>
+    <div class="form-group">
+      <label class="text-dark">Loại người dùng:</label>
+      <select class="form-control" name="type_of_user" placeholder="Chọn loại người dùng..">
+        <option value="3">Người mua</option>
+        <option value="2">Người bán</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="text-dark">Tên người dùng:</label>
+      <input class="form-control" type="text" name="username" placeholder="Nhập tên người dùng..">
+    </div>
+    <div class="form-group">
+      <label class="text-dark">Mật khẩu:</label>
+
+      <input class="form-control" type="password" <input class="form-control" type="password" name="password"
+        placeholder="Nhập mật khẩu..">
+    </div>
+    <div class="form-group">
+      <label class="text-dark">Nhập lại mật khẩu:</label>
+      <input class="form-control" type="password" placeholder="Nhập lại mật khẩu lần nữa..">
+    </div>
+    <div class="form-check" style="display: flex; flex-direction: row;">
+      <div class="text-dark">Bằng việc nhấn vào đây, bạn
+        đồng ý về
+        <a class="ml-1" href="#">Điều khoản & Quyền riêng tư của
+          chúng
+          tôi.</a>
+      </div>
+
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    </div>
+    <div class="modal-footer">
+      <button class="btn text-white" style="background-color: purple; ">TẠO
+        TÀI KHOẢN</button>
+    </div>
+  </form>
+</div>
