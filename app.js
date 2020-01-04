@@ -11,10 +11,6 @@ const bodyparser=require('body-parser');
 var app = express();
 
 require('express-async-errors');
-require('./middlewares/locals.mdw')(app);
-require('./middlewares/routes.mdw')(app);
-
-
 
 const productRoute=require('./routes/product.route');
 
@@ -25,10 +21,7 @@ app.use(express.urlencoded({
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: true,
-    // cookie: {
-    //     secure: true
-    // }
+    saveUninitialized: true
   }))
 app.use(bodyparser.urlencoded({extended:true}))
 app.use(bodyparser.json())
@@ -59,6 +52,9 @@ app.get('/profile', function (req, res) {
 app.get('/new-product', function (req, res) {
     res.render('newProduct', { title: 'Thông tin cá nhân' });
 });
+
+require('./middlewares/locals.mdw')(app);
+require('./middlewares/routes.mdw')(app);
 
 app.use((req, res, next) => {
     res.render('vwError/404.hbs', { title: 'Not Found' });
