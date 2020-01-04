@@ -23,9 +23,9 @@
                     <p class="card-text"><small class="text-muted">Thời điểm đăng
                             <span class="postTime font-italic">{{item.start_date}}</span></small></p>
 
-                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> {{item.current_price}} </span></p>
+                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> {{format item.current_price}}đ </span></p>
                     {{#if item.instant_price}}
-                    <p class="mb-1">Giá mua ngay: <span id="buy-now"> {{item.instant_price}} </span></p>
+                        <p class="mb-1">Giá mua ngay: <span id="buy-now"> {{format item.instant_price}}đ </span></p>
                     {{/if}}
                     <span class="card-text bold">Thời điểm kết thúc </span><span
                         id="endDate">{{item.end_date}}</span><br><br>
@@ -35,9 +35,8 @@
                     <hr width="90%">
                     <div class="row">
                         <div class="col-md-6">
-                            <form method="POST" id="pform">
-                                <input id="spinner" name="price" type="number" value={{item.min_price}}
-                                    min={{item.min_price}} step={{item.step_price}}>
+                            <form method="POST" id="pform" action="/category/{{catName}}/{{item.id}}">
+                                <input id="spinner" name="price" type="number" value={{item.min_price}} min={{item.min_price}} step={{item.step_price}}>
                                 <input type="hidden" id="productId" name="productId" value="{{item.id}}">
                                 <input type="hidden" id="userId" name="userId" value="4">
                             </form>
@@ -156,40 +155,34 @@
         </tbody>
     </table>
     <h4 class="mt-5">SẢN PHẨM CÙNG LOẠI</h4>
-    <div class="container">
-        <div class="CSSTableGenerator">
-            <table ID="myTable">
-                <div class="card-body">
-                    <div class="row">
-                        {{#each rows}}
-                        <div class="col-sm-3 card border-0 mb-3 shadow-sm h-100s">
-                            <a style="color:black; text-decoration: none;" href="/category/{{catName}}/{{id}}">
-                                <img src="/imgs/sp/{{id}}/main.jpg" alt="{{name}}" title="{{name}}"
-                                    class="card-img-top">
-                                <div class="card-body">
-                                    <h6 id="nearlyFi" class="card-title">{{name}}</h6>
-                                    <p id="price">{{price}}</p>
-                                    <small class="text-muted">
-                                        <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                                        {{#if instant_price}}
-                                        <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{instant_price}}đ
-                                        </p>
-                                        {{/if}}
-                                        <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
-                                        <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
-                                        <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                                    </small>
-                                    <span class="my-2">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star-o checked"></span>
-                                    </span>
-                                </div>
-                            </a>
-                            <div id="favorite" class="mb-0">
-                                <i class="heart fa fa-heart-o"></i>
+        <div class="container">
+    <div class="CSSTableGenerator">
+        <table ID="myTable">
+            <div class="card-body">
+                <div class="row">
+                    {{#each rows}}
+                    <div class="col-sm-3 card border-0 mb-3 shadow-sm h-100s">
+                        <a style="color:black; text-decoration: none;" href="/category/{{catName}}/{{id}}">
+                            <img src="/imgs/sp/{{id}}/main.jpg"  alt="{{name}}" title="{{name}}" class="card-img-top">
+                            <div class="card-body">
+                                <h6 id="nearlyFi" class="card-title">{{name}}</h6>
+                                 <p id="price">{{format current_price}}đ</p>
+                                <small class="text-muted">
+                                    <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
+                                    {{#if instant_price}}
+                                    <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{format instant_price}}đ</p>
+                                    {{/if}}
+                                    <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
+                                    <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
+                                    <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
+                                </small>
+                                <span class="my-2">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star-o checked"></span>
+                                </span>
                             </div>
                         </div>
                         {{/each}}
