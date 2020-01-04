@@ -1,14 +1,11 @@
-const express = require('express');
-
-const router = express.Router();
-const bodyparser = require('body-parser');
-const bcrypt = require('bcryptjs');
-
+const express=require('express');
+const router=express.Router();
+const bodyparser=require('body-parser');
+const bcrypt=require('bcryptjs');
 const userModel = require('../models/user.model');
 const loginModel = require('../models/login.model');
 const moment = require('moment');
 var dateFormat = require('dateformat');
-var urlencodedParser = bodyparser.urlencoded({ extended: false })
 
 
 router.get('/register', async (req, res) => {

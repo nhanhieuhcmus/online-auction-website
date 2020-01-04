@@ -3,8 +3,7 @@
         <div class="row no-gutters">
             <div class="col-md-4 d-flex align-items-center border-right flex-column">
                 <div class="card-img p-4 d-flex align-items-center justify-content-center" style="height: 400px;">
-                    <img id="main-img" class="imgs"
-                        src="/imgs/sp/{{item.id}}/main.jpg">
+                    <img id="main-img" class="imgs" src="/imgs/sp/{{item.id}}/main.jpg">
                 </div>
                 <div id="sub-img-group" class="d-flex justify-content-between">
                     <div class="sub-img col-md-4 d-flex align-items-center">
@@ -24,26 +23,55 @@
                     <p class="card-text"><small class="text-muted">Thời điểm đăng
                             <span class="postTime font-italic">{{item.start_date}}</span></small></p>
 
-                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> {{item.current_price}} </span></p>
+                    <p class="mb-1">Giá hiện tại: <span id="recent-price"> {{format item.current_price}}đ </span></p>
                     {{#if item.instant_price}}
-                        <p class="mb-1">Giá mua ngay: <span id="buy-now"> {{item.instant_price}} </span></p>
+                        <p class="mb-1">Giá mua ngay: <span id="buy-now"> {{format item.instant_price}}đ </span></p>
                     {{/if}}
-                    <span class="card-text bold">Thời điểm kết thúc </span><span id = "endDate">{{item.end_date}}</span><br><br>
+                    <span class="card-text bold">Thời điểm kết thúc </span><span
+                        id="endDate">{{item.end_date}}</span><br><br>
                     {{!-- <span class="card-text bold">Đấu giá kết thúc sau </span><span id="countDown"></span><br><br> --}}
                 </div>
                 <div class="card-body">
                     <hr width="90%">
                     <div class="row">
                         <div class="col-md-6">
-                            <form method="POST" id="pform">
+                            <form method="POST" id="pform" action="/category/{{catName}}/{{item.id}}">
                                 <input id="spinner" name="price" type="number" value={{item.min_price}} min={{item.min_price}} step={{item.step_price}}>
                                 <input type="hidden" id="productId" name="productId" value="{{item.id}}">
-                                <input type="hidden" id="userId" name="userId" value="1">
+                                <input type="hidden" id="userId" name="userId" value="4">
                             </form>
                         </div>
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-danger" form="pform" style="width: 120px;">
-                                <i class="fa fa-gavel"></i> Đấu giá</button>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+                                style="width:120px">
+                                <i class="fa fa-gavel"></i> Đấu giá
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Are you sure</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Bạn có chắc chắn đấu giá sản phẩm với mức giá trên?
+                                        </div>
+                                        <div class="modal-footer justify-content-sm-around">
+                                            <button type="button" class="btn btn-secondary" style="width: 100px;"
+                                                data-dismiss="modal">No</button>
+                                            <button type="submit" class="btn btn-danger" form="pform" style="width: 100px;">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{!-- <button type="submit" class="btn btn-danger" form="pform" style="width: 120px;">
+                                <i class="fa fa-gavel"></i> Đấu giá</button> --}}
                         </div>
                     </div>
                     <div class="row">
@@ -55,8 +83,36 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-outline-danger" style="width: 120px;">
-                                Mua ngay</button>
+                            <button type="button" class="btn btn-outline-danger" 
+                            data-toggle="modal" data-target="#exampleModal1"style="width: 120px;">
+                                Mua ngay
+                            </button>
+                            <form method="POST" id="iform" action="/instant">
+                                <input type="hidden" id="productId" name="productId" value="{{item.id}}">
+                                <input type="hidden" id="instant" name="instant" value="{{item.instant_price}}">
+                                <input type="hidden" id="userId" name="userId" value="4">
+                            </form>
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel1">Are you sure</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Bạn có chắc muốn mua ngay sản phẩm này?
+                                        </div>
+                                        <div class="modal-footer justify-content-sm-around">
+                                            <button type="button" class="btn btn-secondary" style="width: 100px;"
+                                                data-dismiss="modal">No</button>
+                                            <button type="submit" class="btn btn-danger" form="iform" style="width: 100px;">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,9 +121,9 @@
             <div class="info col-md-3 d-flex align-content-stretch flex-wrap">
                 <div class="card-body border-bottom">
                     <h6 class="card-title">Thông tin người bán</h6>
-                    <span class="card-text">Nguyễn Thị Nở</span><br>
+                    <span class="card-text">{{seller.full_name}}</span><br>
                     <span class="card-text">Rating: </span>
-                    <b>8/10</b>
+                    <b>{{seller.add_point}}/{{seller.minus_point}}</b>
                 </div>
                 <div class="card-body">
                     <h6 class="card-title">Người đặt giá cao nhất hiện tại</h6>
@@ -110,11 +166,11 @@
                             <img src="/imgs/sp/{{id}}/main.jpg"  alt="{{name}}" title="{{name}}" class="card-img-top">
                             <div class="card-body">
                                 <h6 id="nearlyFi" class="card-title">{{name}}</h6>
-                                <p id="price">{{price}}</p>
+                                 <p id="price">{{format current_price}}đ</p>
                                 <small class="text-muted">
                                     <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
                                     {{#if instant_price}}
-                                    <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{instant_price}}đ</p>
+                                    <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{format instant_price}}đ</p>
                                     {{/if}}
                                     <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
                                     <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
@@ -128,24 +184,20 @@
                                     <span class="fa fa-star-o checked"></span>
                                 </span>
                             </div>
-                        </a>
-                        <div id="favorite" class="mb-0">
-                            <i class="heart fa fa-heart-o"></i>
                         </div>
+                        {{/each}}
                     </div>
-                    {{/each}}
                 </div>
-            </div>
-        </table>
+            </table>
+        </div>
     </div>
-</div>
     <h4 class="mt-5 mb-4">MÔ TẢ SẢN PHẨM</h4>
     <div class="card" style="font-size: 16px;">
         <div class="card-body">
-        {{{item.detail}}}
+            {{{item.detail}}}
         </div>
         <div class="card-footer">
-            <a class="btn btn-success" href = "/category/{{catName}}/{{item.id}}/editor">Edit</a>
+            <a class="btn btn-success" href="/category/{{catName}}/{{item.id}}/editor">Edit</a>
         </div>
     </div>
 </div>
