@@ -34,7 +34,9 @@ router.get('/:name/:id', async function (req, res) {
     offerModel.allByProductId(req.params.id),
     productModel.allByCat(req.params.name)
   ]);
-  const sellerRows = await userModel.single(single.id_seller);
+  console.log(single.id_seller);
+  const sellerRows = await userModel.single(single[0].id_seller);
+  console.log(sellerRows);
   i = 1;
   history.forEach(element => {
     element.BidId = i++;
