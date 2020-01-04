@@ -7,11 +7,10 @@ const loginModel = require('../models/login.model');
 const moment = require('moment');
 var dateFormat = require('dateformat');
 
-
 router.get('/register', async (req, res) => {
     res.render('vwAccount/register');
 });
-router.post('/register', urlencodedParser, async (req, res) => {
+router.post('/register', async (req, res) => {
     const N = 10;
     const hash = bcrypt.hashSync(req.body.password, N);
     var maxID = await userModel.maxId();

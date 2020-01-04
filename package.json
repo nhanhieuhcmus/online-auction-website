@@ -26,10 +26,6 @@
     "express-handlebars": "^3.1.0",
     "express-handlebars-sections": "^1.0.1",
     "express-session": "^1.17.0",
-<<<<<<< HEAD
-    "express-sessions": "^1.0.6",
-=======
->>>>>>> be32f09961f3ed98ea98a6b2631a03de982897e7
     "express-validator": "^6.3.1",
     "js-alert": "^1.0.4",
     "mkdirp": "^0.5.1",
