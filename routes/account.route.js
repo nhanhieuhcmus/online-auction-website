@@ -1,13 +1,10 @@
 const express=require('express');
-
 const router=express.Router();
 const bodyparser=require('body-parser');
 const bcrypt=require('bcryptjs');
-
 const userModel = require('../models/user.model');
 const loginModel = require('../models/login.model');
 var dateFormat = require('dateformat');
-var urlencodedParser = bodyparser.urlencoded({ extended: false })
 
 router.post('/',urlencodedParser,async(req,res)=>{
     const N = 10;

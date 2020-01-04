@@ -6,14 +6,15 @@ const morgan = require('morgan');
 const handlebars = require('./helpers/handlebars')(exphbs);
 const productModel = require('./models/product.model');
 const categoryModel = require('./models/category.model');
-const offerModel = require('./models/offer.model');
-const moment= require('moment');
 const bodyparser=require('body-parser');
-const bcrypt = require('bcryptjs');
-
-require('express-async-errors');
 
 var app = express();
+
+require('express-async-errors');
+require('./middlewares/locals.mdw')(app);
+require('./middlewares/routes.mdw')(app);
+
+
 
 const productRoute=require('./routes/product.route');
 
@@ -21,7 +22,6 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
-
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -30,10 +30,8 @@ app.use(session({
     //     secure: true
     // }
   }))
-  
-
 app.use(bodyparser.urlencoded({extended:true}))
-var urlencodedParser = bodyparser.urlencoded({ extended: false })
+app.use(bodyparser.json())
 app.use(morgan('dev'));
 
 app.engine('hbs', handlebars.engine);
@@ -61,15 +59,6 @@ app.get('/profile', function (req, res) {
 app.get('/new-product', function (req, res) {
     res.render('newProduct', { title: 'Thông tin cá nhân' });
 });
-// app.post('/register',urlencodedParser,async(req,res)=>{
-//     const N = 10;
-//     const hash = bcrypt.hashSync(req.body.password, N);
-//     const entity=req.body;
-//     entity.password=hash;
-//     res.send('email: '+req.body.email+'<br>'+'password:'+entity.password+'<br>');
-// })
-require('./middlewares/locals.mdw')(app);
-require('./middlewares/routes.mdw')(app);
 
 app.use((req, res, next) => {
     res.render('vwError/404.hbs', { title: 'Not Found' });
