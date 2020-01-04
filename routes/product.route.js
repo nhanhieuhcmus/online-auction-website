@@ -8,15 +8,20 @@ const multer = require('multer');
 const dateFormat = require('dateformat');
 const fs = require('fs')
 const mkdirp = require('mkdirp');
-const config = require('../config/default.json')
 
 
 const router = express.Router();
 
 router.use(express.static('public/css'));
 
-router.get('/', (req, res) => {
-  res.render('home', { title: 'Trang chủ' })
+router.get('/', async (req, res) => {
+  const category = await categoryModel.all();
+  res.render('home',
+    {
+      title: 'Trang chủ',
+      category,
+      empty: category.length === 0
+    })
 })
 
 router.get('/new-product', (req, res) => {
@@ -97,27 +102,7 @@ router.post('/new-product-image/:id/:categoryid', async function (req, res) {
 })
 
 router.get('/:name', async function (req, res) {
-  const catName = req.params.name;
-  const limit = config.paginate.limit;
-  var page = req.query.page || 1;
-  if (page < 1) page = 1;
-  const offset = (page - 1) * limit;
-
-  const [total, rows] = await Promise.all([
-    productModel.countByCat(catName),
-    productModel.pageByCat(catName, offset)
-  ]);
-  
-  let nPages = Math.floor(total / limit);
-  if (total % limit > 0) nPages++;
-  const page_numbers = [];
-  for (i = 1; i <= nPages; i++) {
-    page_numbers.push({
-      value: i,
-      isCurrentPage: i === +page
-    })
-  }
-  
+  const rows = await productModel.allByCat(req.params.name);
   rows.forEach(element => {
     if (element.instant_price == null)
       element.instant_price = false;
@@ -129,15 +114,10 @@ router.get('/:name', async function (req, res) {
   });
 
   res.render('vwProduct/listProducts', {
-    catName,
+    catName: req.params.name,
     products: rows,
     empty: rows.length === 0,
-    title: 'Sản phẩm',
-    page_numbers,
-    prev_value: +page - 1,
-    next_value: +page + 1,
-    isMinPage: page!=1,
-    isMaxPage: page!=nPages
+    title: 'Sản phẩm'
   });
 });
 
@@ -147,7 +127,7 @@ router.get('/:name/:id', async function (req, res) {
     offerModel.allByProductId(req.params.id),
     productModel.allByCat(req.params.name)
   ]);
-  const sellerRows = await userModel.single(single[0].id_seller);
+  const sellerRows = await userModel.single(single.id_seller);
   i = 1;
   history.forEach(element => {
     element.BidId = i++;
@@ -167,7 +147,7 @@ router.get('/:name/:id', async function (req, res) {
     element.start_date = moment(element.start_date).format('DD/MM/YYYY');
     element.end_date = moment(element.end_date).format('DD/MM/YYYY');
   });
-  //console.log(sellerRows);
+  console.log(sellerRows);
   res.render('items', {
     catName: req.params.name,
     history,
@@ -179,7 +159,7 @@ router.get('/:name/:id', async function (req, res) {
 })
 
 router.post('/:name/:id', async (req, res) => {
-  console.log(req.body); product = await productModel.single(+req.body.productId);
+  product = await productModel.single(+req.body.productId);
   currentOffer = await offerModel.currentOffer(+req.body.productId);
   if (currentOffer.length > 0)
     if (+req.body.price > currentOffer[0].price) {
