@@ -13,7 +13,7 @@ const mailer = require('./models/mailer.model');
  
 const bcrypt = require('bcryptjs');
 const productRoute = require('./routes/product.route');
-
+const request=require('request');
 require('express-async-errors');
 var app = express();
 app.use(express.json());
@@ -29,6 +29,8 @@ app.use(bodyparser.urlencoded({extended:true}))
 app.use(bodyparser.json())
 app.use(morgan('dev'));
 // app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+
+
 
 require('./middlewares/locals.mdw')(app);
 require('./middlewares/routes.mdw')(app);
