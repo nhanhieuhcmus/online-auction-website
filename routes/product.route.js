@@ -10,6 +10,7 @@ const fs = require('fs')
 const mkdirp = require('mkdirp');
 const config = require('../config/default.json')
 const restrict = require('../middlewares/auth.mdw');
+const bannedModel = require('../models/banned.model');
 
 
 const router = express.Router();
@@ -268,11 +269,13 @@ router.get('/:name/:id', async function (req, res) {
 
 router.post('/:name/:id', restrict, async (req, res) => {
   user = await (userModel.single(req.session.authUser.id));
+  banned = await (bannedModel.single(req.session.authUser.id, req.params.id));
+  console.log(banned);
   point = true;
   if (user[0].minus_point != 0)
     if (user[0].add_point / (user[0].add_point + user[0].minus_point) * 100 < 80)
       point = false;
-  if (point == false) {
+  if (point == false || banned != false) {
     res.redirect('?Error=true');
   }
   else {
@@ -340,6 +343,25 @@ router.get('/err', (req, res) => {
 });
 
 router.post('/ban/:proId/:userId', restrict, async (req, res) => {
+  await bannedModel.add({
+    user_id: req.params.userId,
+    product_id: req.params.proId
+  });
+  await offerModel.del(req.params.userId, req.params.proId);
+  history = await offerModel.allByProductId(req.params.proId);
   
+  product = await productModel.single(req.params.proId);
+  
+  if (history[0].user_id != product[0].priceholder) {
+    product[0].priceholder = history[0].user_id;
+    product[0].current_price = history[0].price;
+    await offerModel.patchOffer({
+      product: req.params.proId,
+      user: history[0].user_id,
+      price: history[0].price
+    })
+    await productModel.patch(product[0]);
+  }
+  res.redirect(req.headers.referer);
 })
 module.exports = router;

@@ -17,5 +17,6 @@ module.exports = {
         delete entity.product
         return db.patch('waiting_offer', entity, condition)
     },
-    addWaitingOffer: entity => db.add('waiting_offer', entity)
+    addWaitingOffer: entity => db.add('waiting_offer', entity),
+    del: (userId, productId) => db.load(`DELETE FROM offer WHERE user_id = ${userId} AND product_id = ${productId}`),
 };
