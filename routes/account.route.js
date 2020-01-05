@@ -147,7 +147,21 @@ router.post('/logout', (req, res) => {
 router.get('/profile', restrict, (req, res) => {
     res.render('vwAccount/profile');
 });
-
+router.post('/change_password',async(req,res)=>{
+    const cur_pw=req.body.current_password;
+    const new_pw=req.body.new_password;
+    const check_usr= await userModel.checkUser(req.session.authUser.user_name);
+    const check_pw= await userModel.checkPass(cur_pw);
+    const rs = bcrypt.compareSync(cur_pw, req.session.authUser.password);
+    
+    if (rs)
+    {
+        const N = 10;
+        const hash = bcrypt.hashSync(new_pw, N);
+        const action= await userModel.changePass(req.session.authUser.user_name,hash);
+    }
+    res.send("Doi mat khau thanh cong!");
+});
 router.get('/err', (req, res) => {
     throw new Error('error occured');
 });
