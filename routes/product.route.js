@@ -165,18 +165,6 @@ router.get('/search', async (req, res) => {
   });
 });
 
-// router.get('/search/priceDown', (req, res) => {
-//   functions(req, res, '1', 'current_price', 'DESC');
-// });
-
-// router.get('/search/timeDown', (req, res) => {
-//   functions(req, res, 'end_date - NOW() > 0', 'end_date - NOW()', 'ASC');
-// });
-
-// router.get('/search/timeUp', (req, res) => {
-//   functions(req, res, 'start_date - NOW() > 0','start_date - NOW()', 'ASC');
-// });
-
 router.get('/:name', async function (req, res) {
   const catName = req.params.name;
   const limit = config.paginate.limit;
