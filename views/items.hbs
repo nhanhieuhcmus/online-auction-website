@@ -1,3 +1,10 @@
+<script>
+    if ({{ Auction }})
+    alert('Đấu giá thành công!!!');
+    else if ({{ Error }})
+    alert('Đấu giá không thành công do bạn không đủ điều kiện hoặc bị ban');
+</script>
+
 <div class="container-fluid px-5 mt-3">
     <div class="card">
         <div class="row no-gutters">
@@ -25,20 +32,19 @@
 
                     <p class="mb-1">Giá hiện tại: <span id="recent-price"> {{format item.current_price}}đ </span></p>
                     {{#if item.instant_price}}
-                        <p class="mb-1">Giá mua ngay: <span id="buy-now"> {{format item.instant_price}}đ </span></p>
+                    <p class="mb-1">Giá mua ngay: <span id="buy-now"> {{format item.instant_price}}đ </span></p>
                     {{/if}}
-                    <span class="card-text bold">Thời điểm kết thúc </span><span
-                        id="endDate">{{item.end_date}}</span><br><br>
+                    <span id="endDateText" class="card-text bold">Thời điểm kết thúc: </span><span id="endDate"
+                        style="color: red;">{{item.end_date}}</span><br><br>
                     {{!-- <span class="card-text bold">Đấu giá kết thúc sau </span><span id="countDown"></span><br><br> --}}
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="AuctionZone">
                     <hr width="90%">
                     <div class="row">
                         <div class="col-md-6">
                             <form method="POST" id="pform" action="/category/{{catName}}/{{item.id}}">
-                                <input id="spinner" name="price" type="number" value={{item.min_price}} min={{item.min_price}} step={{item.step_price}}>
-                                <input type="hidden" id="productId" name="productId" value="{{item.id}}">
-                                <input type="hidden" id="userId" name="userId" value="4">
+                                <input id="spinner" name="price" type="number" value={{item.min_price}}
+                                    min={{item.min_price}} step={{item.step_price}}>
                             </form>
                         </div>
                         <div class="col-md-6">
@@ -65,7 +71,8 @@
                                         <div class="modal-footer justify-content-sm-around">
                                             <button type="button" class="btn btn-secondary" style="width: 100px;"
                                                 data-dismiss="modal">No</button>
-                                            <button type="submit" class="btn btn-danger" form="pform" style="width: 100px;">Yes</button>
+                                            <button type="submit" class="btn btn-danger" form="pform"
+                                                style="width: 100px;">Yes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -83,15 +90,14 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                             {{#if item.instant_price}}
-                            <button type="button" class="btn btn-outline-danger" 
-                            data-toggle="modal" data-target="#exampleModal1"style="width: 120px;">
+                            {{#if item.instant_price}}
+                            <button type="button" class="btn btn-outline-danger" data-toggle="modal"
+                                data-target="#exampleModal1" style="width: 120px;">
                                 Mua ngay
                             </button>
                             <form method="POST" id="iform" action="/instant">
                                 <input type="hidden" id="productId" name="productId" value="{{item.id}}">
                                 <input type="hidden" id="instant" name="instant" value="{{item.instant_price}}">
-                                <input type="hidden" id="userId" name="userId" value="4">
                             </form>
                             <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -109,12 +115,13 @@
                                         <div class="modal-footer justify-content-sm-around">
                                             <button type="button" class="btn btn-secondary" style="width: 100px;"
                                                 data-dismiss="modal">No</button>
-                                            <button type="submit" class="btn btn-danger" form="iform" style="width: 100px;">Yes</button>
+                                            <button type="submit" class="btn btn-danger" form="iform"
+                                                style="width: 100px;">Yes</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    {{/if}}
+                            {{/if}}
                         </div>
                     </div>
                 </div>
@@ -129,9 +136,9 @@
                 </div>
                 <div class="card-body">
                     <h6 class="card-title">Người đặt giá cao nhất hiện tại</h6>
-                    <span class="card-text">Lê Văn Chí</span><br>
+                    <span class="card-text">{{bestAution.full_name}}</span><br>
                     <span class="card-text">Rating: </span>
-                    <b>8/10</b>
+                    <b>{{bestAution.add_point}}/{{bestAution.minus_point}}</b>
                 </div>
             </div>
         </div>
@@ -152,40 +159,69 @@
                 <td>{{TimeFormat time}}</td>
                 <td>{{hideName full_name}}</td>
                 <td>{{price}}</td>
+                <td><button type="submit" class="btn btn-outline-danger" data-toggle="modal"
+                        data-target="#modal{{BidId}}">
+                        <i class="fa fa-times mr-1" aria-hidden="true"></i></button></td>
+                <form method="POST" id="{{BidId}}" action="/category/ban/{{product_id}}/{{user_id}}"></form>
+                {{!-- modal --}}
+                <div class="modal fade" id="modal{{BidId}}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel3" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel3">Are you sure</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc muốn từ chối lượt ra giá của bidder này?
+                            </div>
+                            <div class="modal-footer justify-content-sm-around">
+                                <button type="button" class="btn btn-secondary" style="width: 100px;"
+                                    data-dismiss="modal">No</button>
+                                <button type="submit" class="btn btn-danger" form="{{BidId}}"
+                                    style="width: 100px;">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </tr>
             {{/each}}
         </tbody>
     </table>
     <h4 class="mt-5">SẢN PHẨM CÙNG LOẠI</h4>
-        <div class="container">
-    <div class="CSSTableGenerator">
-        <table ID="myTable">
-            <div class="card-body">
-                <div class="row">
-                    {{#each rows}}
-                    <div class="col-sm-3 card border-0 mb-3 shadow-sm h-100s">
-                        <a style="color:black; text-decoration: none;" href="/category/{{catName}}/{{id}}">
-                            <img src="/imgs/sp/{{id}}/main.jpg"  alt="{{name}}" title="{{name}}" class="card-img-top">
-                            <div class="card-body">
-                                <h6 id="nearlyFi" class="card-title">{{name}}</h6>
-                                 <p id="price">{{format current_price}}đ</p>
-                                <small class="text-muted">
-                                    <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                                    {{#if instant_price}}
-                                    <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{format instant_price}}đ</p>
-                                    {{/if}}
-                                    <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
-                                    <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
-                                    <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                                </small>
-                                <span class="my-2">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star-o checked"></span>
-                                </span>
-                            </div>
+    <div class="container">
+        <div class="CSSTableGenerator">
+            <table ID="myTable">
+                <div class="card-body">
+                    <div class="row">
+                        {{#each rows}}
+                        <div class="col-sm-3 card border-0 mb-3 shadow-sm h-100s">
+                            <a style="color:black; text-decoration: none;" href="/category/{{catName}}/{{id}}">
+                                <img src="/imgs/sp/{{id}}/main.jpg" alt="{{name}}" title="{{name}}"
+                                    class="card-img-top">
+                                <div class="card-body">
+                                    <h6 id="nearlyFi" class="card-title">{{name}}</h6>
+                                    <p id="price">{{format current_price}}đ</p>
+                                    <small class="text-muted">
+                                        <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
+                                        {{#if instant_price}}
+                                        <p id="nearlyFi" class="card-text now_price">Giá mua ngay:
+                                            {{format instant_price}}đ</p>
+                                        {{/if}}
+                                        <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
+                                        <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
+                                        <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
+                                    </small>
+                                    <span class="my-2">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star-o checked"></span>
+                                    </span>
+                                </div>
                         </div>
                         {{/each}}
                     </div>
@@ -210,36 +246,65 @@
         $(this).toggleClass("fa-heart fa-heart-o");
     });
 </script>
+
 <script>
     //Bộ đếm ngày giờ
-    var countDownDate = new Date();
-    countDownDate.setHours(countDownDate.getHours() + 1);
-    countDownDate.setDate(countDownDate.getDate() + 1);
-    // cập nhập thời gian sau mỗi 1 giây
-    var x = setInterval(function () {
+    var countDownDate = new Date($('#endDate').html());
+    $('#endDate').text("");
+    console.log(countDownDate);
+    // Lấy thời gian hiện tại
+    var now = new Date().getTime();
+    // Lấy số thời gian chênh lệch
+    var distance = countDownDate.getTime() - now;
+    if (distance < 0) {
+        $('#endDate').text("");
+        $('#endDateText').text("Đấu giá kết thúc");
+        $('#endDateText').css({
+            'color': 'black',
+            'font-weight': 'bold'
+        });
+        $('#AuctionZone').hide();
+    } else if (distance <= 3 * 1000 * 3600 * 24) {
+        // cập nhập thời gian sau mỗi 1 giây
+        var x = setInterval(function () {
+            distance = countDownDate.getTime() - new Date().getTime();
+            // Tính toán số ngày, giờ, phút, giây từ thời gian chênh lệch
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            if (hours < 10)
+                hours = '0' + hours;
+            if (minutes < 10)
+                minutes = '0' + minutes;
+            if (minutes < 10)
+                seconds = '0' + seconds;
+            var display = "Còn ";
+            if (days > 0)
+                display = display + days + " Ngày ";
+            display = display + hours + " : " + minutes + " : " + seconds;
+            // HIển thị chuỗi thời gian trong thẻ p
+            document.getElementById("endDate").innerHTML = display;
+            // Nếu thời gian kết thúc, hiển thị chuỗi thông báo
+            if (distance < 0) {
+                $('#endDate').text("");
+                $('#endDateText').text("Đấu giá kết thúc");
+                clearInterval(x);
+            }
+        }, 1000);
 
-        // Lấy thời gian hiện tại
-        var now = new Date().getTime();
-
-        // Lấy số thời gian chênh lệch
-        var distance = countDownDate.getTime() - now;
-
-        // Tính toán số ngày, giờ, phút, giây từ thời gian chênh lệch
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        var display = "";
-        if (days > 0)
-            display = display + days + " Ngày ";
-        display = display + hours + " : " + minutes + " : " + seconds;
-        // HIển thị chuỗi thời gian trong thẻ p
-        document.getElementById("countDown").innerHTML = display;
-        // Nếu thời gian kết thúc, hiển thị chuỗi thông báo
-        if (distance < 0) {
-            clearInterval(x);
-        }
-    }, 1000);
+    } else {
+        var day = countDownDate.getDate();
+        var month = countDownDate.getMonth() + 1;
+        var year = countDownDate.getFullYear();
+        var hours = countDownDate.getHours();
+        var minutes = countDownDate.getMinutes();
+        if (minutes < 10)
+            minutes = '0' + minutes;
+        var display = day + "/" + month + "/" + year + " " + hours + ":" + minutes;
+        document.getElementById("endDate").innerHTML = display;
+        $('#endDate').css('color', 'black');
+    }
 </script>
 <script>
     //quantity button

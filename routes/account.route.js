@@ -7,6 +7,8 @@ const loginModel = require('../models/login.model');
 const moment = require('moment');
 var dateFormat = require('dateformat');
 
+const restrict = require('../middlewares/auth.mdw');
+
 router.get('/register', async (req, res) => {
     res.render('vwAccount/register');
 });
@@ -64,25 +66,25 @@ router.post('/login', async (req, res) => {
     if (loginUser === null) {
         // return res.redirect('/account/login?err_message=2');
         return res.render('vwAccount/login', {
-            layout: false,
             err_message: 'Tài khoản không tồn tại!'
         });
     }
     const rs = bcrypt.compareSync(req.body.password, loginUser.password);
-    console.log(rs);
     if (rs === false) {
         // return res.redirect('/account/login?err_message=1');
         return res.render('vwAccount/login', {
-            layout: false,
             err_message: 'Mật khẩu không chính xác!'
         });
     }
 
     req.session.isAuthenticated = true;
-    console.log(req.session.isAuthenticated);
     req.session.authUser = loginUser;
-    console.log(req.session.authUser);
-    res.redirect('/');
+    console.log(req.session);
+    const url = req.query.retUrl || '/';
+    if (req.query.method == 'post')
+        res.redirect(307, url);
+    else
+        res.redirect(url);
 })
 
 router.post('/logout', (req, res) => {
@@ -93,7 +95,7 @@ router.post('/logout', (req, res) => {
 });
 
 
-router.get('/profile', (req, res) => {
+router.get('/profile', restrict, (req, res) => {
     res.render('vwAccount/profile');
 });
 module.exports = router;
