@@ -9,7 +9,6 @@ const categoryModel = require('./models/category.model');
 const offerModel = require('./models/offer.model');
 const moment = require('moment');
 const bodyparser = require('body-parser');
-var cookieParser = require('cookie-parser')
 const mailer = require('./models/mailer.model');
  
 const bcrypt = require('bcryptjs');
@@ -17,7 +16,6 @@ const productRoute = require('./routes/product.route');
 
 require('express-async-errors');
 var app = express();
-app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
@@ -34,19 +32,11 @@ app.use(morgan('dev'));
 
 require('./middlewares/locals.mdw')(app);
 require('./middlewares/routes.mdw')(app);
+
 app.engine('hbs', handlebars.engine);
 app.set('view engine', 'hbs');
 
 app.use(express.static('./public'));
-
-app.get('/', async (req, res) => {
-    const category = await categoryModel.all();
-    res.render('home', { title: 'Trang chủ', category });
-});
-
-app.get('/home', function (req, res) {
-    res.render('home', { title: 'Trang chủ' });
-});
 
 app.get('/cart', function (req, res) {
     res.render('cart', { title: 'Giỏ hàng' });
@@ -59,9 +49,6 @@ app.get('/profile', function (req, res) {
 app.get('/new-product', function (req, res) {
     res.render('newProduct', { title: 'Thông tin cá nhân' });
 });
-
-// require('./middlewares/locals.mdw')(app);
-// require('./middlewares/routes.mdw')(app);
 
 app.use((req, res, next) => {
     res.render('vwError/404.hbs', { title: 'Not Found' });

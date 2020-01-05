@@ -34,5 +34,12 @@ module.exports = {
     from product left join category on product.categoryid=category.id
     where ${condition} and match(product.name) against(\"${key}\") OR match(category.name_category) against(\"${key}\")) as result LEFT JOIN user on result.priceholder = user.id 
     order by ${column} ${type}
-    limit ${config.paginate.limit} offset ${offset}`)
+    limit ${config.paginate.limit} offset ${offset}`),
+
+  nearFinish: _ => db.load(`select * from product where end_date-NOW() > 0
+                            order by end_date-NOW() asc limit 5`),
+
+  mostExpensive: _ => db.load(`select * from product order by current_price desc limit 5`),
+
+  mostAuctionTimes: _ => db.load(`select * from product order by auction_times desc limit 5`),
 };
