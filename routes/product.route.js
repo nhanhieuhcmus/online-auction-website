@@ -96,6 +96,85 @@ router.post('/new-product-image/:id/:categoryid', async function (req, res) {
   });
 })
 
+router.get('/search', async (req, res) => {
+  switch (req.query.sortMode) {
+    case 'priceDown':
+      condition = '1';
+      column = 'current_price';
+      type = 'DESC';
+      break;
+    case 'end_timeUp':
+      condition = 'end_date - NOW() > 0';
+      column = 'end_date - NOW()';
+      type = 'ASC';
+      break;
+    case 'start_timeUp':
+      condition = 'start_date - NOW() > 0';
+      column = 'start_date - NOW()';
+      type = 'DESC';
+      break;
+    default:
+      condition = '1';
+      column = 'current_price';
+      type = 'ASC';
+      break;
+  }
+
+  const key = req.query.searchKey;
+  const limit = config.paginate.limit;
+  var page = req.query.page || 1;
+  if (page < 1) page = 1;
+  const offset = (page - 1) * limit;
+
+  const [total, rows] = await Promise.all([
+    productModel.countForSearch(key),
+    productModel.sortSearchResult(key, offset, condition, column, type)
+  ]);
+
+  let nPages = Math.floor(total / limit);
+  if (total % limit > 0) nPages++;
+  const page_numbers = [];
+  for (i = 1; i <= nPages; i++) {
+    page_numbers.push({
+      value: i,
+      isCurrentPage: i === +page
+    })
+  }
+
+  rows.forEach(element => {
+    if (element.instant_price == null)
+      element.instant_price = false;
+    if (element.priceholder = null)
+      element.priceholder = false;
+    element.start_date = moment(element.start_date).format('DD/MM/YYYY');
+    element.end_date = moment(element.end_date).format('DD/MM/YYYY');
+  });
+  res.render('vwProduct/resultSearch', {
+    key,
+    products: rows,
+    empty: rows.length === 0,
+    title: 'Result for ' + key,
+    page_numbers,
+    prev_value: +page - 1,
+    next_value: +page + 1,
+    Paginate: nPages > 1,
+    notMinPage: page > 1,
+    notMaxPage: page < nPages
+  });
+});
+
+// router.get('/search/priceDown', (req, res) => {
+//   functions(req, res, '1', 'current_price', 'DESC');
+// });
+
+// router.get('/search/timeDown', (req, res) => {
+//   functions(req, res, 'end_date - NOW() > 0', 'end_date - NOW()', 'ASC');
+// });
+
+// router.get('/search/timeUp', (req, res) => {
+//   functions(req, res, 'start_date - NOW() > 0','start_date - NOW()', 'ASC');
+// });
+
 router.get('/:name', async function (req, res) {
   const catName = req.params.name;
   const limit = config.paginate.limit;
@@ -107,7 +186,7 @@ router.get('/:name', async function (req, res) {
     productModel.countByCat(catName),
     productModel.pageByCat(catName, offset)
   ]);
-  
+
   let nPages = Math.floor(total / limit);
   if (total % limit > 0) nPages++;
   const page_numbers = [];
@@ -117,7 +196,7 @@ router.get('/:name', async function (req, res) {
       isCurrentPage: i === +page
     })
   }
-  
+
   rows.forEach(element => {
     if (element.instant_price == null)
       element.instant_price = false;
@@ -136,8 +215,9 @@ router.get('/:name', async function (req, res) {
     page_numbers,
     prev_value: +page - 1,
     next_value: +page + 1,
-    isMinPage: page!=1,
-    isMaxPage: page!=nPages
+    Paginate: nPages > 1,
+    notMinPage: page > 1,
+    notMaxPage: page < nPages
   });
 });
 
@@ -241,5 +321,8 @@ router.post('/:name/:id/editor', async (req, res) => {
   res.redirect(`.`);
 });
 
+router.get('/err', (req, res) => {
+  throw new Error('error occured');
+});
 
 module.exports = router;

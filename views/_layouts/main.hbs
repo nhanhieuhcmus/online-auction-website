@@ -37,29 +37,29 @@
         <a class="nav-item text-white mx-1 text-decoration-none mx-4" href="/home" style="font-weight: bold;">
             <i class="fa fa-home mx"></i>
             TRANG CHỦ</a>
-        <form class="form-inline">
+        <form class="form-inline" method="GET" action="/category/search">
             <div class="form-control">
                 <div id="searchArea">
-                    <input type="text" placeholder="Tìm sản phẩm hay thương hiệu mong muốn ..."
+                    <input type="text" id="searchKey" name="searchKey"
+                        placeholder="Tìm sản phẩm hay thương hiệu mong muốn ..."
                         style="width: 350px; border:none;outline:none">
                     <button type="submit" style="border: none;background-color: white;"><i
                             class="fa fa-search"></i></button>
                 </div>
-
             </div>
         </form>
-        <a class="nav-item text-white mx-4 mr-auto" href="cart" style="font-weight: bold;">
+        <a class="nav-item text-white mx-4 mr-auto" href="/cart" style="font-weight: bold;">
             <i class="fa fa-shopping-cart"></i>
             GIỎ HÀNG
         </a>
-      <form id="frmLogout" method="post" action="/account/logout"></form>
+        <form id="frmLogout" method="post" action="/account/logout"></form>
         <a class="nav-item">
             {{#if isAuthenticated}}
             <li class="nav-item dropdown" style="list-style-type: none;">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                   Hi, <b>{{authUser.user_name}}!</b>
-                   
+                    Hi, <b>{{authUser.user_name}}!</b>
+
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/profile">
@@ -198,7 +198,9 @@
             })
         })
     </script>
+    <script>
 
+    </script>
     {{!-- <script>
         $('#txtDOB').datetimepicker({
             // format: 'd/m/Y H:i'
@@ -214,6 +216,12 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        $(".heart.fa").click(function () {
+            $(this).toggleClass("fa-heart fa-heart-o");
+        });
+    </script>
     {{{_sections.js}}}
 </body>
 

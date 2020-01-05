@@ -96,4 +96,8 @@ router.post('/logout', (req, res) => {
 router.get('/profile', (req, res) => {
     res.render('vwAccount/profile');
 });
+
+router.get('/err', (req, res) => {
+    throw new Error('error occured');
+});
 module.exports = router;
