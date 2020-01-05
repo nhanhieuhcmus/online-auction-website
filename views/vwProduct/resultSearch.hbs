@@ -1,7 +1,27 @@
 <div>
-    <h4 id="top5" style="text-align: left;"> {{catName}} </h4>
+    <h4 id="top5" style="text-align: left;"> Tìm kiếm của "{{key}}"
+        <div class="float-right" id="sort">
+            <a class="sort btn btn-outline-success " id="priceUp" role="button">
+                <i class="fa fa-angle-up" aria-hidden="true"></i>
+                Giá tăng
+            </a>
+            <a class="sort btn btn-outline-success " id="priceDown" role="button">
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                Giá giảm
+            </a>
+            <a class="sort btn btn-outline-success" id="end_timeUp" role="button">
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                Gần kết thúc
+            </a>
+            <a class="sort btn btn-outline-success" id="start_timeUp" role="button">
+                <i class="fa fa-angle-up" aria-hidden="true"></i>
+                Mới đăng
+            </a>
+        </div>
 </div>
+
 <hr class="my-4">
+
 <div class="container">
     {{#if this.empty}}
     <div class="CSSTableGenerator">
@@ -16,7 +36,7 @@
                 <div class="row">
                     {{#each this.products}}
                     <div class="col-sm-3 card border-0 mb-3 shadow-sm h-100s">
-                        <a style="color:black; text-decoration: none;" href="/category/{{catName}}/{{id}}">
+                        <a style="color:black; text-decoration: none;" href="/category/{{name_category}}/{{id}}">
                             <img src="/imgs/sp/{{id}}/main.jpg" height="230px" alt="{{name}}" title="{{name}}"
                                 class="card-img-top">
                             <div class="card-body">
@@ -30,7 +50,7 @@
                                     {{/if}}
                                     <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
                                     <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
-                                    <p id="nearlyFi" class="card-text">Số lượt ra giá: {{auction_times}} </p>
+                                    <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
                                 </small>
                                 <span class="my-2">
                                     <span class="fa fa-star checked"></span>
@@ -55,7 +75,7 @@
             <ul class="pagination justify-content-center">
                 {{#if notMinPage}}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{prev_value}}" aria-label="Previous">
+                    <a class="page-link" href="/category/search?page={{prev_value}}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                     </a>
@@ -65,12 +85,12 @@
                 {{#if isCurrentPage}}
                 <li class="page-item active"><a class="page-link" href="#">{{value}}</a></li>
                 {{else}}
-                <li class="page-item"><a class="page-link" href="?page={{value}}">{{value}}</a></li>
+                <li class="page-item"><a class="page-link" href="/category/search?page={{value}}">{{value}}</a></li>
                 {{/if}}
                 {{/each}}
                 {{#if notMaxPage}}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{next_value}}" aria-label="Next">
+                    <a class="page-link" href="/category/search?page={{next_value}}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                     </a>
@@ -81,17 +101,33 @@
         {{/if}}
     </div>
 </div>
+
+{{#section 'js'}}
+
 <script>
-    $(".heart.fa").click(function () {
-        $(this).toggleClass("fa-heart fa-heart-o");
-    });
-</script>
-<script>
-    var elements = document.getElementsByClassName("column");
-    var i;
-    function gridView() {
-        for (i = 0; i < elements.length; i++) {
-            elements[i].style.width = "25%";
-        }
+    if ($('title').text().indexOf('Result for ') != -1) {
+        searchKey = $('title').text().substr(11);
+        $('a.page-link').each(function () {
+            $(this).prop('href', $(this).prop('href') + '&searchKey=' + searchKey)
+        })
     }
 </script>
+<script>
+    if ($('title').text().indexOf('Result for ') != -1) {
+        searchKey = $('title').text().substr(11);
+        $('a.sort').each(function () {
+            $(this).prop('href', $(this).prop('href'))
+        })
+    }
+</script>
+<script>
+    $('a.sort').each(function () {
+        $(this).on('click', () => {
+            searchKey = $('title').text().substr(11);
+            window.location.replace(window.location.pathname + '?searchKey=' + searchKey + '&sortMode=' + $(this).prop('id'));
+            return false;
+        })
+    })
+
+</script>
+{{/section}}

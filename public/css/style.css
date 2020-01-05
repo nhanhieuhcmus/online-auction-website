@@ -123,10 +123,11 @@
 }
 #top5{
   color: grey;
-  border-bottom: 1px solid grey;
   margin-left: 20px;
   margin-top: 30px;
-  margin-bottom: 30px;
+}
+#sort{
+  margin-right: 20px;
 }
 
 #container{

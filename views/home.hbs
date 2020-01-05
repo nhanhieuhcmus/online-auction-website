@@ -1,3 +1,13 @@
+{{#section 'js'}}
+<script>
+    $('.carousel-item:first-child').addClass('active');
+</script>
+{{/section}}
+
+<div>
+    <h6 id="top5" style="text-align: left;">Được đấu giá nhiều nhất</h6>
+</div>
+<hr class="my-4">
 <!--Carosel 5 sản phẩm hot nhất-->
 <div id="demo" class="carousel slide" data-ride="carousel">
 
@@ -12,62 +22,17 @@
 
     <!-- The slideshow -->
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="https://www.asus.com/media/global/banners/tcpwrq7u6lcctx4r/tcpwrq7u6lcctx4r-0_0_desktop.jpg"
-                width=100% height="400">
-            <div class="carousel-caption text-left">
-                <h3>ASUS EXPERTBOOK Cho Doanh Nhân</h3>
-                <p>ProArt StudioBook Pro là một trong những máy tính xách tay mỏng nhất thế giới có tính
-                    năng đồ họa NVIDIA® Quadro® RTX, làm cho nó trở thành một thế lực hùng mạnh mang ý tưởng
-                    đến với cuộc sống. </p>
-                <a style="background-color: purple;" class="text-white btn btn-lg mb-4" href="items" role="button">Đấu giá ngay</a>
-            </div>
-        </div>
+        {{#each this.hot}}
         <div class="carousel-item">
-            <img src="https://www.asus.com/media/global/banners/gnzkzdtuu4rueo0k/gnzkzdtuu4rueo0k-0_0_desktop.jpg"
-                width=100% height="400">
+            <img src="/imgs/sp/{{id}}/main.jpg" height="230" alt="{{name}}" title="{{name}}">
             <div class="carousel-caption text-left">
-                <h3>Lựa Chọn Khác Cho Bạn</h3>
-                <p>ProArt StudioBook Pro 17 là một trong những máy tính xách tay mỏng nhất thế giới có tính
-                    năng đồ họa NVIDIA® Quadro® RTX, làm cho nó trở thành một thế lực hùng mạnh mang ý tưởng
-                    đến với cuộc sống. </p>
-                <a style="background-color: purple;" class="text-white btn btn-lg mb-4" href="items" role="button">Đấu giá ngay</a>
+                <h3 style="color: black;">{{name}}</h3>
+                <p style="color: black;">Giá: {{format current_price}}đ - Với {{auction_times}} lượt đấu giá</p>
+                <a style="background-color: purple;" class="text-white btn btn-lg mb-4" href="items" role="button">Đấu
+                    giá ngay</a>
             </div>
         </div>
-        <div class="carousel-item">
-            <img src="https://www.thinkpro.vn/uploads/images/userfiles/san-pham/Asus/P5440/p5440_a13.jpg" width=100%
-                height="400">
-            <div class="carousel-caption text-right">
-                <h3>Thêm Một Lựa Chọn Nữa</h3>
-                <p>ProArt StudioBook Pro 17 là một trong những máy tính xách tay mỏng nhất thế giới có tính
-                    năng đồ họa NVIDIA® Quadro® RTX, làm cho nó trở thành một thế lực hùng mạnh mang ý tưởng
-                    đến với cuộc sống.
-                </p>
-                <a style="background-color: purple;" class="text-white btn btn-lg mb-4" href="items" role="button">Đấu giá ngay</a>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="https://www.asus.com/media/global/banners/tcpwrq7u6lcctx4r/tcpwrq7u6lcctx4r-0_0_desktop.jpg"
-                width=100% height="400">
-            <div class="carousel-caption text-left">
-                <h3>ASUS EXPERTBOOK Cho Doanh Nhân</h3>
-                <p>ProArt StudioBook Pro là một trong những máy tính xách tay mỏng nhất thế giới có tính
-                    năng đồ họa NVIDIA® Quadro® RTX, làm cho nó trở thành một thế lực hùng mạnh mang ý tưởng
-                    đến với cuộc sống. </p>
-                <a style="background-color: purple;" class="text-white btn btn-lg mb-4" href="items" role="button">Đấu giá ngay</a>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="https://www.asus.com/media/global/banners/tcpwrq7u6lcctx4r/tcpwrq7u6lcctx4r-0_0_desktop.jpg"
-                width=100% height="400">
-            <div class="carousel-caption text-left">
-                <h3>ASUS EXPERTBOOK Cho Doanh Nhân</h3>
-                <p>ProArt StudioBook Pro là một trong những máy tính xách tay mỏng nhất thế giới có tính
-                    năng đồ họa NVIDIA® Quadro® RTX, làm cho nó trở thành một thế lực hùng mạnh mang ý tưởng
-                    đến với cuộc sống. </p>
-                <a style="background-color: purple;" class="text-white btn btn-lg mb-4" href="items" role="button">Đấu giá ngay</a>
-            </div>
-        </div>
+        {{/each}}
     </div>
 
     <!-- Left and right controls -->
@@ -84,21 +49,26 @@
     <div>
         <h6 id="top5" style="text-align: left;">Gần kết thúc</h6>
     </div>
+    <hr class="my-4">
     <div class="">
         <div class="card-deck">
+            {{#each this.nearFinish}}
             <div class="card border-0 mr-auto shadow-sm">
                 <a style="color:black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
+                    <img src="/imgs/sp/{{id}}/main.jpg" height="230" alt="{{name}}" title="{{name}}">
+
                     <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
+                        <h6 id="nearlyFi" class="card-title">{{name}}</h6>
+                        <p id="price">{{format current_price}}</p>
                         <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
+                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: {{full_name}}</p>
+                            {{#if instant_price}}
+                            <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{format instant_price}}đ
+                            </p>
+                            {{/if}}
+                            <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
+                            <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
+                            <p id="nearlyFi" class="card-text">Số lượt ra giá: {{auction_times}} </p>
                         </small>
                         <span class="my-2">
                             <span class="fa fa-star checked"></span>
@@ -113,278 +83,33 @@
                     <i class="heart fa fa-heart-o"></i>
                 </div>
             </div>
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color:black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color:black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color:black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color: black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
+            {{/each}}
         </div>
     </div>
+
     <!--Top 5 sản phần có lượt đấu giá cao nhất-->
-    <div>
-        <h6 id="top5" style="text-align: left;">Đấu giá nhiều nhất</h6>
-    </div>
-    <div class="">
-        <div class="card-deck">
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color:black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: <span style="color: red;"> 300</span></p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color:black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: <span style="color: red;"> 300</span></p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color:black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: <span style="color: red;"> 300</span></p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color:black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: <span style="color: red;"> 300</span></p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color: black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: <span style="color: red;"> 300</span></p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Top 5 sản phần có giá cao nhất-->
     <div>
         <h6 id="top5" style="text-align: left;">Giá cao nhất</h6>
     </div>
+    <hr class="my-4">
     <div class="">
         <div class="card-deck">
+            {{#each this.mostPrice}}
             <div class="card border-0 mr-auto shadow-sm">
                 <a style="color:black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
+                    <img src="/imgs/sp/{{id}}/main.jpg" height="230" alt="{{name}}" title="{{name}}">
                     <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
+                        <h6 id="nearlyFi" class="card-title">{{name}}</h6>
+                        <p id="price">{{format current_price}}</p>
                         <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
+                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: {{full_name}}</p>
+                            {{#if instant_price}}
+                            <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{format instant_price}}đ
+                            </p>
+                            {{/if}}
+                            <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
+                            <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
+                            <p id="nearlyFi" class="card-text">Số lượt ra giá: {{auction_times}} </p>
                         </small>
                         <span class="my-2">
                             <span class="fa fa-star checked"></span>
@@ -399,114 +124,7 @@
                     <i class="heart fa fa-heart-o"></i>
                 </div>
             </div>
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color:black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color:black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color:black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color: black; text-decoration: none;" href="items">
-                    <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6353/6353351_sd.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">Laptop HP xxxx/Core I3 xxxx</h6>
-                        <p id="price">11.900.000đ</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                            <p id="nearlyFi" class="card-text">Giá mua ngay: xxxxxxxđ</p>
-                            <p id="nearlyFi" class="card-text">Ngày đăng: 1/1/2019</p>
-                            <p id="nearlyFi" class="card-text">Còn lại: 2 ngày </p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
-            </div>
+            {{/each}}
         </div>
     </div>
     <div class="text-right my-3">

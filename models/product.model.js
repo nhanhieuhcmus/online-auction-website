@@ -22,4 +22,24 @@ module.exports = {
     const res = await db.load('select max(id) as MaxID from product');
     return res[0].MaxID;
   },
+  countForSearch: async key => {
+    const rows = await db.load(`select count(*) as total
+    from product left join category on product.categoryid=category.id
+    where match(product.name) against(\"${key}\") OR match(category.name_category) against(\"${key}\")`)
+    return rows[0].total;
+  },
+
+  sortSearchResult: async (key, offset, condition, column, type) => await db.load(`select result.*, user.full_name
+    from (select product.*,name_category
+    from product left join category on product.categoryid=category.id
+    where ${condition} and match(product.name) against(\"${key}\") OR match(category.name_category) against(\"${key}\")) as result LEFT JOIN user on result.priceholder = user.id 
+    order by ${column} ${type}
+    limit ${config.paginate.limit} offset ${offset}`),
+
+  nearFinish: _ => db.load(`select * from product where end_date-NOW() > 0
+                            order by end_date-NOW() asc limit 5`),
+
+  mostExpensive: _ => db.load(`select * from product order by current_price desc limit 5`),
+
+  mostAuctionTimes: _ => db.load(`select * from product order by auction_times desc limit 5`),
 };
