@@ -4,7 +4,6 @@ module.exports = function (app) {
   app.use(async (req, res, next) => {
     const rows = await categoryModel.all();
     res.locals.lcCategory = rows;
-
     //xử lí sau đăng nhập
     if (!req.session.isAuthenticated) 
     {

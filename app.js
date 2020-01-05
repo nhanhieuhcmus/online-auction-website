@@ -9,14 +9,15 @@ const categoryModel = require('./models/category.model');
 const offerModel = require('./models/offer.model');
 const moment = require('moment');
 const bodyparser = require('body-parser');
+var cookieParser = require('cookie-parser')
+const mailer = require('./models/mailer.model');
+ 
 const bcrypt = require('bcryptjs');
 const productRoute = require('./routes/product.route');
 
 require('express-async-errors');
-
 var app = express();
-
-
+app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
@@ -24,20 +25,11 @@ app.use(express.urlencoded({
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
   }))
 app.use(bodyparser.urlencoded({extended:true}))
 app.use(bodyparser.json())
 app.use(morgan('dev'));
-
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    // cookie: {
-    //     secure: true
-    // }
-}))
 // app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
 require('./middlewares/locals.mdw')(app);
@@ -68,8 +60,8 @@ app.get('/new-product', function (req, res) {
     res.render('newProduct', { title: 'Thông tin cá nhân' });
 });
 
-require('./middlewares/locals.mdw')(app);
-require('./middlewares/routes.mdw')(app);
+// require('./middlewares/locals.mdw')(app);
+// require('./middlewares/routes.mdw')(app);
 
 app.use((req, res, next) => {
     res.render('vwError/404.hbs', { title: 'Not Found' });
