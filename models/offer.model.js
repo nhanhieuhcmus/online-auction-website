@@ -19,4 +19,5 @@ module.exports = {
     },
     addWaitingOffer: entity => db.add('waiting_offer', entity),
     del: (userId, productId) => db.load(`DELETE FROM offer WHERE user_id = ${userId} AND product_id = ${productId}`),
+    delWaiting: (userId, productId) => db.load(`DELETE FROM waiting_offer WHERE user = ${userId} AND product = ${productId}`),
 };

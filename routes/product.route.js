@@ -11,7 +11,7 @@ const mkdirp = require('mkdirp');
 const config = require('../config/default.json')
 const restrict = require('../middlewares/auth.mdw');
 const bannedModel = require('../models/banned.model');
-
+const mailer = require('../models/mailer.model');
 
 const router = express.Router();
 
@@ -256,9 +256,8 @@ router.get('/:name/:id', async function (req, res) {
 })
 
 router.post('/:name/:id', restrict, async (req, res) => {
-  user = await (userModel.single(req.session.authUser.id));
+  var user = await (userModel.single(req.session.authUser.id));
   banned = await (bannedModel.single(req.session.authUser.id, req.params.id));
-  console.log(banned);
   point = true;
   if (user[0].minus_point != 0)
     if (user[0].add_point / (user[0].add_point + user[0].minus_point) * 100 < 80)
@@ -277,7 +276,7 @@ router.post('/:name/:id', restrict, async (req, res) => {
         await offerModel.patch(single[0]);
         product[0].current_price = currentOffer[0].price + product[0].step_price;
         product[0].priceholder = req.session.authUser.id;
-        await productModel.patch(product[0]);
+        
         await offerModel.patchOffer({
           product: req.params.id,
           user: req.session.authUser.id,
@@ -289,18 +288,19 @@ router.post('/:name/:id', restrict, async (req, res) => {
         single[0].price = +req.body.price;
         result = await offerModel.patch(single[0]);
         product[0].current_price = +req.body.price;
-        await productModel.patch(product[0]);
+        
       }
     else {
       product[0].priceholder = req.session.authUser.id;
-      await productModel.patch(product[0]);
+      
       await offerModel.addWaitingOffer({
         product: req.params.id,
         user: req.session.authUser.id,
         price: +req.body.price
       })
     }
-
+    product[0].auction_times++;
+    await productModel.patch(product[0]);
     entity = {
       product_id: req.params.id,
       user_id: req.session.authUser.id,
@@ -308,6 +308,8 @@ router.post('/:name/:id', restrict, async (req, res) => {
     };
     entity.time = new Date();
     result = await offerModel.add(entity);
+    var seller = await userModel.single(product[0].id_seller);
+    mailer.send(seller[0].email, "Web Aution Online", "Khách hàng "+ user[0].full_name + " vừa đấu giá thành công sản phẩm: "+ req.headers.referer);
     res.redirect('?Auction=true');
   }
   //res.redirect(`/category/${req.params.name}/${req.params.id}`);
@@ -337,10 +339,13 @@ router.post('/ban/:proId/:userId', restrict, async (req, res) => {
   });
   await offerModel.del(req.params.userId, req.params.proId);
   history = await offerModel.allByProductId(req.params.proId);
-  
+  console.log(history);
   product = await productModel.single(req.params.proId);
-  
-  if (history[0].user_id != product[0].priceholder) {
+  if (history.length == 0) {
+    product[0].priceholder = -1;
+    await offerModel.delWaiting(req.params.userId, req.params.proId);
+  }
+  else if (history[0].user_id != product[0].priceholder) {
     product[0].priceholder = history[0].user_id;
     product[0].current_price = history[0].price;
     await offerModel.patchOffer({
@@ -348,8 +353,12 @@ router.post('/ban/:proId/:userId', restrict, async (req, res) => {
       user: history[0].user_id,
       price: history[0].price
     })
-    await productModel.patch(product[0]);
+    
   }
+  await productModel.patch(product[0]);
+  
+  var bidder = await userModel.single(req.params.userId);
+  mailer.send(bidder[0].email, "Web Aution Online", "Bạn đã bị từ chối đấu giá sản phẩm: " + req.headers.referer);
   res.redirect(req.headers.referer);
 })
 module.exports = router;
