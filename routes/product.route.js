@@ -2,6 +2,7 @@ const express = require('express');
 const productModel = require('../models/product.model');
 const offerModel = require('../models/offer.model');
 const categoryModel = require('../models/category.model');
+const watch_listModel = require('../models/watch_list.model');
 const userModel = require('../models/user.model');
 const moment = require('moment');
 const multer = require('multer');
@@ -44,7 +45,8 @@ router.post('/new-product', restrict, async function (req, res) {
     start_date: start_date,
     end_date: end_date,
     current_price: req.body.start_price,
-    priceholder: -1
+    priceholder: -1,
+    auction_times: 0
   };
   // console.log(entity);
   const result = await productModel.add(entity);
@@ -105,12 +107,12 @@ router.get('/search', async (req, res) => {
       type = 'DESC';
       break;
     case 'end_timeUp':
-      condition = 'end_date - NOW() > 0';
+      condition = 'end_date - NOW()>0';
       column = 'end_date - NOW()';
       type = 'ASC';
       break;
     case 'start_timeUp':
-      condition = 'start_date - NOW() > 0';
+      condition = '1';
       column = 'start_date - NOW()';
       type = 'DESC';
       break;
@@ -127,10 +129,20 @@ router.get('/search', async (req, res) => {
   if (page < 1) page = 1;
   const offset = (page - 1) * limit;
 
-  const [total, rows] = await Promise.all([
+  const [total, rows, favorite] = await Promise.all([
     productModel.countForSearch(key),
-    productModel.sortSearchResult(key, offset, condition, column, type)
+    productModel.sortSearchResult(key, offset, condition, column, type),
+    watch_listModel.all()
   ]);
+
+  if (req.session.authUser) {
+    rows.forEach(i => {
+      favorite.forEach(element => {
+        if (element.user_id == req.session.authUser.id && element.product_id == i.id)
+          i.isFavorite = true;
+      })
+    })
+  }
 
   let nPages = Math.floor(total / limit);
   if (total % limit > 0) nPages++;
@@ -171,10 +183,20 @@ router.get('/:name', async function (req, res) {
   if (page < 1) page = 1;
   const offset = (page - 1) * limit;
 
-  const [total, rows] = await Promise.all([
+  const [total, rows, favorite] = await Promise.all([
     productModel.countByCat(catName),
-    productModel.pageByCat(catName, offset)
+    productModel.pageByCat(catName, offset),
+    watch_listModel.all()
   ]);
+
+  if (req.session.authUser) {
+    rows.forEach(i => {
+      favorite.forEach(element => {
+        if (element.user_id == req.session.authUser.id && element.product_id == i.id)
+          i.isFavorite = true;
+      })
+    })
+  }
 
   let nPages = Math.floor(total / limit);
   if (total % limit > 0) nPages++;
@@ -214,14 +236,30 @@ router.get('/:name/:id', async function (req, res) {
   const [single, history, rows] = await Promise.all([
     productModel.single(req.params.id),
     offerModel.allByProductId(req.params.id),
-    productModel.allByCat(req.params.name)
+    productModel.sameCategory(req.params.name),
   ]);
+
+  if (req.session.authUser) {
+    const favorite = await watch_listModel.isFavorite(req.session.authUser.id, req.params.id);
+    if (favorite)
+      single[0].isFavorite = true;
+    else single[0].isFavorite = false;
+
+    const favorites = await watch_listModel.all();
+    rows.forEach(i => {
+      favorites.forEach(element => {
+        if (element.user_id == req.session.authUser.id && element.product_id == i.id)
+          i.isFavorite = true;
+      })
+    })
+  }
+
   bestAution = {};
   const sellerRows = await userModel.single(single[0].id_seller);
   i = 1;
   history.forEach(element => {
     element.BidId = i++;
-  }) 
+  })
   if (history != false) {
     const Aution = await userModel.single(history[0].user_id);
     bestAution = Aution[0];
@@ -328,6 +366,6 @@ router.get('/err', (req, res) => {
 });
 
 router.post('/ban/:proId/:userId', restrict, async (req, res) => {
-  
+
 })
 module.exports = router;

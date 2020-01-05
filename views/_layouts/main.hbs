@@ -35,9 +35,10 @@
         </ul>
 
         </div>
-        <a class="nav-item text-white mx-1 text-decoration-none mx-4" href="/" style="font-weight: bold;">
+        <a class="nav-item text-white text-decoration-none mx-4" href="/" style="font-weight: bold;">
             <i class="fa fa-home mx"></i>
             TRANG CHỦ</a>
+        {{#if isAuthenticated}}
         <form class="form-inline" method="GET" action="/category/search">
             <div class="form-control">
                 <div id="searchArea">
@@ -49,10 +50,23 @@
                 </div>
             </div>
         </form>
-        <a class="nav-item text-white mx-4 mr-auto" href="/cart" style="font-weight: bold;">
-            <i class="fa fa-shopping-cart"></i>
-            GIỎ HÀNG
+        <a class="nav-item text-white mx-4 mr-auto" href="/watch_list" style="font-weight: bold;">
+            <i class="fa fa-heart" aria-hidden="true"></i>
+            YÊU THÍCH
         </a>
+        {{else}}
+        <form class="form-inline mr-auto" method="GET" action="/category/search">
+            <div class="form-control">
+                <div id="searchArea">
+                    <input type="text" id="searchKey" name="searchKey"
+                        placeholder="Tìm sản phẩm hay thương hiệu mong muốn ..."
+                        style="width: 350px; border:none;outline:none">
+                    <button type="submit" style="border: none;background-color: white;"><i
+                            class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+        {{/if}}
         <form id="frmLogout" method="post" action="/account/logout"></form>
         <a class="nav-item">
             {{#if isAuthenticated}}
@@ -68,16 +82,18 @@
                         Hồ sơ
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
+                    <a class="dropdown-item btn-outline-light" href="javascript: $('#frmLogout').submit();">
                         <i class="fa fa-sign-out" aria-hidden="true"></i>
                         Đăng xuất
                     </a>
                 </div>
             </li>
             {{else}}
-            <a href="/account/register" class="nav-item"><button class="btn text-white mr-0">ĐĂNG KÝ</button></a>
-            <a href="/account/login" class="nav-item" style="font-weight: bold; margin-right: 0px;">
-                <button class="btn text-white" data-target="#mymodel" data-toggle="modal" id="loginArea">ĐĂNG
+            <a href="/account/register" class="nav-item"><button class="btn text-white btn-outline-light mr-2">ĐĂNG
+                    KÝ</button></a>
+            <a href="/account/login" class="nav-item" style="font-weight: bold; margin-right: 20px;">
+                <button class="btn text-white btn-outline-light" data-target="#mymodel" data-toggle="modal"
+                    id="loginArea">ĐĂNG
                     NHẬP</button>
 
                 {{!-- <div class="btn-group">
@@ -214,13 +230,21 @@
             return true;
         }
     </script> --}}
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script>
         $(".heart.fa").click(function () {
             $(this).toggleClass("fa-heart fa-heart-o");
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('a.favorite').each(function () {
+                $(this).prop('href', $(this).prop('href') + '/?retUrl=' + window.location.pathname)
+            })
         });
     </script>
     {{{_sections.js}}}

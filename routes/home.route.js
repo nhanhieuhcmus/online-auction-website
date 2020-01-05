@@ -1,5 +1,6 @@
 const express = require('express');
 const productModel = require('../models/product.model');
+const watch_listModel = require('../models/watch_list.model');
 const offerModel = require('../models/offer.model');
 const categoryModel = require('../models/category.model');
 const userModel = require('../models/user.model');
@@ -11,18 +12,25 @@ const router = express.Router();
 router.use(express.static('public/css'));
 
 router.get('/', async (req, res) => {
-    const [hot, nearFinish, mostPrice] = await Promise.all([
+    const [hot, nearFinish, mostPrice, favorite] = await Promise.all([
         productModel.mostAuctionTimes(),
         productModel.nearFinish(),
-        productModel.mostExpensive()
+        productModel.mostExpensive(),
+        watch_listModel.all()
     ]);
-    const carosel_numbers = [];
-    for (i = 1; i <= 5; i++) {
-        carosel_numbers.push({
-            value: hot[i],
-            // isCurrentCarosel: i === +page
+
+    if (req.session.authUser) {
+        data = [hot, nearFinish, mostPrice];
+        data.forEach(i => {
+            i.forEach(j => {
+                favorite.forEach(element => {
+                    if (element.user_id == req.session.authUser.id && element.product_id == j.id)
+                        j.isFavorite = true;
+                })
+            })
         })
     }
+
     nearFinish.forEach(element => {
         if (element.instant_price == null)
             element.instant_price = false;
@@ -46,10 +54,6 @@ router.get('/', async (req, res) => {
         nearFinish,
         mostPrice,
     });
-});
-
-router.get('/home', function (req, res) {
-    res.render('home', { title: 'Trang chủ' });
 });
 
 router.get('/err', (req, res) => {

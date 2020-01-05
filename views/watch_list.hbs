@@ -1,0 +1,40 @@
+<div class="container">
+    <table id="cart" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th style="width:50%">Sản phẩm</th>
+                <th style="width:22%" class="text-center">Giá hiện tại</th>
+                <th style="width:22%" class="text-center">Người giữ giá</th>
+                <th style="width:10%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#if this.empty}}
+            <tr>
+                Không có sản phẩm yêu thích nào.
+            </tr>
+            {{else}}
+            {{#each this.rows}}
+            <tr>
+                <td data-th="Product">
+                    <a href="/category/{{name_category}}/{{id}}" class="row" a style="color:black; text-decoration: none;">
+                        <div class="col-sm-2 hidden-xs d-flex align-items-center"><img src="/imgs/sp/{{id}}/main.jpg"
+                                height="100" width="100" alt="{{name}}" title="{{name}}" class="img-responsive" /></div>
+                        <div class="col-sm-10">
+                            <p style="font-weight: 100;" class=" mr-2 ml-5">{{name}}</p>
+                        </div>
+                    </a>
+                </td>
+                <td data-th="Price" class="text-center">{{format current_price}}đ</td>
+                <td data-th="Subtotal" class="text-center">{{full_name}}</td>
+                <td class="actions" data-th="">
+                    <a id="favorite" class="mb-0" href="/watch_list/{{id}}">
+                        <i class="heart fa fa-heart"></i>
+                    </a>
+                </td>
+            </tr>
+            {{/each}}
+            {{/if}}
+        </tbody>
+    </table>
+</div>

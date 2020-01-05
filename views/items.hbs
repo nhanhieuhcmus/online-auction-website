@@ -84,10 +84,14 @@
                     <div class="row">
                         <hr width="90%">
                         <div class="col-md-6 d-flex align-items-center justify-content-center">
-                            <div id="favorite">
+                            <a id="favorite" class="mb-0" href="/watch_list/{{id}}">
+                                {{#if item.isFavorite}}
+                                <i class="heart fa fa-heart"></i>
+                                {{else}}
                                 <i class="heart fa fa-heart-o"></i>
+                                {{/if}}
                                 <span class="ml-2">Yêu thích</span>
-                            </div>
+                            </a>
                         </div>
                         <div class="col-md-6">
                             {{#if item.instant_price}}
@@ -191,42 +195,44 @@
         </tbody>
     </table>
     <h4 class="mt-5">SẢN PHẨM CÙNG LOẠI</h4>
-    <div class="container">
-        <div class="CSSTableGenerator">
-            <table ID="myTable">
-                <div class="card-body">
-                    <div class="row">
-                        {{#each rows}}
-                        <div class="col-sm-3 card border-0 mb-3 shadow-sm h-100s">
-                            <a style="color:black; text-decoration: none;" href="/category/{{catName}}/{{id}}">
-                                <img src="/imgs/sp/{{id}}/main.jpg" alt="{{name}}" title="{{name}}"
-                                    class="card-img-top">
-                                <div class="card-body">
-                                    <h6 id="nearlyFi" class="card-title">{{name}}</h6>
-                                    <p id="price">{{format current_price}}đ</p>
-                                    <small class="text-muted">
-                                        <p id="nearlyFi" class="card-text">Người ra giá cao nhất: Chí Phèo</p>
-                                        {{#if instant_price}}
-                                        <p id="nearlyFi" class="card-text now_price">Giá mua ngay:
-                                            {{format instant_price}}đ</p>
-                                        {{/if}}
-                                        <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
-                                        <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
-                                        <p id="nearlyFi" class="card-text">Số lượt ra giá: 300 </p>
-                                    </small>
-                                    <span class="my-2">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star-o checked"></span>
-                                    </span>
-                                </div>
-                        </div>
-                        {{/each}}
+    <div class="">
+        <div class="card-deck">
+            {{#each this.rows}}
+            <div class="card border-0 mr-auto shadow-sm">
+                <a style="color:black; text-decoration: none;" href="/category/{{name_category}}/{{id}}">
+                    <img src="/imgs/sp/{{id}}/main.jpg" height="230" alt="{{name}}" title="{{name}}">
+
+                    <div class="card-body">
+                        <h6 id="nearlyFi" class="card-title">{{name}}</h6>
+                        <p id="price">{{format current_price}}</p>
+                        <small class="text-muted">
+                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: {{full_name}}</p>
+                            {{#if instant_price}}
+                            <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{format instant_price}}đ
+                            </p>
+                            {{/if}}
+                            <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
+                            <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
+                            <p id="nearlyFi" class="card-text">Số lượt ra giá: {{auction_times}} </p>
+                        </small>
+                        <span class="my-2">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star-o checked"></span>
+                        </span>
                     </div>
-                </div>
-            </table>
+                </a>
+                <a id="favorite" class="mb-0" href="/watch_list/{{id}}">
+                    {{#if isFavorite}}
+                    <i class="heart fa fa-heart"></i>
+                    {{else}}
+                    <i class="heart fa fa-heart-o"></i>
+                    {{/if}}
+                </a>
+            </div>
+            {{/each}}
         </div>
     </div>
     <h4 class="mt-5 mb-4">MÔ TẢ SẢN PHẨM</h4>
@@ -241,11 +247,6 @@
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-input-spinner@1.12.7/src/bootstrap-input-spinner.min.js"></script>
-<script>
-    $(".heart.fa").click(function () {
-        $(this).toggleClass("fa-heart fa-heart-o");
-    });
-</script>
 
 <script>
     //Bộ đếm ngày giờ
