@@ -6,5 +6,11 @@ module.exports = {
   add: entity => db.add('user', entity),
   del: id => db.del('user', { f_ID: id }),
   maxId: async () => {
-    const res = await db.load('select max(id) as MaxID from user'); return res[0].MaxID;},
+    const res = await db.load('select max(id) as MaxID from user'); 
+    return res[0].MaxID;
+  },
+  checkEmail: email => db.load(`select * from user where email='${email}'`),
+  checkPass: pass => db.load(`select * from login where password='${pass}'`),
+  checkUser: username => db.load(`select * from login where user_name='${username}'`),
+  changePass:(username,new_password) => db.load(`update login set password = '${new_password}' WHERE user_name = '${username}'`)
 };

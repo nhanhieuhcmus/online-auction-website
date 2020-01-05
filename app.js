@@ -11,7 +11,7 @@ const moment = require('moment');
 const bodyparser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const productRoute = require('./routes/product.route');
-
+const request=require('request');
 require('express-async-errors');
 
 var app = express();
@@ -39,6 +39,8 @@ app.use(session({
     // }
 }))
 // app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+
+
 
 require('./middlewares/locals.mdw')(app);
 require('./middlewares/routes.mdw')(app);
