@@ -11,14 +11,19 @@
             <a class="list btn btn-outline-success" id="win" role="button" href="/list/won-list">
                 <i class="fa fa-trophy" aria-hidden="true"></i> Đã thắng
             </a>
+            {{#if isBidder}}
+            {{else}} 
+            
             <a class="list btn btn-outline-success" id="selling" role="button" href="/list/selling-list">
                 <i class="fa fa-sellsy" aria-hidden="true"></i>
                 Đang bán
             </a>
+            
             <a class="list btn btn-outline-success" id="purchase" role="button" href="/list/purchase-list">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 Có người mua
             </a>
+            {{/if}}
         </div>
 </div>
 

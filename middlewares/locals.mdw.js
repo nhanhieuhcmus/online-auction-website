@@ -15,10 +15,12 @@ module.exports = function (app) {
     if (req.session.authUser) {
       const user = await userModel.single(req.session.authUser.id);
      // console.log(user);
-      if (user[0].type_of_user == 1 || user[0].type_of_user == 3)
-        res.locals.new_product = true;
       if (user[0].type_of_user == 1)
-        res.locals.edit_categories = true;
+        res.locals.isAdmin = true;
+      else if (user[0].type_of_user == 2)
+        res.locals.isBidder = true;
+      else if (user[0].type_of_user == 3)
+        res.locals.isSeller = true;
     }
     next();
   })
