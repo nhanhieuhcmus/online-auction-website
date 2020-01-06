@@ -1,5 +1,6 @@
 const express = require('express');
 const categoryModel = require('../../models/category.model');
+const userModel = require('../../models/user.model');
 const router = express.Router();
 
 
@@ -61,6 +62,27 @@ router.post('/delete', async (req, res) => {
     const result = await categoryModel.del(req.body.id);
     //console.log(result.affectedRows);
     res.redirect('/admin/category/edit-category');
+});
+
+router.get('/users', async (req, res) => {
+    const user = await userModel.all();
+    user.forEach(element => {
+        if (element.id == -1)
+            element.isReal = false;
+        else element.isReal = true;
+        if (element.type_of_user == 1)
+            element.type_of_user = 'Admin';
+        if (element.type_of_user == 2)
+            element.type_of_user = 'Người mua';
+        if (element.type_of_user == 3)
+            element.type_of_user = 'Người bán';
+    });
+    res.render('vwCategory/userManagement',
+        {
+            title: 'Danh sách người dùng',
+            user,
+            empty: user.length === 0
+        })
 });
 
 router.get('/err', (req, res) => {
