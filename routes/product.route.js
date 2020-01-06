@@ -39,7 +39,7 @@ router.post('/new-product', restrict, async function (req, res) {
     categoryid: req.body.categoryid,
     detail: req.body.detail,
     name: req.body.name,
-    id_seller: 2,
+    id_seller: req.session.authUser.id,
     start_price: req.body.start_price,
     step_price: req.body.step_price,
     instant_price: req.body.instant_price,
@@ -240,11 +240,13 @@ router.get('/:name/:id', async function (req, res) {
     productModel.sameCategory(req.params.name),
   ]);
 
+  console.log(single);
   if (req.session.authUser) {
     const favorite = await watch_listModel.isFavorite(req.session.authUser.id, req.params.id);
     if (favorite)
       single[0].isFavorite = true;
     else single[0].isFavorite = false;
+
 
     const favorites = await watch_listModel.all();
     rows.forEach(i => {

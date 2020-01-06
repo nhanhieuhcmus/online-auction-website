@@ -12,7 +12,7 @@ module.exports = {
     and user.id = product.priceholder and product.end_date-NOW() > 0`),
   sameCategory: catName => db.load(`select product.*, user.full_name, category.name_category from product,category,user where name_category=\"${catName}\" and category.id = product.categoryid and product.end_date-NOW() > 0
   and user.id = product.priceholder limit 5`),
-  single: id => db.load(`select * from product where id = ${id} and product.end_date-NOW() > 0`),
+  single: id => db.load(`select * from product where id = ${id}`),
   add: entity => db.add('product', entity),
   del: id => db.del('product', { product_id: id }),
   patch: entity => {
@@ -48,5 +48,6 @@ module.exports = {
 
   favoriteByUser: userid => db.load(`select product.*, category.name_category, user.full_name
   from (select * from add_watch_list where user_id = ${userid}) as favorite, product, category, user
-  where product.end_date - NOW() > 0 and favorite.product_id = product.id and product.categoryid = category.id and product.priceholder = user.id`)
+  where product.end_date - NOW() > 0 and favorite.product_id = product.id and product.categoryid = category.id and product.priceholder = user.id`),
+
 };  

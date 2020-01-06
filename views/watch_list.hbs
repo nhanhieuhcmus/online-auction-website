@@ -1,3 +1,27 @@
+<div class="mb-5">
+    <h4 id="top5" style="text-align: left;"> DANH SÁCH
+        <div class="float-right" id="list">
+            <a class="list btn btn-outline-success " id="favorite" role="button" href="/list">
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                Yêu thích
+            </a>
+            <a class="list btn btn-outline-success " id="auction" role="button" href="/list/auction-list">
+                <i class="fa fa-gavel" aria-hidden="true"></i> Đang đấu giá
+            </a>
+            <a class="list btn btn-outline-success" id="win" role="button" href="/list/won-list">
+                <i class="fa fa-trophy" aria-hidden="true"></i> Đã thắng
+            </a>
+            <a class="list btn btn-outline-success" id="selling" role="button">
+                <i class="fa fa-sellsy" aria-hidden="true"></i>
+                Đang bán
+            </a>
+            <a class="list btn btn-outline-success" id="purchase" role="button" href="/list/purchase-list">
+               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                Có người mua
+            </a>
+        </div>
+</div>
+
 <div class="container">
     <table id="cart" class="table table-hover table-condensed">
         <thead>
@@ -27,11 +51,25 @@
                 </td>
                 <td data-th="Price" class="text-center">{{format current_price}}đ</td>
                 <td data-th="Subtotal" class="text-center">{{full_name}}</td>
+                {{#if favorite}}
                 <td class="actions" data-th="">
                     <a id="favorite" class="mb-0" href="/watch_list/{{id}}">
                         <i class="heart fa fa-heart"></i>
                     </a>
                 </td>
+                {{/if}}
+                {{#if rating}}
+                <td class="actions" data-th="">
+                    <a id="rating" class="mb-0" href="#">
+                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                    </a>
+                </td>
+                <td>
+                     <a id="rating" class="mb-0" href="#">
+                        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                    </a>
+                </td>
+                {{/if}}
             </tr>
             {{/each}}
             {{/if}}

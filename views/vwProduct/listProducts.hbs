@@ -23,7 +23,7 @@
                                 <h6 id="nearlyFi" class="card-title">{{name}}</h6>
                                 <p id="price">{{format current_price}}đ</p>
                                 <small class="text-muted">
-                                    <p id="nearlyFi" class="card-text">Người ra giá cao nhất: {{full_name}}</p>
+                                    <p id="nearlyFi" class="card-text">Người ra giá cao nhất: {{hideName full_name}}</p>
                                     {{#if instant_price}}
                                     <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{format instant_price}}đ
                                     </p>
@@ -41,7 +41,7 @@
                                 </span>
                             </div>
                         </a>
-                        <a id="favorite" class="mb-0" href="/watch_list/{{id}}">
+                        <a id="favorite" class="mb-0" href="/list/{{id}}">
                             {{#if isFavorite}}
                             <i class="heart fa fa-heart"></i>
                             {{else}}
