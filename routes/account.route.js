@@ -31,8 +31,8 @@ router.post('/register', async (req, res) => {
         maxID = 0;
     const check = await userModel.checkEmail(req.body.email);
     console.log(check);
-    if (check != false) {
-        res.render('vwAccount/register', { check: 'Email không được trùng!' });
+    if (check != false && req.body.password!=req.body.repassword) {
+        res.render('vwAccount/register', { check_email: 'Email không được trùng!' , check_pass: 'Mật khẩu nhập lại không khớp!' });
     }
     else {
         const entity_user = {
@@ -128,7 +128,15 @@ router.post('/login', async (req, res) => {
 
     req.session.isAuthenticated = true;
     req.session.authUser = loginUser;
-    console.log(req.session);
+    const userInfo = await userModel.singleByID(loginUser.id);
+    var dob = moment(userInfo.date_of_birth, 'YYYY-MM-DD').format('DD-MM-YYYY');
+    var datejoined = moment(userInfo.date_joined, 'YYYY-MM-DD').format('DD-MM-YYYY');
+
+    userInfo.date_of_birth = dob;//convert db datetime into normal datetime before wrap it to session
+    userInfo.date_joined = datejoined;//convert db datetime into normal datetime before wrap it to session
+
+    req.session.userInfo = userInfo;
+
     const url = req.query.retUrl || '/';
     if (req.query.method == 'post')
         res.redirect(307, url);
@@ -147,20 +155,40 @@ router.post('/logout', (req, res) => {
 router.get('/profile', restrict, (req, res) => {
     res.render('vwAccount/profile');
 });
-router.post('/change_password',async(req,res)=>{
-    const cur_pw=req.body.current_password;
-    const new_pw=req.body.new_password;
-    const check_usr= await userModel.checkUser(req.session.authUser.user_name);
-    const check_pw= await userModel.checkPass(cur_pw);
+router.post('/change_password', async (req, res) => {
+    const cur_pw = req.body.current_password;
+    const new_pw = req.body.new_password;
+    const check_usr = await userModel.checkUser(req.session.authUser.user_name);
+    const check_pw = await userModel.checkPass(cur_pw);
     const rs = bcrypt.compareSync(cur_pw, req.session.authUser.password);
-    
-    if (rs)
-    {
+
+    if (rs) {
         const N = 10;
         const hash = bcrypt.hashSync(new_pw, N);
-        const action= await userModel.changePass(req.session.authUser.user_name,hash);
+        const action = await userModel.changePass(req.session.authUser.user_name, hash);
     }
     res.send("Doi mat khau thanh cong!");
+});
+
+router.post('/change_info', async (req, res) => {
+    const cur_id = req.session.userInfo.id;
+    const new_name = req.body.new_name;
+    const new_email = req.body.new_email;
+    const new_address = req.body.new_address;
+
+   
+    // await userModel.change_name(cur_id, new_name);
+    // await userModel.change_email(cur_id, new_email);
+    await userModel.change_info(cur_id,'full_name',new_name);
+    await userModel.change_info(cur_id,'email',new_email);
+    await userModel.change_info(cur_id,'address',new_address);
+    
+    req.session.userInfo.full_name = new_name;
+    req.session.userInfo.email = new_email;
+    req.session.userInfo.address = new_address;
+
+
+    res.redirect('/account/profile');
 });
 router.get('/err', (req, res) => {
     throw new Error('error occured');
