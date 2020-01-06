@@ -3,7 +3,7 @@ const watch_listModel = require('../models/watch_list.model');
 const productModel = require('../models/product.model');
 const offerModel = require('../models/offer.model');
 const router = express.Router();
-
+const isBidder = require('../middlewares/deny.bidder.mdw');
 
 router.use(express.static('public/css'));
 
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
         {
             title: 'Yêu thích',
             rows,
-            empty: rows.lenght === 0,
+            empty: rows.length === 0,
         })
 });
 
@@ -26,7 +26,7 @@ router.get('/auction-list', async (req, res) => {
         {
             title: 'Đang đấu giá',
             rows,
-            empty: rows.lenght === 0
+            empty: rows.length === 0
         })
 });
 
@@ -36,20 +36,20 @@ router.get('/won-list', async (req, res) => {
         {
             title: 'Đã thắng',
             rows,
-            empty: rows.lenght === 0
+            empty: rows.length === 0
         })
 });
 
-router.get('/purchase-list', async (req, res) => {
+router.get('/purchase-list', isBidder, async (req, res) => {
     const rows = await offerModel.purchaseList(req.session.authUser.id);
     rows.forEach(element =>{
         element.rating = true
     })
     res.render('watch_list',
         {
-            title: 'Đã thắng',
+            title: 'Có người mua',
             rows,
-            empty: rows.lenght === 0
+            empty: rows.length === 0
         })
 });
 

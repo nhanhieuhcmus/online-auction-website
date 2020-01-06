@@ -13,7 +13,7 @@ const config = require('../config/default.json')
 const restrict = require('../middlewares/auth.mdw');
 const bannedModel = require('../models/banned.model');
 const mailer = require('../models/mailer.model');
-
+const isBidder = require('../middlewares/deny.bidder.mdw');
 const router = express.Router();
 
 router.use(express.static('public/css'));
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
   res.render('home', { title: 'Trang chủ' })
 })
 
-router.get('/new-product', restrict, (req, res) => {
+router.get('/new-product', restrict, isBidder, (req, res) => {
   res.render('vwProduct/newProduct',
     { title: 'Thêm sản phẩm mới' })
 });
@@ -68,7 +68,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.get('/new-product-image/:id/:categoryid', (req, res) => {
+router.get('/new-product-image/:id/:categoryid', isBidder, (req, res) => {
   res.render('vwProduct/newProductImage',
     { title: 'Thêm hình cho sản phẩm mới' })
 });
@@ -355,13 +355,13 @@ router.post('/:name/:id', restrict, async (req, res) => {
   //res.redirect(`/category/${req.params.name}/${req.params.id}`);
 });
 
-router.get('/:name/:id/editor', async (req, res) => {
+router.get('/:name/:id/editor', restrict, isBidder, async (req, res) => {
   res.render('vwEditor', {
     title: 'Cập nhật mô tả'
   });
 })
 
-router.post('/:name/:id/editor', restrict, async (req, res) => {
+router.post('/:name/:id/editor', restrict, isBidder, async (req, res) => {
   product = await productModel.single(req.params.id);
   product[0].detail += '<p><b>' + moment().format('DD/MM/YYYY hh:mm A') + '</b></p>' + req.body.FullDes;
   await productModel.patch(product[0]);
@@ -372,7 +372,7 @@ router.get('/err', (req, res) => {
   throw new Error('error occured');
 });
 
-router.post('/ban/:proId/:userId', restrict, async (req, res) => {
+router.post('/ban/:proId/:userId', restrict, isBidder, async (req, res) => {
   await bannedModel.add({
     user_id: req.params.userId,
     product_id: req.params.proId

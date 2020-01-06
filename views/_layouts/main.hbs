@@ -77,22 +77,29 @@
                         <i class="fa fa-user mr-2" aria-hidden="true"></i>
                         Hồ sơ
                     </a>
+                    {{#if isBidder}}
                     <button class="dropdown-item" data-toggle="modal" data-target="#reqModal">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         Nâng cấp tài khoản
                     </button>
+                    {{/if}}
+
+                    {{#if isSeller}}
+                    <a class="dropdown-item" href="/category/new-product">
+                        <i class="fa fa-product-hunt mr-2" aria-hidden="true"></i> Đăng sản phẩm</a>
+                    {{/if}}
+                    
+                    {{#if isAdmin}}
                     <a class="dropdown-item" href="/req-list">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         Xác nhận yêu cầu
                     </a>
-                    <div class="dropdown-divider"></div>
-                    {{#if new_product}}
+
                     <a class="dropdown-item" href="/category/new-product">
                         <i class="fa fa-product-hunt mr-2" aria-hidden="true"></i> Đăng sản phẩm</a>
-                    {{/if}}
-                    {{#if edit_categories}}
-                    <a class="dropdown-item" href="/admin/category/edit-category"> 
-                    <i class="fa fa-bars mr-2" aria-hidden="true"></i> Danh mục</a>
+
+                    <a class="dropdown-item" href="/admin/category/edit-category">
+                        <i class="fa fa-bars mr-2" aria-hidden="true"></i> Danh mục</a>
                     {{/if}}
                     <a class="dropdown-item btn-outline-light" href="javascript: $('#frmLogout').submit();">
                         <i class="fa fa-sign-out mr-2" aria-hidden="true"></i>
@@ -100,7 +107,7 @@
                     </a>
                 </div>
             </li>
-            <form id="rform" method="POST"  action="/req/{{authUser.id}}" ></form>
+            <form id="rform" method="POST" action="/req/{{authUser.id}}"></form>
             {{!-- modal --}}
             <div class="modal fade" id="reqModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
