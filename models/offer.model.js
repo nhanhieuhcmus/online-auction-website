@@ -34,6 +34,11 @@ module.exports = {
     purchaseList: userId => db.load(`select result.*, cat.name_category, u.full_name
     from (select p.*, wt.user from product p LEFT JOIN waiting_offer wt on p.id = wt.product
     where p.id_seller = ${userId} and p.end_date - NOW() < 0) result, user u, category cat
+    where result.priceholder = u.id and result.categoryid = cat.id`),
+
+    sellingList: userId => db.load(`select result.*, cat.name_category, u.full_name
+    from (select p.* from product p
+    where p.id_seller = ${userId} and p.end_date - NOW() > 0) result, user u, category cat
     where result.priceholder = u.id and result.categoryid = cat.id`)
 
 };

@@ -67,7 +67,7 @@
         <a class="nav-item">
             {{#if isAuthenticated}}
             <li class="nav-item dropdown" style="list-style-type: none;">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user mr-2" aria-hidden="true"></i>
                     Hi, <b>{{authUser.user_name}}!</b>
 
@@ -97,9 +97,11 @@
 
                     <a class="dropdown-item" href="/category/new-product">
                         <i class="fa fa-product-hunt mr-2" aria-hidden="true"></i> Đăng sản phẩm</a>
-
-                    <a class="dropdown-item" href="/admin/category/edit-category">
-                        <i class="fa fa-bars mr-2" aria-hidden="true"></i> Danh mục</a>
+                    
+                    <a class="dropdown-item" href="/admin/category/edit-category"> 
+                    <i class="fa fa-bars mr-2" aria-hidden="true"></i> Danh mục</a>
+                    <a class="dropdown-item" href="/admin/category/users"> 
+                    <i class="fa fa-user mr-2" aria-hidden="true"></i> Danh sách người dùng</a>
                     {{/if}}
                     <a class="dropdown-item btn-outline-light" href="javascript: $('#frmLogout').submit();">
                         <i class="fa fa-sign-out mr-2" aria-hidden="true"></i>

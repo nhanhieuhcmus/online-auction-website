@@ -53,6 +53,16 @@ router.get('/purchase-list', isBidder, async (req, res) => {
         })
 });
 
+router.get('/selling-list', async (req, res) => {
+    const rows = await offerModel.sellingList(req.session.authUser.id);
+    res.render('watch_list',
+        {
+            title: 'Đã thắng',
+            rows,
+            empty: rows.lenght === 0
+        })
+});
+
 router.get('/:id', async (req, res) => {
     check = await watch_listModel.isFavorite(req.session.authUser.id, req.params.id);
     if (check)
