@@ -10,7 +10,7 @@
     {{!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
-   
+
     {{{_sections.css}}}
     <title>{{title}}</title>
 </head>
@@ -47,9 +47,8 @@
                 </div>
             </div>
         </form>
-        <a class="nav-item text-white mx-4 mr-auto" href="/watch_list" style="font-weight: bold;">
-            <i class="fa fa-heart" aria-hidden="true"></i>
-            YÊU THÍCH
+        <a class="nav-item text-white mx-4 mr-auto" href="/list" style="font-weight: bold;">
+            <i class="fa fa-list" aria-hidden="true"></i> DANH SÁCH
         </a>
         {{else}}
         <form class="form-inline mr-auto" method="GET" action="/category/search">
@@ -69,18 +68,25 @@
             {{#if isAuthenticated}}
             <li class="nav-item dropdown" style="list-style-type: none;">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                    aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user mr-2" aria-hidden="true"></i>
                     Hi, <b>{{authUser.user_name}}!</b>
 
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/account/profile">
-                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <i class="fa fa-user mr-2" aria-hidden="true"></i>
                         Hồ sơ
                     </a>
-                    <div class="dropdown-divider"></div>
+                    {{#if new_product}}
+                    <a class="dropdown-item" href="/category/new-product">
+                        <i class="fa fa-product-hunt mr-2" aria-hidden="true"></i> Đăng sản phẩm</a>
+                    {{/if}}
+                    {{#if edit_categories}}
+                    <a class="dropdown-item" href="/admin/category/edit-category"> 
+                    <i class="fa fa-bars mr-2" aria-hidden="true"></i> Danh mục</a>
+                    {{/if}}
                     <a class="dropdown-item btn-outline-light" href="javascript: $('#frmLogout').submit();">
-                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <i class="fa fa-sign-out mr-2" aria-hidden="true"></i>
                         Đăng xuất
                     </a>
                 </div>
@@ -92,32 +98,6 @@
                 <button class="btn text-white btn-outline-light" data-target="#mymodel" data-toggle="modal"
                     id="loginArea">ĐĂNG
                     NHẬP</button>
-
-                {{!-- <div class="btn-group">
-                    <button data-user-button type="button" class="btn text-white dropdown-toggle state-hidden"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="userbtn"
-                        style="background-color: purple;">
-                        <i class="fa fa-user"></i>
-                        {{this.user_name}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <button id="userOptional" class="dropdown-item" type="button"><a href="profile">Thông tin cá
-                                nhân
-                            </a></button>
-                        {{#if this.new_product}}
-                        <button id="userOptional" class="dropdown-item" type="button"><a href="new-product">Đăng sản
-                                phẩm</a></button>
-                        {{/if}}
-                        {{#if this.edit_categories}}
-                        <button id="userOptional" class="dropdown-item" type="button"><a
-                                href="/admin/category/edit-category">Chỉnh sửa danh
-                                mục sản phẩm</a></button>
-                        {{/if}}
-                        <button data-logout-button id="userOptional" class="dropdown-item" type="button"><a
-                                href="#">Đăng
-                                xuất</a></button>
-                    </div>
-                </div> --}}
             </a>
             {{/if}}
         </a>
@@ -179,28 +159,6 @@
         }
     </script>
 
-
-    <script>
-        var username = document.getElementById("username");
-        var password = document.getElementById("password");
-        var login = document.getElementById("login");
-        var loginArea = document.getElementById("loginArea");
-        var loginContent = document.getElementById("login-content");
-        var user_button = document.getElementById("userbtn");
-        login.onclick = function () {
-            if ((username.value == "admin") && (password.value == "nhanhieu")) {
-                user_button.innerHTML = "Quản trị viên";
-
-            }
-            else if ((username.value == "bidder") && (password.value == "nhanhieu")) {
-                user_button.innerHTML = "Người đấu giá";
-            }
-            else if ((username.value == "seller") && (password.value == "nhanhieu")) {
-                user_button.innerHTML = "Người bán hàng";
-            }
-            $(".modal").modal('hide');
-        }
-    </script>
     <script>
         $("#signup").click(function () {
             $("#modalID").modal('hide');
@@ -214,13 +172,13 @@
     </script>
     <script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            < script src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script>
-        $(".heart.fa").click(function () {
-            $(this).toggleClass("fa-heart fa-heart-o");
-        });
+            $(".heart.fa").click(function () {
+                $(this).toggleClass("fa-heart fa-heart-o");
+            });
     </script>
 
     <script>
