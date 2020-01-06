@@ -128,7 +128,6 @@ router.post('/login', async (req, res) => {
 
     req.session.isAuthenticated = true;
     req.session.authUser = loginUser;
-    console.log(req.session);
     const url = req.query.retUrl || '/';
     if (req.query.method == 'post')
         res.redirect(307, url);

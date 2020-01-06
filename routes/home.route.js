@@ -5,7 +5,8 @@ const offerModel = require('../models/offer.model');
 const categoryModel = require('../models/category.model');
 const userModel = require('../models/user.model');
 const moment = require('moment');
-
+const restrict = require('../middlewares/auth.mdw');
+const request = require('../models/request.model');
 
 const router = express.Router();
 
@@ -56,6 +57,33 @@ router.get('/', async (req, res) => {
     });
 });
 
+router.post('/req/:id', restrict, async (req, res) => {
+    await request.add({
+        user_id: req.params.id
+    })
+    res.redirect(req.headers.referer);
+})
+
+router.get('/req-list', restrict, async (req, res) => {
+    const rows = await request.all();
+    res.render('vwRequest', {
+        rows,
+        empty: rows.length === 0
+    })
+})
+
+router.post('/request/accept', restrict, async (req, res) => {
+    const user = await userModel.single(req.body.user_id)
+    user[0].type_of_user = 3;
+    await userModel.patch(user[0]);
+    const result = await request.del(req.body.user_id);
+    res.redirect(req.headers.referer);
+})
+
+router.post('/request/deny', restrict, async (req, res) => {
+    const result = await request.del(req.body.user_id);
+    res.redirect(req.headers.referer);
+})
 router.get('/err', (req, res) => {
     throw new Error('error occured');
 });

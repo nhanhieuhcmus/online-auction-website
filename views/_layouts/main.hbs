@@ -10,7 +10,7 @@
     {{!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
-   
+
     {{{_sections.css}}}
     <title>{{title}}</title>
 </head>
@@ -78,6 +78,14 @@
                         <i class="fa fa-user" aria-hidden="true"></i>
                         Hồ sơ
                     </a>
+                    <button class="dropdown-item" data-toggle="modal" data-target="#reqModal">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        Nâng cấp tài khoản
+                    </button>
+                    <a class="dropdown-item" href="/req-list">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        Xác nhận yêu cầu
+                    </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item btn-outline-light" href="javascript: $('#frmLogout').submit();">
                         <i class="fa fa-sign-out" aria-hidden="true"></i>
@@ -85,6 +93,29 @@
                     </a>
                 </div>
             </li>
+            <form id="rform" method="POST"  action="/req/{{authUser.id}}" ></form>
+            {{!-- modal --}}
+            <div class="modal fade" id="reqModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Are you sure</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Bạn có chắc muốn xin nâng cấp tài khoản thành người bán?
+                        </div>
+                        <div class="modal-footer justify-content-sm-around">
+                            <button type="button" class="btn btn-secondary" style="width: 100px;"
+                                data-dismiss="modal">No</button>
+                            <button type="submit" class="btn btn-danger" form="rform" style="width: 100px;">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {{else}}
             <a href="/account/register" class="nav-item"><button class="btn text-white btn-outline-light mr-2">ĐĂNG
                     KÝ</button></a>
@@ -214,13 +245,13 @@
     </script>
     <script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            < script src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script>
-        $(".heart.fa").click(function () {
-            $(this).toggleClass("fa-heart fa-heart-o");
-        });
+            $(".heart.fa").click(function () {
+                $(this).toggleClass("fa-heart fa-heart-o");
+            });
     </script>
 
     <script>

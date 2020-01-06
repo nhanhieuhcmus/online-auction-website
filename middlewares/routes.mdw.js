@@ -7,5 +7,5 @@ module.exports = function (app) {
     app.use('/admin/category', require('../routes/admin/category.route'));
     app.use('/register',require('../routes/account.route'));
     app.use('/login',require('../routes/account.route'));
-    app.use('/watch_list', require('../routes/watch_list.route'));
+    app.use('/watch_list', restrict, require('../routes/watch_list.route'));
 };
