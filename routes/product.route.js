@@ -137,11 +137,15 @@ router.get('/search', async (req, res) => {
   ]);
 
   if (req.session.authUser) {
-    rows.forEach(i => {
+    rows.forEach(async i => {
       favorite.forEach(element => {
         if (element.user_id == req.session.authUser.id && element.product_id == i.id)
           i.isFavorite = true;
       })
+      const isHoldPrice = await watch_listModel.isHoldPrice(req.session.authUser.id, i.id)
+      if (isHoldPrice)
+        i.isHoldPrice = true;
+      else i.isHoldPrice = false;
     })
   }
 
@@ -191,11 +195,15 @@ router.get('/:name', async function (req, res) {
   ]);
 
   if (req.session.authUser) {
-    rows.forEach(i => {
+    rows.forEach(async i => {
       favorite.forEach(element => {
         if (element.user_id == req.session.authUser.id && element.product_id == i.id)
           i.isFavorite = true;
       })
+      const isHoldPrice = await watch_listModel.isHoldPrice(req.session.authUser.id, i.id)
+      if (isHoldPrice)
+        i.isHoldPrice = true;
+      else i.isHoldPrice = false;
     })
   }
 
@@ -316,7 +324,7 @@ router.post('/:name/:id', restrict, async (req, res) => {
         await offerModel.patch(single[0]);
         product[0].current_price = currentOffer[0].price + product[0].step_price;
         product[0].priceholder = req.session.authUser.id;
-        
+
         await offerModel.patchOffer({
           product: req.params.id,
           user: req.session.authUser.id,
@@ -328,11 +336,11 @@ router.post('/:name/:id', restrict, async (req, res) => {
         single[0].price = +req.body.price;
         result = await offerModel.patch(single[0]);
         product[0].current_price = +req.body.price;
-        
+
       }
     else {
       product[0].priceholder = req.session.authUser.id;
-      
+
       await offerModel.addWaitingOffer({
         product: req.params.id,
         user: req.session.authUser.id,
@@ -349,7 +357,7 @@ router.post('/:name/:id', restrict, async (req, res) => {
     entity.time = new Date();
     result = await offerModel.add(entity);
     var seller = await userModel.single(product[0].id_seller);
-    mailer.send(seller[0].email, "Web Aution Online", "Khách hàng "+ user[0].full_name + " vừa đấu giá thành công sản phẩm: "+ req.headers.referer);
+    mailer.send(seller[0].email, "Web Aution Online", "Khách hàng " + user[0].full_name + " vừa đấu giá thành công sản phẩm: " + req.headers.referer);
     res.redirect('?Auction=true');
   }
   //res.redirect(`/category/${req.params.name}/${req.params.id}`);
@@ -393,10 +401,10 @@ router.post('/ban/:proId/:userId', restrict, async (req, res) => {
       user: history[0].user_id,
       price: history[0].price
     })
-    
+
   }
   await productModel.patch(product[0]);
-  
+
   var bidder = await userModel.single(req.params.userId);
   mailer.send(bidder[0].email, "Web Aution Online", "Bạn đã bị từ chối đấu giá sản phẩm: " + req.headers.referer);
   res.redirect(req.headers.referer);

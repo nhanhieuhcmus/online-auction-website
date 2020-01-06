@@ -9,6 +9,10 @@ module.exports = {
         ret = await db.load(`select * from add_watch_list where user_id=\"${Username}\" and product_id =${ProductID}`);
         return ret.length != 0
     },
+    isHoldPrice: async(Username, ProductID) => {
+        ret = await db.load(`select * from product where product.priceholder = ${Username} and product.id =${ProductID}`)
+        return ret.length == 1
+    },
     patch: entity => {
         const condition = { id: entity.id };
         delete entity.id;

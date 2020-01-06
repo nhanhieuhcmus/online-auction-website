@@ -16,13 +16,18 @@
                 Đang bán
             </a>
             <a class="list btn btn-outline-success" id="purchase" role="button" href="/list/purchase-list">
-               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 Có người mua
             </a>
         </div>
 </div>
 
 <div class="container">
+    {{#if this.empty}}
+    <tr>
+        Không có sản phẩm yêu thích nào.
+    </tr>
+    {{else}}
     <table id="cart" class="table table-hover table-condensed">
         <thead>
             <tr>
@@ -33,15 +38,15 @@
             </tr>
         </thead>
         <tbody>
-            {{#if this.empty}}
-            <tr>
-                Không có sản phẩm yêu thích nào.
-            </tr>
-            {{else}}
             {{#each this.rows}}
+            {{#if isHoldPrice}}
+            <tr style="background-color: pink;">
+                {{else}}
             <tr>
+                {{/if}}
                 <td data-th="Product">
-                    <a href="/category/{{name_category}}/{{id}}" class="row" a style="color:black; text-decoration: none;">
+                    <a href="/category/{{name_category}}/{{id}}" class="row" a
+                        style="color:black; text-decoration: none;">
                         <div class="col-sm-2 hidden-xs d-flex align-items-center"><img src="/imgs/sp/{{id}}/main.jpg"
                                 height="100" width="100" alt="{{name}}" title="{{name}}" class="img-responsive" /></div>
                         <div class="col-sm-10">
@@ -65,7 +70,7 @@
                     </a>
                 </td>
                 <td>
-                     <a id="rating" class="mb-0" href="#">
+                    <a id="rating" class="mb-0" href="#">
                         <i class="fa fa-thumbs-down" aria-hidden="true"></i>
                     </a>
                 </td>

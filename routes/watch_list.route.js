@@ -9,8 +9,12 @@ router.use(express.static('public/css'));
 
 router.get('/', async (req, res) => {
     const rows = await productModel.favoriteByUser(req.session.authUser.id);
-    rows.forEach(element =>{
-        element.favorite = true
+    rows.forEach(async i => {
+        i.favorite = true;
+        const isHoldPrice = await watch_listModel.isHoldPrice(req.session.authUser.id, i.id)
+        if (isHoldPrice)
+            i.isHoldPrice = true;
+        else i.isHoldPrice = false;
     })
     res.render('watch_list',
         {
@@ -22,6 +26,12 @@ router.get('/', async (req, res) => {
 
 router.get('/auction-list', async (req, res) => {
     const rows = await offerModel.auctionList(req.session.authUser.id);
+    rows.forEach(async i => {
+        const isHoldPrice = await watch_listModel.isHoldPrice(req.session.authUser.id, i.id)
+        if (isHoldPrice)
+            i.isHoldPrice = true;
+        else i.isHoldPrice = false;
+    })
     res.render('watch_list',
         {
             title: 'Đang đấu giá',
@@ -32,6 +42,12 @@ router.get('/auction-list', async (req, res) => {
 
 router.get('/won-list', async (req, res) => {
     const rows = await offerModel.wonList(req.session.authUser.id);
+    rows.forEach(async i => {
+        const isHoldPrice = await watch_listModel.isHoldPrice(req.session.authUser.id, i.id)
+        if (isHoldPrice)
+            i.isHoldPrice = true;
+        else i.isHoldPrice = false;
+    })
     res.render('watch_list',
         {
             title: 'Đã thắng',
@@ -42,12 +58,16 @@ router.get('/won-list', async (req, res) => {
 
 router.get('/purchase-list', async (req, res) => {
     const rows = await offerModel.purchaseList(req.session.authUser.id);
-    rows.forEach(element =>{
-        element.rating = true
+    rows.forEach(async i => {
+        i.rating = true;
+        const isHoldPrice = await watch_listModel.isHoldPrice(req.session.authUser.id, i.id)
+        if (isHoldPrice)
+            i.isHoldPrice = true;
+        else i.isHoldPrice = false;
     })
     res.render('watch_list',
         {
-            title: 'Đã thắng',
+            title: 'Có người mua',
             rows,
             empty: rows.lenght === 0
         })
@@ -55,6 +75,12 @@ router.get('/purchase-list', async (req, res) => {
 
 router.get('/selling-list', async (req, res) => {
     const rows = await offerModel.sellingList(req.session.authUser.id);
+    rows.forEach(async i => {
+        const isHoldPrice = await watch_listModel.isHoldPrice(req.session.authUser.id, i.id)
+        if (isHoldPrice)
+            i.isHoldPrice = true;
+        else i.isHoldPrice = false;
+    })
     res.render('watch_list',
         {
             title: 'Đã thắng',

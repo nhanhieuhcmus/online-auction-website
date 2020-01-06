@@ -6,6 +6,6 @@
         "database": "ql_sdg"
     },
     "paginate": {
-        "limit": 8
+        "limit": 6
     }
 }

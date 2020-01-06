@@ -23,11 +23,15 @@ router.get('/', async (req, res) => {
     if (req.session.authUser) {
         data = [hot, nearFinish, mostPrice];
         data.forEach(i => {
-            i.forEach(j => {
+            i.forEach(async j => {
                 favorite.forEach(element => {
                     if (element.user_id == req.session.authUser.id && element.product_id == j.id)
                         j.isFavorite = true;
                 })
+                const isHoldPrice = await watch_listModel.isHoldPrice(req.session.authUser.id, j.id)
+                if (isHoldPrice)
+                    j.isHoldPrice = true;
+                else j.isHoldPrice = false;
             })
         })
     }
