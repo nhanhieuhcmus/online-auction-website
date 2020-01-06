@@ -10,10 +10,10 @@ const offerModel = require('./models/offer.model');
 const moment = require('moment');
 const bodyparser = require('body-parser');
 const mailer = require('./models/mailer.model');
- 
+
 const bcrypt = require('bcryptjs');
 const productRoute = require('./routes/product.route');
-const request=require('request');
+const request = require('request');
 require('express-async-errors');
 var app = express();
 app.use(express.json());
@@ -24,8 +24,8 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-  }))
-app.use(bodyparser.urlencoded({extended:true}))
+}))
+app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
 app.use(morgan('dev'));
 // app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
@@ -40,26 +40,19 @@ app.set('view engine', 'hbs');
 
 app.use(express.static('./public'));
 
-app.get('/cart', function (req, res) {
-    res.render('cart', { title: 'Giỏ hàng' });
-});
-
-app.get('/profile', function (req, res) {
-    res.render('profile', { title: 'Thông tin cá nhân' });
-});
-
-app.get('/new-product', function (req, res) {
-    res.render('newProduct', { title: 'Thông tin cá nhân' });
-});
-
 app.use((req, res, next) => {
-    res.render('vwError/404.hbs', { title: 'Not Found' });
+    res.render('vwError/404.hbs', {
+        title: 'Not Found',
+        layout: false
+    });
 })
 
 app.use((err, req, res, next) => {
-    res.render('vwError/index.hbs', { title: 'Error' })
+    res.render('vwError/index.hbs', {
+        title: 'Error',
+        layout: false
+    })
     console.error(err.stack);
-    // res.status(500).send('View error on console.');
 })
 
 app.listen(3000, () => {

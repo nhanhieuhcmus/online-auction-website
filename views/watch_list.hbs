@@ -30,7 +30,7 @@
 <div class="container">
     {{#if this.empty}}
     <tr>
-        Không có sản phẩm yêu thích nào.
+        Không có sản phẩm nào.
     </tr>
     {{else}}
     <table id="cart" class="table table-hover table-condensed">
@@ -52,8 +52,9 @@
                 <td data-th="Product">
                     <a href="/category/{{name_category}}/{{id}}" class="row" a
                         style="color:black; text-decoration: none;">
-                        <div class="col-sm-2 hidden-xs d-flex align-items-center"><img src="/imgs/sp/{{id}}/main.jpg"
-                                height="100" width="100" alt="{{name}}" title="{{name}}" class="img-responsive" /></div>
+                        <div class="col-sm-2 hidden-xs d-flex align-items-center">
+                            <img src="/imgs/sp/{{id}}/main.jpg"
+                                height="100px" width="100px" alt="{{name}}" title="{{name}}"/></div>
                         <div class="col-sm-10">
                             <p style="font-weight: 100;" class=" mr-2 ml-5">{{name}}</p>
                         </div>

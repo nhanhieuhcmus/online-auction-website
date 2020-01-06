@@ -13,9 +13,6 @@
             <li class="nav-item">
                 <a data-toggle="tab" class="nav-link" href="#myrating">Đánh giá</a>
             </li>
-            <li class="nav-item">
-                <a data-toggle="tab" class="nav-link" href="#mycredits">Ví tiền</a>
-            </li>
         </ul>
     </div>
     <div class="tab-content">
@@ -103,65 +100,8 @@
                 <br>
                 <h4>Đánh giá của tôi</h4>
                 <br>
-                <p class="mb-4"><b>Tổng lượt đánh giá: <span id="total-rating" class="ml-5"> 8/10</span></b></p>
-                <table id="cart" class="table table-hover table-condensed">
-                    <thead>
-                        <tr>
-                            <th class="rating-table-head" style="width:15%;">Đánh giá</th>
-                            <th class="rating-table-head" style="width:85%;">Tên sản phẩm/Nội dung đánh giá</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="d-flex justify-content-center">
-                                <button disabled="disabled" class="btn btn-success btn-sm"><i
-                                        class="fa fa-thumbs-up"></i></button>
-                            </td>
-                            <td>
-                                <p id="product-name" class="mb-2" style="font-size: 14px;"><b>Laptop Lenovo IdeaPad
-                                        L340-15IRH 81LK007JVN
-                                        Core i7-9750H/ GTX 1050 3GB/ Dos (15.6 FHD
-                                        IPS) - Hàng Chính Hãng</b></p>
-                                <p id="rating-from-product" style="font-size: 16px;">Tốt</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="d-flex justify-content-center">
-                                <button disabled="disabled" class="btn btn-danger btn-sm"><i
-                                        class="fa fa-thumbs-down"></i></button>
-                            </td>
-                            <td>
-                                <p id="product-name" class="mb-2" style="font-size: 14px;"><b>Rechargeable Wireless
-                                        Mouse Silent Ergonomic Gaming Mice
-                                        6 Keys RGB Back-light for Laptop Computer</b></p>
-                                <p id="rating-from-product" style="font-size: 16px;">Xấu</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="d-flex justify-content-center">
-                                <button disabled="disabled" class="btn btn-success btn-sm"><i
-                                        class="fa fa-thumbs-up"></i></button>
-                            </td>
-                            <td>
-                                <p id="product-name" class="mb-2" style="font-size: 14px;"><b>Laptop Lenovo IdeaPad
-                                        L340-15IRH 81LK007JVN
-                                        Core i7-9750H/ GTX 1050 3GB/ Dos (15.6 FHD
-                                        IPS) - Hàng Chính Hãng</b></p>
-                                <p id="rating-from-product" style="font-size: 16px;">Tốt</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <p class="mb-4"><b>Tổng lượt đánh giá: <span id="total-rating" class="ml-5"> {{userInfo.add_point}}/{{userInfo.minus_point}}</span></b></p>
 
-            </div>
-        </div>
-        <div id="mycredits" class="tab-pane fade">
-            <div class="col-md-8 mx-3">
-                <br>
-                <h4>Thông tin tín dụng</h4>
-                <br>
-                <p>Tổng số tiền trong tài khoản:<span id="total-credit" class="ml-5">1 tỷ</span><span id="đ"> đ</span>
-                </p>
             </div>
         </div>
     </div>
