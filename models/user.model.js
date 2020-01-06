@@ -24,4 +24,8 @@ module.exports = {
 
 
 
+  patch: entity => {
+    const condition = { id: entity.id };
+    return db.patch('user', entity, condition);
+  },
 };

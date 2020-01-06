@@ -31,8 +31,8 @@ router.post('/register', async (req, res) => {
         maxID = 0;
     const check = await userModel.checkEmail(req.body.email);
     console.log(check);
-    if (check != false && req.body.password!=req.body.repassword) {
-        res.render('vwAccount/register', { check_email: 'Email không được trùng!' , check_pass: 'Mật khẩu nhập lại không khớp!' });
+    if (check != false && req.body.password != req.body.repassword) {
+        res.render('vwAccount/register', { check_email: 'Email không được trùng!', check_pass: 'Mật khẩu nhập lại không khớp!' });
     }
     else {
         const entity_user = {
@@ -158,16 +158,26 @@ router.get('/profile', restrict, (req, res) => {
 router.post('/change_password', async (req, res) => {
     const cur_pw = req.body.current_password;
     const new_pw = req.body.new_password;
+    const re_new_pw=req.body.re_new_password;
     const check_usr = await userModel.checkUser(req.session.authUser.user_name);
     const check_pw = await userModel.checkPass(cur_pw);
     const rs = bcrypt.compareSync(cur_pw, req.session.authUser.password);
-
-    if (rs) {
+    //check current password is right
+    if (!rs){
+        res.send("Mật khẩu hiện tại sai!");
+    }
+    else if (new_pw!=re_new_pw){
+        res.send("Mật khẩu mới không khớp!");
+    }
+    
+    else if (rs) {
         const N = 10;
         const hash = bcrypt.hashSync(new_pw, N);
         const action = await userModel.changePass(req.session.authUser.user_name, hash);
+        req.session.isAuthenticated = false;
+        req.session.authUser = null;
+        res.redirect('/account/login');
     }
-    res.send("Doi mat khau thanh cong!");
 });
 
 router.post('/change_info', async (req, res) => {
@@ -176,13 +186,13 @@ router.post('/change_info', async (req, res) => {
     const new_email = req.body.new_email;
     const new_address = req.body.new_address;
 
-   
+
     // await userModel.change_name(cur_id, new_name);
     // await userModel.change_email(cur_id, new_email);
-    await userModel.change_info(cur_id,'full_name',new_name);
-    await userModel.change_info(cur_id,'email',new_email);
-    await userModel.change_info(cur_id,'address',new_address);
-    
+    await userModel.change_info(cur_id, 'full_name', new_name);
+    await userModel.change_info(cur_id, 'email', new_email);
+    await userModel.change_info(cur_id, 'address', new_address);
+
     req.session.userInfo.full_name = new_name;
     req.session.userInfo.email = new_email;
     req.session.userInfo.address = new_address;

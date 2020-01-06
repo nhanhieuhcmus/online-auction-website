@@ -28,7 +28,8 @@
             <div class="carousel-caption text-left">
                 <h3 style="color: black;">{{name}}</h3>
                 <p style="color: black;">Giá: {{format current_price}}đ - Với {{auction_times}} lượt đấu giá</p>
-                <a style="background-color: purple;" class="text-white btn btn-lg mb-4" href="items" role="button">Đấu
+                <a style="background-color: purple;" class="text-white btn btn-lg mb-4"
+                    href="/category/{{name_category}}/{{id}}" role="button">Đấu
                     giá ngay</a>
             </div>
         </div>
@@ -53,87 +54,98 @@
     <div class="">
         <div class="card-deck">
             {{#each this.nearFinish}}
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color:black; text-decoration: none;" href="items">
-                    <img src="/imgs/sp/{{id}}/main.jpg" height="230" alt="{{name}}" title="{{name}}">
+            {{#if isHoldPrice}}
+            <div class="card border-0 mr-auto shadow-sm" style="background-color: pink;">
+                {{else}}
+                <div class="card border-0 mr-auto shadow-sm">
+                    {{/if}}
+                    <a style="color:black; text-decoration: none;" href="/category/{{name_category}}/{{id}}">
+                        <img src="/imgs/sp/{{id}}/main.jpg" class="card-img-top" height="230" alt="{{name}}"
+                            title="{{name}}">
 
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">{{name}}</h6>
-                        <p id="price">{{format current_price}}</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: {{full_name}}</p>
-                            {{#if instant_price}}
-                            <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{format instant_price}}đ
-                            </p>
+                        <div class="card-body">
+                            <h6 id="nearlyFi" class="card-title">{{name}}</h6>
+                            <p id="price">{{format current_price}}</p>
+                            <small class="text-muted">
+                                <p id="nearlyFi" class="card-text">Người ra giá cao nhất: {{hideName full_name}}</p>
+                                {{#if instant_price}}
+                                <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{format instant_price}}đ
+                                </p>
+                                {{/if}}
+                                <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
+                                <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
+                                <p id="nearlyFi" class="card-text">Số lượt ra giá: {{auction_times}} </p>
+                            </small>
+                            <span class="my-2">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star-o checked"></span>
+                            </span>
+                        </div>
+                    </a>
+                    <a id="favorite" class="mb-0" href="/list/{{id}}">
+                        {{#if isFavorite}}
+                        <i class="heart fa fa-heart"></i>
+                        {{else}}
+                        <i class="heart fa fa-heart-o"></i>
+                        {{/if}}
+                    </a>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <!--Top 5 sản phần có lượt đấu giá cao nhất-->
+        <div>
+            <h6 id="top5" style="text-align: left;">Giá cao nhất</h6>
+        </div>
+        <hr class="my-4">
+        <div class="">
+            <div class="card-deck">
+                {{#each this.mostPrice}}
+                {{#if isHoldPrice}}
+                <div class="card border-0 mr-auto shadow-sm" style="background-color: pink;">
+                    {{else}}
+                    <div class="card border-0 mr-auto shadow-sm">
+                        {{/if}}
+                        <a style="color:black; text-decoration: none;" href="/category/{{name_category}}/{{id}}">
+                            <img src="/imgs/sp/{{id}}/main.jpg" class="card-img-top" height="230" alt="{{name}}" title="{{name}}">
+                            <div class="card-body">
+                                <h6 id="nearlyFi" class="card-title">{{name}}</h6>
+                                <p id="price">{{format current_price}}</p>
+                                <small class="text-muted">
+                                    <p id="nearlyFi" class="card-text">Người ra giá cao nhất: {{hideName full_name}}</p>
+                                    {{#if instant_price}}
+                                    <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{format instant_price}}đ
+                                    </p>
+                                    {{/if}}
+                                    <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
+                                    <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
+                                    <p id="nearlyFi" class="card-text">Số lượt ra giá: {{auction_times}} </p>
+                                </small>
+                                <span class="my-2">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star-o checked"></span>
+                                </span>
+                            </div>
+                        </a>
+                        <a id="favorite" class="mb-0" href="/list/{{id}}">
+                            {{#if isFavorite}}
+                            <i class="heart fa fa-heart"></i>
+                            {{else}}
+                            <i class="heart fa fa-heart-o"></i>
                             {{/if}}
-                            <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
-                            <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: {{auction_times}} </p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
+                        </a>
                     </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
+                    {{/each}}
                 </div>
             </div>
-            {{/each}}
-        </div>
-    </div>
-
-    <!--Top 5 sản phần có lượt đấu giá cao nhất-->
-    <div>
-        <h6 id="top5" style="text-align: left;">Giá cao nhất</h6>
-    </div>
-    <hr class="my-4">
-    <div class="">
-        <div class="card-deck">
-            {{#each this.mostPrice}}
-            <div class="card border-0 mr-auto shadow-sm">
-                <a style="color:black; text-decoration: none;" href="items">
-                    <img src="/imgs/sp/{{id}}/main.jpg" height="230" alt="{{name}}" title="{{name}}">
-                    <div class="card-body">
-                        <h6 id="nearlyFi" class="card-title">{{name}}</h6>
-                        <p id="price">{{format current_price}}</p>
-                        <small class="text-muted">
-                            <p id="nearlyFi" class="card-text">Người ra giá cao nhất: {{full_name}}</p>
-                            {{#if instant_price}}
-                            <p id="nearlyFi" class="card-text now_price">Giá mua ngay: {{format instant_price}}đ
-                            </p>
-                            {{/if}}
-                            <p id="nearlyFi" class="card-text">Ngày đăng: {{start_date}}</p>
-                            <p id="nearlyFi" class="card-text">Thời điểm kết thúc: {{end_date}}</p>
-                            <p id="nearlyFi" class="card-text">Số lượt ra giá: {{auction_times}} </p>
-                        </small>
-                        <span class="my-2">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star-o checked"></span>
-                        </span>
-                    </div>
-                </a>
-                <div id="favorite">
-                    <i class="heart fa fa-heart-o"></i>
-                </div>
+            <div class="text-right my-3">
+                <a style="background-color: purple;" class="btn text-white" href="#" role="button">Đầu trang &raquo;</a>
             </div>
-            {{/each}}
         </div>
-    </div>
-    <div class="text-right my-3">
-        <a style="background-color: purple;" class="btn text-white" href="#" role="button">Đầu trang &raquo;</a>
-    </div>
-</div>
-
-<script>
-    $(".heart.fa").click(function () {
-        $(this).toggleClass("fa-heart fa-heart-o");
-    });
-</script>

@@ -2,6 +2,7 @@ const express = require('express');
 const productModel = require('../models/product.model');
 const offerModel = require('../models/offer.model');
 const categoryModel = require('../models/category.model');
+const watch_listModel = require('../models/watch_list.model');
 const userModel = require('../models/user.model');
 const moment = require('moment');
 const multer = require('multer');
@@ -12,7 +13,7 @@ const config = require('../config/default.json')
 const restrict = require('../middlewares/auth.mdw');
 const bannedModel = require('../models/banned.model');
 const mailer = require('../models/mailer.model');
-
+const isBidder = require('../middlewares/deny.bidder.mdw');
 const router = express.Router();
 
 router.use(express.static('public/css'));
@@ -21,7 +22,7 @@ router.get('/', (req, res) => {
   res.render('home', { title: 'Trang chủ' })
 })
 
-router.get('/new-product', restrict, (req, res) => {
+router.get('/new-product', restrict, isBidder, (req, res) => {
   res.render('vwProduct/newProduct',
     { title: 'Thêm sản phẩm mới' })
 });
@@ -38,14 +39,15 @@ router.post('/new-product', restrict, async function (req, res) {
     categoryid: req.body.categoryid,
     detail: req.body.detail,
     name: req.body.name,
-    id_seller: 2,
+    id_seller: req.session.authUser.id,
     start_price: req.body.start_price,
     step_price: req.body.step_price,
     instant_price: req.body.instant_price,
     start_date: start_date,
     end_date: end_date,
     current_price: req.body.start_price,
-    priceholder: -1
+    priceholder: -1,
+    auction_times: 0
   };
   // console.log(entity);
   const result = await productModel.add(entity);
@@ -66,7 +68,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.get('/new-product-image/:id/:categoryid', (req, res) => {
+router.get('/new-product-image/:id/:categoryid', isBidder, (req, res) => {
   res.render('vwProduct/newProductImage',
     { title: 'Thêm hình cho sản phẩm mới' })
 });
@@ -106,12 +108,12 @@ router.get('/search', async (req, res) => {
       type = 'DESC';
       break;
     case 'end_timeUp':
-      condition = 'end_date - NOW() > 0';
+      condition = 'end_date - NOW()>0';
       column = 'end_date - NOW()';
       type = 'ASC';
       break;
     case 'start_timeUp':
-      condition = 'start_date - NOW() > 0';
+      condition = '1';
       column = 'start_date - NOW()';
       type = 'DESC';
       break;
@@ -128,10 +130,24 @@ router.get('/search', async (req, res) => {
   if (page < 1) page = 1;
   const offset = (page - 1) * limit;
 
-  const [total, rows] = await Promise.all([
+  const [total, rows, favorite] = await Promise.all([
     productModel.countForSearch(key),
-    productModel.sortSearchResult(key, offset, condition, column, type)
+    productModel.sortSearchResult(key, offset, condition, column, type),
+    watch_listModel.all()
   ]);
+
+  if (req.session.authUser) {
+    rows.forEach(async i => {
+      favorite.forEach(element => {
+        if (element.user_id == req.session.authUser.id && element.product_id == i.id)
+          i.isFavorite = true;
+      })
+      const isHoldPrice = await watch_listModel.isHoldPrice(req.session.authUser.id, i.id)
+      if (isHoldPrice)
+        i.isHoldPrice = true;
+      else i.isHoldPrice = false;
+    })
+  }
 
   let nPages = Math.floor(total / limit);
   if (total % limit > 0) nPages++;
@@ -172,10 +188,24 @@ router.get('/:name', async function (req, res) {
   if (page < 1) page = 1;
   const offset = (page - 1) * limit;
 
-  const [total, rows] = await Promise.all([
+  const [total, rows, favorite] = await Promise.all([
     productModel.countByCat(catName),
-    productModel.pageByCat(catName, offset)
+    productModel.pageByCat(catName, offset),
+    watch_listModel.all()
   ]);
+
+  if (req.session.authUser) {
+    rows.forEach(async i => {
+      favorite.forEach(element => {
+        if (element.user_id == req.session.authUser.id && element.product_id == i.id)
+          i.isFavorite = true;
+      })
+      const isHoldPrice = await watch_listModel.isHoldPrice(req.session.authUser.id, i.id)
+      if (isHoldPrice)
+        i.isHoldPrice = true;
+      else i.isHoldPrice = false;
+    })
+  }
 
   let nPages = Math.floor(total / limit);
   if (total % limit > 0) nPages++;
@@ -215,14 +245,32 @@ router.get('/:name/:id', async function (req, res) {
   const [single, history, rows] = await Promise.all([
     productModel.single(req.params.id),
     offerModel.allByProductId(req.params.id),
-    productModel.allByCat(req.params.name)
+    productModel.sameCategory(req.params.name),
   ]);
+
+  console.log(single);
+  if (req.session.authUser) {
+    const favorite = await watch_listModel.isFavorite(req.session.authUser.id, req.params.id);
+    if (favorite)
+      single[0].isFavorite = true;
+    else single[0].isFavorite = false;
+
+
+    const favorites = await watch_listModel.all();
+    rows.forEach(i => {
+      favorites.forEach(element => {
+        if (element.user_id == req.session.authUser.id && element.product_id == i.id)
+          i.isFavorite = true;
+      })
+    })
+  }
+
   bestAution = {};
   const sellerRows = await userModel.single(single[0].id_seller);
   i = 1;
   history.forEach(element => {
     element.BidId = i++;
-  }) 
+  })
   if (history != false) {
     const Aution = await userModel.single(history[0].user_id);
     bestAution = Aution[0];
@@ -276,7 +324,7 @@ router.post('/:name/:id', restrict, async (req, res) => {
         await offerModel.patch(single[0]);
         product[0].current_price = currentOffer[0].price + product[0].step_price;
         product[0].priceholder = req.session.authUser.id;
-        
+
         await offerModel.patchOffer({
           product: req.params.id,
           user: req.session.authUser.id,
@@ -288,11 +336,11 @@ router.post('/:name/:id', restrict, async (req, res) => {
         single[0].price = +req.body.price;
         result = await offerModel.patch(single[0]);
         product[0].current_price = +req.body.price;
-        
+
       }
     else {
       product[0].priceholder = req.session.authUser.id;
-      
+
       await offerModel.addWaitingOffer({
         product: req.params.id,
         user: req.session.authUser.id,
@@ -309,19 +357,19 @@ router.post('/:name/:id', restrict, async (req, res) => {
     entity.time = new Date();
     result = await offerModel.add(entity);
     var seller = await userModel.single(product[0].id_seller);
-    mailer.send(seller[0].email, "Web Aution Online", "Khách hàng "+ user[0].full_name + " vừa đấu giá thành công sản phẩm: "+ req.headers.referer);
+    mailer.send(seller[0].email, "Web Aution Online", "Khách hàng " + user[0].full_name + " vừa đấu giá thành công sản phẩm: " + req.headers.referer);
     res.redirect('?Auction=true');
   }
   //res.redirect(`/category/${req.params.name}/${req.params.id}`);
 });
 
-router.get('/:name/:id/editor', async (req, res) => {
+router.get('/:name/:id/editor', restrict, isBidder, async (req, res) => {
   res.render('vwEditor', {
     title: 'Cập nhật mô tả'
   });
 })
 
-router.post('/:name/:id/editor', restrict, async (req, res) => {
+router.post('/:name/:id/editor', restrict, isBidder, async (req, res) => {
   product = await productModel.single(req.params.id);
   product[0].detail += '<p><b>' + moment().format('DD/MM/YYYY hh:mm A') + '</b></p>' + req.body.FullDes;
   await productModel.patch(product[0]);
@@ -332,7 +380,7 @@ router.get('/err', (req, res) => {
   throw new Error('error occured');
 });
 
-router.post('/ban/:proId/:userId', restrict, async (req, res) => {
+router.post('/ban/:proId/:userId', restrict, isBidder, async (req, res) => {
   await bannedModel.add({
     user_id: req.params.userId,
     product_id: req.params.proId
@@ -353,10 +401,10 @@ router.post('/ban/:proId/:userId', restrict, async (req, res) => {
       user: history[0].user_id,
       price: history[0].price
     })
-    
+
   }
   await productModel.patch(product[0]);
-  
+
   var bidder = await userModel.single(req.params.userId);
   mailer.send(bidder[0].email, "Web Aution Online", "Bạn đã bị từ chối đấu giá sản phẩm: " + req.headers.referer);
   res.redirect(req.headers.referer);
