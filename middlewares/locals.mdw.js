@@ -11,6 +11,7 @@ module.exports = function (app) {
     }
     res.locals.isAuthenticated = req.session.isAuthenticated;
     res.locals.authUser = req.session.authUser;
+    res.locals.userInfo = req.session.userInfo;
 
     if (req.session.authUser) {
       const user = await userModel.single(req.session.authUser.id);

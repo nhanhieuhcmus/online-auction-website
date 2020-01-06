@@ -24,65 +24,36 @@
                 <br>
                 <h4>Thông tin cá nhân</h4>
                 <br>
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Họ và tên</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1">
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Email</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1"
-                        placeholder="name@example.com">
-                </div>
+                <form method="POST" action="/account/change_info">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Họ và tên</label>
+                        <input type="text" class="form-control" name="new_name" id="exampleFormControlInput1"
+                            placeholder="{{userInfo.full_name}}"required>
+                        {{check}}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Email</label>
+                        <input type="email" class="form-control" name="new_email" id="exampleFormControlInput1"
+                            placeholder="{{userInfo.email}}"required>
+                        {{check}}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Ngày sinh: </label>
+                        <div id="" class="form-control" cols="30" rows="4">{{userInfo.date_of_birth}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Ngày tham gia: </label>
+                        <div id="" class="form-control" cols="30" rows="4">{{userInfo.date_joined}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Địa chỉ</label>
+                        <input type="text" class="form-control" name="new_address" id="exampleFormControlInput1"
+                            placeholder="{{userInfo.address}}">
+                    </div>
+                    <button type="submit" style="background-color: purple;" class="text-white btn my-4">Cập
+                        nhật</button>
+                </form>
 
-                <label for="exampleFormControlInput1">Giới tính</label>
-                <div class="form-group d-flex justify-content-column">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                            value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">
-                            Nam
-                        </label>
-                    </div>
-                    <div class="form-check ml-5">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                            value="option2">
-                        <label class="form-check-label" for="exampleRadios2">
-                            Nữ
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Số điện thoại</label>
-                    <input class="form-control" id="exampleFormControlInput1">
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Tỉnh/Thành phố</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option value="" selected="selelected">Chọn tỉnh/thành phố</option>
-                        <option>Hồ Chí Minh</option>
-                        <option>Hà Nội</option>
-                        <option>Vĩnh Long</option>
-                        <option>Cần Thơ</option>
-                        <option>Trà Vinh</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Quận/Huyện</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option value="" selected="selelected">Chọn quận/huyện</option>
-                        <option>Tp. Vĩnh Long</option>
-                        <option>Vũng Liêm</option>
-                        <option>Tam Bình</option>
-                        <option>Long Hồ</option>
-                        <option>Trà Ôn</option>
-                        <option>Bình Minh</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Địa chỉ</label>
-                    <textarea name="Diachi" id="" class="form-control" cols="30" rows="4"></textarea>
-                </div>
-                <button type="submit" style="background-color: purple;" class="text-white btn my-4">Cập nhật</button>
             </div>
         </div>
         <div id="security" class="tab-pane fade">
@@ -111,7 +82,8 @@
                 <form action="/account/change_password" method="POST">
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Nhập mật khẩu hiện tại</label>
-                        <input type="password" class="form-control" name="current_password" id="exampleFormControlInput1">
+                        <input type="password" class="form-control" name="current_password"
+                            id="exampleFormControlInput1">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Nhập mật khẩu mới</label>
@@ -119,7 +91,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Nhập lại mật khẩu mới</label>
-                        <input type="password" class="form-control" id="exampleFormControlInput1">
+                        <input type="password" class="form-control" name="re_new_password" id="exampleFormControlInput1">
                     </div>
                     <button type="submit" style="background-color: purple;" class="text-white btn my-4">Cập nhật mật
                         khẩu</button>
