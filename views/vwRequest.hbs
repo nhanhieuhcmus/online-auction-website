@@ -1,0 +1,39 @@
+<div class="container">
+    {{#if this.empty}}
+    <tr>
+        <td>Không có yêu cầu nào.</td>
+    </tr>
+    {{else}}
+    <table id="cart" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th style="width:10%">Id</th>
+                <th style="width:70%" class="text-center">Họ tên</th>
+                <th style="width:30%" class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {{#each this.rows}}
+            <tr>
+                <td data-th="id">
+                    {{id}}
+                </td>
+                <td data-th="Name" class="text-center">{{full_name}}đ</td>
+                <td class="text-center">
+                    <button class="btn btn-success" type="submit" form="accept{{id}}"><i class="fa fa-check"></i></button>
+                    <button class="btn btn-danger" type="submit" form="deny{{id}}"><i class="fa fa-times"></i></button>
+                </td>
+                <form method="POST" action= "/request/accept" id="accept{{id}}" name="accept{{id}}">
+                    <input name="user_id" type="hidden" value="{{user_id}}">
+                </form>
+                <form method="POST" action= "/request/deny"id="deny{{id}}" name="deny{{id}}">
+                    <input name="user_id" type="hidden" value="{{user_id}}">
+                </form>
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+    {{/if}}
+</div>

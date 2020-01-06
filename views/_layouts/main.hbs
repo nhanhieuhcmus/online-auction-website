@@ -77,6 +77,15 @@
                         <i class="fa fa-user mr-2" aria-hidden="true"></i>
                         Hồ sơ
                     </a>
+                    <button class="dropdown-item" data-toggle="modal" data-target="#reqModal">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        Nâng cấp tài khoản
+                    </button>
+                    <a class="dropdown-item" href="/req-list">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        Xác nhận yêu cầu
+                    </a>
+                    <div class="dropdown-divider"></div>
                     {{#if new_product}}
                     <a class="dropdown-item" href="/category/new-product">
                         <i class="fa fa-product-hunt mr-2" aria-hidden="true"></i> Đăng sản phẩm</a>
@@ -93,6 +102,29 @@
                     </a>
                 </div>
             </li>
+            <form id="rform" method="POST"  action="/req/{{authUser.id}}" ></form>
+            {{!-- modal --}}
+            <div class="modal fade" id="reqModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Are you sure</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Bạn có chắc muốn xin nâng cấp tài khoản thành người bán?
+                        </div>
+                        <div class="modal-footer justify-content-sm-around">
+                            <button type="button" class="btn btn-secondary" style="width: 100px;"
+                                data-dismiss="modal">No</button>
+                            <button type="submit" class="btn btn-danger" form="rform" style="width: 100px;">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {{else}}
             <a href="/account/register" class="nav-item"><button class="btn text-white btn-outline-light mr-2">ĐĂNG
                     KÝ</button></a>
