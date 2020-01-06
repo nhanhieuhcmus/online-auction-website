@@ -247,14 +247,17 @@ router.get('/:name/:id', async function (req, res) {
     offerModel.allByProductId(req.params.id),
     productModel.sameCategory(req.params.name),
   ]);
-
-  console.log(single);
   if (req.session.authUser) {
     const favorite = await watch_listModel.isFavorite(req.session.authUser.id, req.params.id);
     if (favorite)
       single[0].isFavorite = true;
     else single[0].isFavorite = false;
 
+    if (single[0].id_seller == req.session.authUser.id) {
+      history.forEach(element => {
+        element.owner = true;
+      })
+    }
 
     const favorites = await watch_listModel.all();
     rows.forEach(i => {
@@ -290,6 +293,9 @@ router.get('/:name/:id', async function (req, res) {
     element.start_date = moment(element.start_date).format('DD/MM/YYYY');
     element.end_date = moment(element.end_date).format('DD/MM/YYYY');
   });
+
+ 
+
   res.render('items', {
     catName: req.params.name,
     bestAution,

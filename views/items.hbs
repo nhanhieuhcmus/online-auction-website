@@ -163,6 +163,8 @@
                 <td>{{TimeFormat time}}</td>
                 <td>{{hideName full_name}}</td>
                 <td>{{price}}</td>
+
+                {{#if owner}}
                 <td><button type="submit" class="btn btn-outline-danger" data-toggle="modal"
                         data-target="#modal{{BidId}}">
                         <i class="fa fa-times mr-1" aria-hidden="true"></i></button></td>
@@ -190,6 +192,7 @@
                         </div>
                     </div>
                 </div>
+                {{/if}}
             </tr>
             {{/each}}
         </tbody>

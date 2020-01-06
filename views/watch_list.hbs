@@ -63,23 +63,36 @@
                 <td data-th="Subtotal" class="text-center">{{full_name}}</td>
                 {{#if favorite}}
                 <td class="actions" data-th="">
-                    <a id="favorite" class="mb-0" href="/watch_list/{{id}}">
+                    <a id="favorite" class="mb-0" href="/list/{{id}}">
                         <i class="heart fa fa-heart"></i>
                     </a>
                 </td>
                 {{/if}}
-                {{#if rating}}
+                {{#if purchase}}
                 <td class="actions" data-th="">
-                    <a id="rating" class="mb-0" href="#">
+                    <a id="rating" class="mb-0 btn btn-success" href="/rating/like/{{id_seller}}/{{priceholder}}/{{id}}">
                         <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                     </a>
                 </td>
                 <td>
-                    <a id="rating" class="mb-0" href="#">
+                    <a id="rating" class="mb-0 btn btn-danger" href="/rating/dislike/{{id_seller}}/{{priceholder}}/{{id}}">
+                        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                    </a>
+                </td>
+                {{else}} {{#if won}}
+                <td class="actions" data-th="">
+                    <a id="rating" class="mb-0 btn btn-success" href="/rating/like/{{priceholder}}/{{id_seller}}/{{id}}">
+                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                    </a>
+                </td>
+                <td>
+                    <a id="rating" class="mb-0 btn btn-danger" href="/rating/dislike/{{priceholder}}/{{id_seller}}/{{id}}">
                         <i class="fa fa-thumbs-down" aria-hidden="true"></i>
                     </a>
                 </td>
                 {{/if}}
+                {{/if}}
+
             </tr>
             {{/each}}
             {{/if}}

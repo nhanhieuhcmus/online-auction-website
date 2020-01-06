@@ -11,15 +11,20 @@ const request = require('request');
 // const { stringify } = require('querystring');
 // const verifyUrl = 'https://google.com/recaptcha/api/siteverify?secret=${secretKey}&reponse=${req.body.captcha}&remoteip=${req.connection.remoteAddress}';
 
-
+const isLogin = (req, res, next) => {
+    if (req.session.isAuthenticated === true)
+      return res.redirect('/');
+  
+    next();
+  }
 
 const restrict = require('../middlewares/auth.mdw');
 
-router.get('/register', async (req, res) => {
+router.get('/register', isLogin, async (req, res) => {
     res.render('vwAccount/register');
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', isLogin, async (req, res) => {
     const N = 10;
     const hash = bcrypt.hashSync(req.body.password, N);
 
@@ -67,7 +72,7 @@ router.post('/register', async (req, res) => {
         res.redirect('/');
     }
 })
-router.post('/submit', async (req, res) => {
+router.post('/submit', isLogin, async (req, res) => {
     // if (!req.body.captcha)
     //     return res.json({ success: false, msg: 'Please select captcha' });
     if (req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
@@ -106,11 +111,11 @@ router.post('/submit', async (req, res) => {
 
 });
 
-router.get('/login', async (req, res) => {
+router.get('/login', isLogin, async (req, res) => {
     res.render('vwAccount/login');
 });
 // Check account matching
-router.post('/login', async (req, res) => {
+router.post('/login', isLogin, async (req, res) => {
     const loginUser = await loginModel.singleByUsername(req.body.username);
     if (loginUser === null) {
         // return res.redirect('/account/login?err_message=2');
@@ -135,7 +140,7 @@ router.post('/login', async (req, res) => {
         res.redirect(url);
 })
 
-router.post('/logout', (req, res) => {
+router.post('/logout', restrict, (req, res) => {
     req.session.isAuthenticated = false;
     req.session.authUser = null;
     // res.redirect(req.headers.referer);
